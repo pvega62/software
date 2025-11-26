@@ -31,7 +31,7 @@ This section of my **Docs-as-Code portfolio** provides a comprehensive look at t
 - [Before You Begin](/docs/data-pipelines/before-you-begin)
 - [The SuiClient Architecture](/docs/typescript-tutorial/sui-client-concept)
 
-To view the raw markdown files for these docs, head to **[GitHub](https://github.com/pvega62/software/tree/main/docs)**.
+To view the raw markdown files for these docs, head to **[GitHub](https://github.com/pvega62/software/tree/01ff338290542a442ffaf6b5daa4d8790a7a880d/docs)**.
 
 ## Workflow
 - Drafting with Markdown in VS Code
