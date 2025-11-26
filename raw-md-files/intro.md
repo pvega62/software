@@ -21,7 +21,7 @@ This section of my **Docs-as-Code portfolio** provides a comprehensive look at t
 **API References**
 - [Stripe API Documentation Sample](/docs/stripe-api/stripe-api)
 - [Pet Store API Documentation Sample](/docs/pet-store-api/)
-- [Ingest Events Using the Streaming Ingest API](/docs/data-pipelines/api-ingest-stream)
+- [Ingest Events via Streaming API](/docs/data-pipelines/api-ingest-stream)
 - [SuiClient: getObject](/docs/typescript-tutorial/api-get-object)
 - [SuiClient: multiGetObjects](/docs/typescript-tutorial/api-get-multi-objects)
 - [SuiClient: getOwnedObjects](/docs/typescript-tutorial/api-get-owned-objects)

@@ -1,9 +1,9 @@
 ---
 id: api-ingest-stream
 slug: api-ingest-stream
-title: Ingestion of Events Using the Streaming Ingestion API
+title: Ingest Events via Streaming API
 sidebar_position: 3
-sidebar_label: Streaming Ingest API
+sidebar_label: Ingest Events via Streaming API
 description: API reference for sending log, metric, and event data into a pipeline for processing and routing.
 ---
 
