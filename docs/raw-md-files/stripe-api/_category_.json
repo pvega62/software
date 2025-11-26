@@ -1,0 +1,8 @@
+{
+    "label": "Stripe API Documentation Samples",
+    "position": 2,
+    "link": {
+        "type": "generated-index",
+        "description": "A guide for developers to use the Stripe API for payment processing and financial services."
+    }
+}
