@@ -1,12 +1,13 @@
 ---
-id: before-you-begin
-slug: before-you-begin
-title: Before You Begin
-sidebar_label: Before You Begin
+id: before-you-start
+slug: before-you-start
+title: Before You Start
+sidebar_label: Before You Start
 sidebar_position: 1
 description: Prerequisites, tooling, and context to help you get started with event pipelines, ingestion, and routing workflows.
 ---
-
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 This page provides the essential context, prerequisites, and tooling you'll need before diving into the Data Pipelines documentation.  
 Whether you're new to observability pipelines or just new to this set of docs, start here.
@@ -104,11 +105,19 @@ If you don’t know what a POST request is, no problem—the guides walk you thr
 ## Conceptual model to keep in mind
 
 Most examples follow a flow like this:
-
+<Tabs>
+<TabItem value="diagram" label="Mermaid (code)" default>
 ```mermaid
 flowchart LR
-    A[Cloud Apps] --> B[Ingestion]
-    B --> C[Processing<br/>Parse • Enrich • Mask]
-    C --> D[Routing<br/>Filters • Rules • Sampling]
-    D --> E{{Destinations}}
+    A["Cloud Apps"] --> B["Ingestion"]
+    B --> C["Processing<br/>Parse • Enrich • Mask"]
+    C --> D["Routing<br/>Filters • Rules • Sampling"]
+    D --> E{{"Destinations"}}
 ```
+</TabItem>
+<TabItem value="visual" label="Mermaid (image)" default>
+
+![screenshot of pipeline architecture](cloud_data_pipeline.svg)
+
+</TabItem>
+</Tabs>

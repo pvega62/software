@@ -1,11 +1,13 @@
 ---
 id: route-cloud-app-logs-guide
 slug: route-cloud-app-logs-guide
-title: Route Cloud App Logs Into a Pipeline
-sidebar_label: Route App Logs
+title: Routing Cloud App Logs Into a Pipeline
+sidebar_label: Routing Cloud App Logs Into a Pipeline
 sidebar_position: 4
 description: Step-by-step guide to sending a JSON log from a cloud app into the pipeline and verifying ingestion.
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 This guide walks you through the "Hello World" of observability pipelines: sending a single JSON log event from a cloud app (simulated via API) and verifying it in the platform.
 
@@ -32,8 +34,9 @@ Ensure you have:
 
 ---
 
-## Pipeline overview (Mermaid diagram)
-
+## Pipeline overview
+<Tabs>
+<tabitem value="diagram" label="Mermaid (code)" default>
 ```mermaid
 flowchart LR
     A[Cloud App] -->|JSON Log| B[Ingest API]
@@ -41,9 +44,15 @@ flowchart LR
     C -->|Match Rule| D[Live Data Viewer]
     C -->|No Match| E[Drop / Default Bucket]
 ```
+</tabitem>
 
-## Architecture overview
+<tabitem value="image" label="Mermaid (image)" default>
 
+![screenshot of pipeline architecture](cloud_log_ingest.svg)
+
+</tabitem>
+
+<tabitem value="ascii diagram" label="ASCII">
 ```pgsql
    [Your App]
        |
@@ -60,7 +69,9 @@ flowchart LR
 |   Live Data Viewer    |  <-- We are verifying here
 +-----------------------+
 ```
+</tabitem>
 
+</Tabs>
 ---
 
 ## 1. Create or select a stream

@@ -5,7 +5,7 @@ sidebar_position: 1
 sidebar_label: 'Introduction'
 slug: intro
 ---
-## Welcome to my documentation portfolio!
+## Welcome to my documentation portfolio
 
 This section of my **Docs-as-Code portfolio** provides a comprehensive look at technical documentation samples, all authored and published entirely in Markdown using Docusaurus. Here you'll find examples of developer guides, API references, and insights into the workflows used to create them.
 
@@ -28,7 +28,7 @@ This section of my **Docs-as-Code portfolio** provides a comprehensive look at t
 
 **Conceptual/Overview Docs**
 - [Event Streams & Observability Pipelines](/docs/data-pipelines/concept-observability-pipelines)
-- [Before You Begin](/docs/data-pipelines/before-you-begin)
+- [Before You Start](/docs/data-pipelines/before-you-start)
 - [The SuiClient Architecture](/docs/typescript-tutorial/sui-client-concept)
 
 To view the raw markdown files for these docs, head to **[GitHub](https://github.com/pvega62/software/tree/01ff338290542a442ffaf6b5daa4d8790a7a880d/docs)**.
@@ -46,6 +46,7 @@ To view the raw markdown files for these docs, head to **[GitHub](https://github
 - **Postman**: For API testing and generating API documentation examples.
 - **Vale**: For linting and ensuring style guide adherence.
 - **Git/GitHub**: For version control and hosting.
+- **Mermaid Chart**: Converting Mermaid code into images.
 
 This mirrors how professional teams maintain developer documentation portals such as Docusaurus or similar static-site generators.
 

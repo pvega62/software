@@ -1082,11 +1082,3 @@ DELETE "https://petstore3.swagger.io/api/v3/user/user1" \
 |--------|--------|---------------------------------------------------------------------------------------------------------|
 | username   | string  | The username of the user to delete |
 
-# Author's note
-This document provides an in-depth guide for the Petstore API as a company's technical writer/documentation specialist would write it. In true "docs-as-code" fashion, it's a living document, continuously improving it based on feedback and changing requirements.
-
-It includes detailed information about the API endpoints, examples of how to make calls to the API, the parameters required for each endpoint, and the expected responses. This should serve as a comprehensive resource for developers working with the Petstore API.
-
-This sample API uses Swagger, a powerful open-source framework for API development. It's not intended for production use but rather as a demonstration of how one would document an API. You can find out more about Swagger at [https://swagger.io](https://swagger.io) or on [irc.freenode.net, #swagger](irc://irc.freenode.net/swagger). 
-
-And the mandatory dog tax: here's [Ace](media/20210327_200932.jpg).

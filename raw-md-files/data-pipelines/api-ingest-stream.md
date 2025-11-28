@@ -6,6 +6,8 @@ sidebar_position: 3
 sidebar_label: Ingest Events via Streaming API
 description: API reference for sending log, metric, and event data into a pipeline for processing and routing.
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 ## Introduction
 Use this API to send event data into a pipeline for processing, filtering, enrichment, and routing.
@@ -33,16 +35,23 @@ Make sure you have:
 ---
 
 ## Pipeline overview
-
+<Tabs>
+<TabItem value="diagram" label="Mermaid (code)">
 ```mermaid
 flowchart LR
-    A [Cloud App / Microservice] --> B [Streaming Ingest API]
-    B --> C [Processing Layer<br/> • Parsing<br/> • Enrichment<br/> • Masking]
-    C --> D [Routing Engine<br/> • Filters<br/> • Sampling<br/> • Rules]
-    D --> E {{Destinations:<br/>S3 / SIEM / Elastic / Snowflake}}
+    A["Cloud App / Microservice"] --> B["Streaming Ingest API"]
+    B --> C["Processing Layer<br/> • Parsing<br/> • Enrichment<br/> • Masking"]
+    C --> D["Routing Engine<br/> • Filters<br/> • Sampling<br/> • Rules"]
+    D --> E{{"Destinations:<br/>S3 / SIEM / Elastic / Snowflake"}}
 ```
-## Pipeline architecture (ASCII)
-```lua
+</TabItem>
+<TabItem value="image" label="Mermaid (image)">
+
+![screenshot of pipeline architecture](api-ingest-pipeline.svg)
+
+</TabItem>
+<TabItem value="ascii diagram" label="ASCII">
+```stl
 +--------------+       +------------------+       +----------------+       +----------------+
 |  Cloud App   | --->  |  Ingest API      | --->  |   Processing   | --->  |   Routing      |
 | (Logs/Events)|       | (POST /ingest)   |       | (Parse/Enrich) |       | (Rules Engine) |
@@ -53,8 +62,10 @@ flowchart LR
                                                                     |    Destinations      |
                                                                     |  S3 | SIEM | DW | ES |
                                                                     +----------------------+
-
 ```
+</TabItem>
+</Tabs>
+
 ## Ingest endpoint
 
 ```
@@ -92,7 +103,6 @@ POST /v1/streams/ingest
 
 ## Response
 ### 200 OK
-<!-- The acronym "OK" is used here as it is standard for HTTP status codes. -->
 ```json
 {
   "status": "accepted",

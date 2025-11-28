@@ -6,6 +6,8 @@ sidebar_label: Creating a Postman Mock Server
 sidebar_position: 5
 description: Guide to setting up a Postman Mock Server for simulating the Data Pipeline Streaming Ingest API.
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 This guide explains how to use the provided Postman sample files to create a mock API environment. You’ll simulate the same endpoints shown throughout the documentation—no live back-end required.
 
@@ -22,7 +24,6 @@ This guide explains how to use the provided Postman sample files to create a moc
 
 Download all three here:
 [Download Postman Files](https://github.com/pvega62/software/tree/3f2954fd16d57d7dd06b0e27c57daf3522e48c8a/downloads/mock-postman-json)
-(Replace this link with your hosted JSON file locations.)
 
 ---
 
@@ -108,21 +109,10 @@ Remove a required header or edit the JSON body to trigger a `400 Bad Request` re
 
 ---
 
-## Step 6. Visualize the request flow
+## Step 6. Visualizing the request flow
 
-### ASCII diagram
-
-```
-+------------+          +--------------------+          +------------------------+
-|  Postman   |  ----->  |  Mock Server (API) |  ----->  |  Mock Response (JSON)  |
-+------------+          +--------------------+          +------------------------+
-      |                          |                               |
-      |  POST /v1/streams/ingest |                               |
-      |  Headers + JSON Body     |                               |
-      +----------------------------------------------------------+
-```
-
-### Mermaid diagram
+<Tabs>
+<tabitem value="diagram" label="Mermaid (code)" default>
 
 ```mermaid
 sequenceDiagram
@@ -135,12 +125,31 @@ sequenceDiagram
     Mock-->>Resp: Simulate 200 or 400 JSON response
     Resp-->>Dev: Return response to Postman client
 ```
+</tabitem>
 
+<tabitem value="image" label="Mermaid (image)" default>
+
+![screenshot of pipeline architecture](stream_ingest.svg)
+</tabitem>
+
+<tabitem value="ascii diagram" label= "ASCII" default>
+
+```
++------------+          +--------------------+          +------------------------+
+|  Postman   |  ----->  |  Mock Server (API) |  ----->  |  Mock Response (JSON)  |
++------------+          +--------------------+          +------------------------+
+      |                          |                               |
+      |  POST /v1/streams/ingest |                               |
+      |  Headers + JSON Body     |                               |
+      +----------------------------------------------------------+
+```
+</tabitem>
+</Tabs>
 ---
 
 ## Step 7. Switch between live and mock testing
 
-* To test “live” documentation examples, use **DataPipeline-postman-collection.json** with `{{base_url}}`.
+* To test “live” examples, use **DataPipeline-postman-collection.json** with `{{base_url}}`.
 * To test locally or offline, use **DataPipeline-MockServer-Collection.json** with `{{mock_base_url}}`.
 * Both rely on the same `DataPipeline-Environment.json` for variable management.
 
@@ -157,12 +166,11 @@ Using Postman Mock Servers and collections enables you to:
 * Test both real and simulated environments with a single configuration.
 * Develop and verify documentation alongside API design.
 
-This workflow mirrors the “docs-as-code” approach used by modern developer documentation teams.
 
 ---
 
 ## Next steps
 
 * Review the [Ingest API Reference](/docs/data-pipelines/api-ingest-stream)
-* Try the [Route Cloud Application Logs Guide](/docs/data-pipelines/route-cloud-app-logs-guide)
-* Complete the [Before You Begin](/docs/data-pipelines/before-you-begin) checklist
+* Try the [Routing Cloud Application Logs Guide](/docs/data-pipelines/route-cloud-app-logs-guide)
+* Complete the [Before You Start](/docs/data-pipelines/before-you-start) checklist

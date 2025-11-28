@@ -5,6 +5,9 @@ sidebar_position: 1
 slug: sui-client-concept
 description: The role of the SuiClient in Sui app architecture, handling communication between your app and the Sui blockchain network.
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # The `SuiClient` - Your App's Post Office Clerk
 
 - **Audience:** Developers new to the Sui blockchain.
@@ -27,13 +30,24 @@ Think of the Sui Network as a massive, global postal system.
 
 You rely on the clerk to interact with the system. You can't sort the mail or drive the delivery trucks yourself; you must make requests through the clerk.
 
-```mermaid
-graph LR
-    A[Your App] -->|Requests Data| B(SuiClient)
-    B -->|Queries| C[Sui Network Node]
-    C -->|Returns Data| B
-    B -->|JSON Response| A
-```
+<Tabs>
+  <TabItem value="diagram" label=" Code" default>
+
+  ```mermaid
+  flowchart LR
+      A["Your App<br/>(Customer)"] -->|Requests Service| B("SuiClient<br/>(Clerk)")
+      B -->|Processes Request| C["Sui Network Node<br/>(Postal System)"]
+      C -->|Delivers Result| B
+      B -->|Hands Over Item| A
+  ```
+
+  </TabItem>
+  <TabItem value="visual" label="Image">
+
+  ![screenshot of SuiClient architecture](app_service_flow.svg)
+
+  </TabItem>
+</Tabs>
 
 ## Connecting to the network
 
@@ -51,7 +65,7 @@ When you initialize the client, you define which environment it targets:
 
 The `SuiClient` handles two distinct categories of operations. Understanding the difference is critical for app design.
 
-### 1. Read operations (queries) 📖
+### 1. Read operations (queries)
 
 These are requests to look up existing data on the ledger.
 
@@ -62,7 +76,7 @@ These are requests to look up existing data on the ledger.
     * `getObject()`: Fetching NFT metadata.
     * `getBalance()`: Checking a wallet's funds.
 
-### 2. Write operations (transactions) ✍️
+### 2. Write operations (transactions)
 
 These are requests to **change** the state of the ledger.
 

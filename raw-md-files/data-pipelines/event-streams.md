@@ -2,10 +2,12 @@
 id: concept-observability-pipelines
 slug: concept-observability-pipelines
 title: Event Streams & Observability Pipelines
-sidebar_label: Observability Concepts
+sidebar_label: Event Streams & Observability Pipelines
 sidebar_position: 2
 description: Conceptual overview of event streams, routing, processing, and modern observability pipeline architecture.
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 Modern systems emit massive amounts of telemetry—logs, metrics, traces, security events, and everything between.  
 This document explains how **observability pipelines** help teams collect, shape, route, and optimize this data in real time.
@@ -25,7 +27,9 @@ Observability pipelines solve real-world challenges:
 Every engineering, SRE, and security team benefits from faster, cleaner, and more actionable data.
 
 ---
-# High-level pipeline architecture (Mermaid diagram)
+# High-level pipeline architecture 
+<Tabs>
+<TabItem value="diagram" label="Mermaid (code)" default>
 ```mermaid
 flowchart TD
     A[Event Sources<br/>• Apps<br/>• Containers<br/>• IoT] --> B[Ingestion Layer]
@@ -37,8 +41,14 @@ flowchart TD
     E --> E3[Data Warehouse]
     E --> E4[Observability Tools]
 ```
----
-## Architecture overview (ASCII)
+</TabItem>
+<TabItem value="visual" label="Mermaid (image)" default>
+
+![screenshot of pipeline architecture](event_data_flowchart.svg)
+
+</TabItem>
+<TabItem value="ascii diagram" label="ASCII" default>
+
 ```pgsql
    [Event Sources]
      (Apps, Containers, IoT, Security Logs)
@@ -65,7 +75,8 @@ flowchart TD
       v           v             v
    [SIEM]       [S3]       [Elastic]
 ```
-
+</TabItem>
+</Tabs>
 ---
 ## What's an event stream
 

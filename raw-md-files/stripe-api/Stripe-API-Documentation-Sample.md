@@ -949,10 +949,3 @@ Responses will return standard codes.
 | Name | Type | Description |
 |------|------|-------------|
 | `id` | string |**(Required)** The ID of the charge to retrieve. |
-
-## Author's note
-This document is meant to provide a sampling of the Stripe API documentation as I would write it as a Stripe technical writer. It includes commonly used API endpoints, examples on how to make calls to the API, the parameters to attach to them and the expected responses.
-
-The API documentation isn't exhaustive and I would not recommend using it to build a functional application. (Unless you can, in which case, let me know so I can take all the credit.)
-
-This document was created using the Stripe API collection from April 2024 in the Postman application. Please visit the [Official Stripe API documentation](https://stripe.com/docs/api) for the most up-to-date branches and pertaining documentation.
