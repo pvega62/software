@@ -19,8 +19,8 @@ This section of my **Docs-as-Code portfolio** provides a comprehensive look at t
 - [Tutorial: Sending a Transaction](/docs/typescript-tutorial/write-transaction-tutorial)
 
 **API References**
-- [Stripe API Documentation Sample](/docs/stripe-api/stripe-api)
-- [Pet Store API Documentation Sample](/docs/pet-store-api/)
+- [Stripe API Documentation](/docs/category/stripe-api-documentation)
+- [Pet Store API Documentation](/docs/category/pet-store-api-documentation/)
 - [Ingest Events via Streaming API](/docs/data-pipelines/api-ingest-stream)
 - [SuiClient: getObject](/docs/typescript-tutorial/api-get-object)
 - [SuiClient: multiGetObjects](/docs/typescript-tutorial/api-get-multi-objects)

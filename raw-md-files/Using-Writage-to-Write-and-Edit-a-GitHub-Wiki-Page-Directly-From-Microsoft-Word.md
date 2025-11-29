@@ -73,10 +73,3 @@ Once you've written a Markdown document in Word, you can push it to the GitHub R
 
 Repeat the steps to push the document to GitHub when creating a new document or editing an existing document.
 
-## Author's note
-
-This guide demonstrates a streamlined workflow for creating and managing GitHub wiki documentation using the Writage add-in for Microsoft Word. For technical writers and content creators comfortable with Word's interface, Writage serves as a valuable tool. It simplifies producing well-formatted Markdown content by bridging the gap between a powerful word processor and a collaborative development platform, eliminating the need to switch between applications.
-
-As detailed in this Standard Operating Procedure (SOP), the process is straightforward: install the prerequisites, clone the GitHub wiki, author your documentation in Word, and push the final Markdown file to the repository. This workflow enhances productivity and ensures your documentation is consistent and professional.
-
-I created this document as a sample for my technical writing portfolio. Its purpose is to showcase my ability to develop clear, concise, and user-friendly SOPs that guide users through a technical process from start to finish. As the author, I aimed to demonstrate my writing skills and my understanding of content creation workflows for modern SaaS platforms like GitHub.
