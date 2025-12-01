@@ -1,0 +1,30 @@
+{
+  "id": "39e9ac44-7c0d-4fbf-96ad-data-pipeline-env",
+  "name": "Data Pipeline Environment",
+  "values": [
+    {
+      "key": "base_url",
+      "value": "https://api.placeholder-streaming.com",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "mock_base_url",
+      "value": "https://mock-server-url-from-postman.io",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "api_token",
+      "value": "demo-token-123",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "stream_id",
+      "value": "demo-stream-001",
+      "type": "default",
+      "enabled": true
+    }
+  ]
+}

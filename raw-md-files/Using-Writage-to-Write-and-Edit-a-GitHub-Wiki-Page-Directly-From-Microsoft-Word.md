@@ -17,7 +17,9 @@ A Markdown document pushed to the wiki repository will appear as a new page on t
 ## Prerequisites
 
 -   [The Writage add-in for Microsoft Word](https://www.writage.com/).
-    -   **NOTE**: Writage comes with a 14-day free trial. Afterward, you will have to buy a license.
+    :::note    
+    Writage comes with a 14-day free trial. Afterward, you will have to buy a license.
+    :::
 -   [The latest version of Microsoft Word](https://www.microsoft.com/en-us/microsoft-365/download-office).
 -   [The latest version of GitHub Desktop](https://desktop.github.com/download/).
 -   An existing GitHub Repository with a wiki.
