@@ -1,0 +1,8 @@
+{
+  "label": "Pet Store API Documentation",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Explore the comprehensive API documentation for the Pet Store's app or site. This section includes details on authentication methods, available endpoints, request/response formats, and example use cases to help you integrate with the Pet Store API effectively."
+  }
+}

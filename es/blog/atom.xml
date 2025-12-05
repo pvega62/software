@@ -6,7 +6,6 @@
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://pvega62.github.io/software/es/blog"/>
     <subtitle>Portfolio Site Blog</subtitle>
-    <icon>https://pvega62.github.io/software/es/img/logo.svg</icon>
     <entry>
         <title type="html"><![CDATA[La Redacción Técnica y Yo]]></title>
         <id>https://pvega62.github.io/software/es/blog/technical-writing-and-me</id>

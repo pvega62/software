@@ -36,6 +36,8 @@ To view the raw markdown files for these docs, head to **[GitHub](https://github
 ## Workflow
 - Drafting with Markdown in VS Code
 - Markdown linting with Vale
+- Translation with DeepL
+- Diagram creation with Mermaid
 - Docs versioning with Git
 - API validation with Postman and Swagger/OpenAPI
 - Publishing with Docusaurus
@@ -47,7 +49,9 @@ To view the raw markdown files for these docs, head to **[GitHub](https://github
 - **Vale**: For linting and ensuring style guide adherence.
 - **Git/GitHub**: For version control and hosting.
 - **Mermaid Chart**: Converting Mermaid code into images.
+- **DeepL**: For translation of documentation into multiple languages.
 
 This mirrors how professional teams maintain developer documentation portals such as Docusaurus or similar static-site generators.
 
 > Each sample demonstrates end-to-end doc creation: research → drafting → review → publishing.
+

@@ -1,0 +1,8 @@
+{
+    "label": "Stripe API Documentation",
+    "position": 2,
+    "link": {
+        "type": "generated-index",
+        "description": "These documents are meant to provide a sampling of the Stripe API documentation, demonstrating how I would write it if I were a Stripe technical writer. It includes commonly used API endpoints, examples on how to make calls to the API, the parameters to attach to them and the expected responses This isn't a comprehensive list of Stripe API endpoints, it's meant to serve as a sampling of my documentation ability."
+    }
+}
