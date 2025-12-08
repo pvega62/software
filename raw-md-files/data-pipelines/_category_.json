@@ -1,8 +1,0 @@
-{
-  "label": "Data Pipeline Documentation",
-  "position": 4,
-  "link": {
-    "type": "generated-index",
-    "description": "Learn how to design, build, and route event streams for modern observability pipelines. This section covers core concepts, ingestion APIs, and hands-on routing workflows."
-  }
-}

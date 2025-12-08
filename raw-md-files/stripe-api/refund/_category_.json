@@ -1,8 +1,0 @@
-{
-    "label": "Refund APIs",
-    "position": 5,
-    "link": {
-        "type": "generated-index",
-        "description": "These documents provide detailed information about the Payment Refund-related API endpoints in the Stripe API. They include examples of the URLs needed to make calls to the API, the parameters to attach to them, and the expected responses."
-    }
-}

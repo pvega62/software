@@ -33,8 +33,9 @@ The method accepts a configuration object with the following properties:
 | `ids` | `string[]` | **Yes** | An array of 32-byte hexadecimal Object IDs. |
 | `options` | `SuiObjectDataOptions` | No | Configuration flags to toggle specific data fields. Applies to **all** requested objects. |
 
-> **Limit:** Most public RPC nodes enforce a limit of typically 50 IDs per request. For larger batches, you must split your array into chunks.
-
+:::note
+Most public RPC nodes enforce a limit of typically 50 IDs per request. For larger batches, you must split your array into chunks.
+:::
 ---
 
 ## Return value

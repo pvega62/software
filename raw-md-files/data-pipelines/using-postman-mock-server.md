@@ -27,7 +27,7 @@ Download all three here:
 
 ---
 
-## Step 1. Import the files into Postman
+## 1. Import the files into Postman
 
 1. Open Postman and click **Import**.
 2. Upload:
@@ -44,7 +44,7 @@ You should now see:
 
 ---
 
-## Step 2. Create the mock server
+## 2. Create the mock server
 
 1. Go to **Mock Servers** in Postman.
 2. Click **Create Mock Server**.
@@ -59,7 +59,7 @@ https://a12b34cd-1234-5678.mock.pstmn.io
 
 ---
 
-## Step 3. Update the environment variable
+## 3. Update the environment variable
 
 1. Go to **Environments → Data Pipeline Environment**.
 2. Find the variable `mock_base_url`.
@@ -77,7 +77,7 @@ https://a12b34cd-1234-5678.mock.pstmn.io
 
 ---
 
-## Step 4. Send your first mock request
+## 4. Send your first mock request
 
 1. Open **POST /v1/streams/ingest** inside the **Mock Server Collection**.
 2. Confirm the environment is active.
@@ -96,7 +96,7 @@ You should see a `200 OK` mock response:
 
 ---
 
-## Step 5. Test an error response
+## 5. Test an error response
 
 Remove a required header or edit the JSON body to trigger a `400 Bad Request` response.
 
@@ -109,7 +109,7 @@ Remove a required header or edit the JSON body to trigger a `400 Bad Request` re
 
 ---
 
-## Step 6. Visualizing the request flow
+## 6. Visualizing the request flow
 
 <Tabs>
 <tabitem value="diagram" label="Mermaid (code)" default>
@@ -147,7 +147,7 @@ sequenceDiagram
 </Tabs>
 ---
 
-## Step 7. Switch between live and mock testing
+## 7. Switch between live and mock testing
 
 * To test “live” examples, use **DataPipeline-postman-collection.json** with `{{base_url}}`.
 * To test locally or offline, use **DataPipeline-MockServer-Collection.json** with `{{mock_base_url}}`.
