@@ -2,73 +2,16 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://pvega62.github.io/software/fr/blog</id>
     <title>Portfolio Site Blog</title>
-    <updated>2025-11-08T00:00:00.000Z</updated>
+    <updated>2025-12-02T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://pvega62.github.io/software/fr/blog"/>
     <subtitle>Portfolio Site Blog</subtitle>
     <icon>https://pvega62.github.io/software/fr/img/logo.svg</icon>
     <entry>
-        <title type="html"><![CDATA[La rédaction technique et moi]]></title>
-        <id>https://pvega62.github.io/software/fr/blog/technical-writing-and-me</id>
-        <link href="https://pvega62.github.io/software/fr/blog/technical-writing-and-me"/>
-        <updated>2025-11-08T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Ou, ce que j'ai fait depuis mon dernier poste de rédacteur technique]]></summary>
-        <content type="html"><![CDATA[<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ou-ce-que-jai-fait-depuis-mon-dernier-poste-de-rédacteur-technique">Ou, ce que j'ai fait depuis mon dernier poste de rédacteur technique<a href="https://pvega62.github.io/software/fr/blog/technical-writing-and-me#ou-ce-que-jai-fait-depuis-mon-dernier-poste-de-r%C3%A9dacteur-technique" class="hash-link" aria-label="Lien direct vers Ou, ce que j'ai fait depuis mon dernier poste de rédacteur technique" title="Lien direct vers Ou, ce que j'ai fait depuis mon dernier poste de rédacteur technique" translate="no">​</a></h3>
-<p>Je n'ai pas été rédacteur technique à titre <em>officiel</em> depuis plus d'un an, et cela me manque. Le temps libre m'a permis de développer d'autres muscles créatifs, mais j'ai hâte de reprendre le métier. Alors, qu'ai-je fait ? Écrire, naturellement.</p>
-<p>Au fond, je suis un écrivain. C'est ce que je fais.</p>
-<p>J'ai un large éventail d'intérêts, mais ils sont généralement au service de l'écriture. J'ai acquis des compétences en codage et en conception UX pour devenir un meilleur rédacteur technique et UX. J'ai appris sur les API pour mieux rédiger la documentation. J'ai plongé dans les blockchains pour comprendre les systèmes décentralisés. J'ai étudié la thermodynamique pour mieux documenter les appareils électroménagers chez Felix Storch.</p>
-<p>J'aime simplement apprendre des choses et ensuite les écrire. J'aime bricoler un système et ensuite l'expliquer. J'aime décomposer des sujets complexes en termes simples.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="doctor-who-et-le-manuel-de-la-tardis">Doctor Who et le manuel de la TARDIS<a href="https://pvega62.github.io/software/fr/blog/technical-writing-and-me#doctor-who-et-le-manuel-de-la-tardis" class="hash-link" aria-label="Lien direct vers Doctor Who et le manuel de la TARDIS" title="Lien direct vers Doctor Who et le manuel de la TARDIS" translate="no">​</a></h3>
-<p>L'une des premières choses que j'ai faites avec mon partenaire a été de décomposer exactement comment fonctionne la Régénération dans <em>Doctor Who</em>. Il y a en fait une composante de rédaction technique ici : <a href="https://drive.google.com/file/d/1jzCeNg4tqy2IMLF1HUjr1bOmSdEsKhoZ/view?usp=sharing" target="_blank" rel="noopener noreferrer" class=""><strong>j'ai écrit un manuel d'utilisation sur la façon de cultiver une TARDIS de type 40 à l'aide d'un morceau de corail TARDIS</strong></a>. Ce fut un exercice amusant de rédaction technique et de construction de monde. <a href="https://youtu.be/7fixNsuYRmg?si=ml2CoErH1KI3zV8G&amp;t=37" target="_blank" rel="noopener noreferrer" class="">Dans ce cas, mes experts en la matière étaient le Docteur et Donna Noble eux-mêmes.</a></p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="rédaction-freelance-et-ux">Rédaction freelance et UX<a href="https://pvega62.github.io/software/fr/blog/technical-writing-and-me#r%C3%A9daction-freelance-et-ux" class="hash-link" aria-label="Lien direct vers Rédaction freelance et UX" title="Lien direct vers Rédaction freelance et UX" translate="no">​</a></h3>
-<p>Pendant cette période, j'ai travaillé comme rédacteur UX à temps partiel, élaborant des micro-copies pour l'application et le site d'une startup appelée Culangex. L'application n'a pas encore été lancée, mais je suis fier du travail accompli par l'équipe. Entre cela et divers petits boulots d'écriture en freelance, je n'ai pas cessé d'être un rédacteur technique ; j'ai simplement appliqué l'ensemble des compétences de nouvelles manières.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="une-sorte-dannée-sabbatique">Une sorte d'année sabbatique<a href="https://pvega62.github.io/software/fr/blog/technical-writing-and-me#une-sorte-dann%C3%A9e-sabbatique" class="hash-link" aria-label="Lien direct vers Une sorte d'année sabbatique" title="Lien direct vers Une sorte d'année sabbatique" translate="no">​</a></h3>
-<p>J'ai également pris le temps d'être avec ma famille. L'avantage de cette pause professionnelle a été de passer la dernière année avec ma grand-mère avant son décès. Lui rendre la pareille pour ses soins et être là pour elle dans ses dernières heures est un privilège que je ne regretterai jamais. Prioriser ma famille était le bon choix.</p>
-<p>Maintenant, je suis prêt à reprendre le travail à plein temps. J'ai pris le temps de faire mon deuil, de réfléchir et de me préparer. Je suis un agent libre, prêt à signer avec une nouvelle équipe.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="le-chemin-parcouru-jusquà-présent">Le chemin parcouru jusqu'à présent<a href="https://pvega62.github.io/software/fr/blog/technical-writing-and-me#le-chemin-parcouru-jusqu%C3%A0-pr%C3%A9sent" class="hash-link" aria-label="Lien direct vers Le chemin parcouru jusqu'à présent" title="Lien direct vers Le chemin parcouru jusqu'à présent" translate="no">​</a></h3>
-<p>Toute ma carrière m'a mené à la rédaction technique. Chaque rôle a été un tremplin :</p>
-<ul>
-<li class=""><strong>Journalisme :</strong> J'ai appris à faire des recherches approfondies et à interviewer des personnes – des compétences qui se traduisent directement par le travail avec des experts en la matière (SME).</li>
-<li class=""><strong>Édition (W.W. Norton) :</strong> En tant que stagiaire éditorial, j'ai appris à écrire de manière claire et concise pour des publics spécifiques lors de la rédaction de rapports de lecture et de textes marketing.</li>
-<li class=""><strong>Enseignement supérieur (City Tech) :</strong> En tant que seul anglophone du département des services médias, je suis devenu le rédacteur par défaut de tous les guides et documentations du département.</li>
-<li class=""><strong>Éducation :</strong> En tant que tuteur d'anglais, j'ai appris à décomposer des sujets complexes en morceaux digestes pour les étudiants.</li>
-<li class=""><strong>Rédaction UX :</strong> Chez Culangex, j'ai perfectionné mes compétences en rédaction de microcopy et en conception de flux d'utilisateurs.</li>
-<li class=""><strong>Fabrication (Felix Storch) :</strong> Cela m'a donné mon premier rôle de rédacteur technique à temps plein, où j'ai appris les tenants et les aboutissants des manuels, des guides d'installation et des normes de l'industrie.</li>
-</ul>
-<p>Tous les chemins mènent à Rome – ou dans ce cas, à la rédaction technique.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="outils-que-jai-maîtrisés-ou-révisés">Outils que j'ai maîtrisés ou révisés<a href="https://pvega62.github.io/software/fr/blog/technical-writing-and-me#outils-que-jai-ma%C3%AEtris%C3%A9s-ou-r%C3%A9vis%C3%A9s" class="hash-link" aria-label="Lien direct vers Outils que j'ai maîtrisés ou révisés" title="Lien direct vers Outils que j'ai maîtrisés ou révisés" translate="no">​</a></h3>
-<p>En attendant, j'ai ajouté de nouveaux outils à ma boîte à outils de rédaction technique :</p>
-<ul>
-<li class=""><strong>VS Code</strong> : Éditeur principal pour l'écriture, l'édition et le codage.</li>
-<li class=""><strong>Figma</strong> : Pour la rédaction UX et la collaboration de conception.</li>
-<li class=""><strong>Postman</strong> : Pour les tests et la documentation des API.</li>
-<li class=""><strong>Swagger/OpenAPI</strong> : Pour la référence et la validation des API.</li>
-<li class=""><strong>Vale</strong> : Pour le linting et l'assurance de la conformité au guide de style.</li>
-<li class=""><strong>Docusaurus</strong> : Pour générer des sites de documentation statiques (comme celui-ci).</li>
-<li class=""><strong>React</strong> : Pour personnaliser les sites Docusaurus.</li>
-<li class=""><strong>Git/GitHub</strong> : Pour le contrôle de version et la collaboration.</li>
-<li class=""><strong>Markdown</strong> : Pour l'écriture et le formatage de la documentation.</li>
-<li class=""><strong>Writage</strong> : Pour éditer les pages Wiki de GitHub directement depuis Microsoft Word.</li>
-<li class=""><strong>Notion</strong> : Pour organiser les notes et les brouillons de documentation.</li>
-<li class=""><strong>NotebookLM</strong> : Pour la recherche assistée par l'IA.</li>
-<li class=""><strong>Gemini</strong> : Pour la génération et l'édition de contenu assistées par l'IA.</li>
-</ul>
-<p>J'ai été occupé. J'ai écrit. J'ai appris. Et je suis prêt à retourner au travail.</p>
-<p>Si vous recherchez un rédacteur technique dévoué et passionné qui aime apprendre et expliquer des sujets complexes, connectons-nous.
-Contactez-me sur <a href="https://www.linkedin.com/in/pvega62" target="_blank" rel="noopener noreferrer" class="">LinkedIn</a> ou par e-mail à <a href="mailto:vega.pedro96@gmail.com" target="_blank" rel="noopener noreferrer" class="">vega.pedro96@gmail.com</a>.</p>]]></content>
-        <author>
-            <name>Pedro Vega</name>
-            <uri>https://pvega62.github.io/</uri>
-        </author>
-        <category label="Life" term="Life"/>
-        <category label="Technical Writing" term="Technical Writing"/>
-        <category label="Career" term="Career"/>
-    </entry>
-    <entry>
         <title type="html"><![CDATA[Philosophie pop - Examen de la déontologie et de l'utilitarisme à l'aide de Civil War de Marvel]]></title>
         <id>https://pvega62.github.io/software/fr/blog/pop-philosophy</id>
         <link href="https://pvega62.github.io/software/fr/blog/pop-philosophy"/>
-        <updated>2017-12-02T00:00:00.000Z</updated>
+        <updated>2025-12-02T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Avertissement : Il s'agit d'un essai que j'ai écrit pour un cours de philosophie à l'université. J'ai mis à jour les citations pour qu'elles soient complètes et exactes, mais le corps de l'essai reste le même que lorsque je l'ai écrit à l'époque. Je l'ai simplement converti en Markdown afin de jouer avec la fonctionnalité du blog. Bonne lecture. Il contient également des spoilers pour le film et la série de bandes dessinées Civil War de Marvel.]]></summary>
         <content type="html"><![CDATA[<p><strong>Avertissement</strong> : Il s'agit d'un essai que j'ai écrit pour un cours de philosophie à l'université. J'ai mis à jour les citations pour qu'elles soient complètes et exactes, mais le corps de l'essai reste le même que lorsque je l'ai écrit à l'époque. Je l'ai simplement converti en Markdown afin de jouer avec la fonctionnalité du blog. Bonne lecture. Il contient également des spoilers pour le film et la série de bandes dessinées <em>Civil War</em> de Marvel.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="introduction">Introduction<a href="https://pvega62.github.io/software/fr/blog/pop-philosophy#introduction" class="hash-link" aria-label="Lien direct vers Introduction" title="Lien direct vers Introduction" translate="no">​</a></h2>

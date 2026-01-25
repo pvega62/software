@@ -4,68 +4,15 @@
         <title>Portfolio Site Blog</title>
         <link>https://pvega62.github.io/software/blog</link>
         <description>Portfolio Site Blog</description>
-        <lastBuildDate>Sat, 08 Nov 2025 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 02 Dec 2025 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <item>
-            <title><![CDATA[Technical Writing and Me]]></title>
-            <link>https://pvega62.github.io/software/blog/technical-writing-and-me</link>
-            <guid>https://pvega62.github.io/software/blog/technical-writing-and-me</guid>
-            <pubDate>Sat, 08 Nov 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[Or, what I've been up to since my last Technical Writing role]]></description>
-            <content:encoded><![CDATA[<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="or-what-ive-been-up-to-since-my-last-technical-writing-role">Or, what I've been up to since my last Technical Writing role<a href="https://pvega62.github.io/software/blog/technical-writing-and-me#or-what-ive-been-up-to-since-my-last-technical-writing-role" class="hash-link" aria-label="Direct link to Or, what I've been up to since my last Technical Writing role" title="Direct link to Or, what I've been up to since my last Technical Writing role" translate="no">​</a></h3>
-<p>I haven't been a Technical Writer in an <em>official</em> capacity for over a year now, and I miss it. The time away has allowed me to flex other creative muscles, but I am eager to return to the craft. So, what have I been up to? Writing, naturally.</p>
-<p>At my core, I'm a writer. It's what I do.</p>
-<p>I have a wide range of interests, but they're usually in service of writing. I picked up coding and UX design skills to become a better Technical and UX Writer. I learned about APIs to write better documentation. I dove into blockchains to understand decentralized systems. I studied thermodynamics to better document household appliances at Felix Storch.</p>
-<p>I simply love learning about things and then writing about them. I love tinkering with a system and then explaining it. I love breaking down complex topics into simple terms.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="doctor-who-and-the-tardis-manual">Doctor Who and the TARDIS manual<a href="https://pvega62.github.io/software/blog/technical-writing-and-me#doctor-who-and-the-tardis-manual" class="hash-link" aria-label="Direct link to Doctor Who and the TARDIS manual" title="Direct link to Doctor Who and the TARDIS manual" translate="no">​</a></h3>
-<p>One of the first things I did with my partner was break down exactly how Regeneration works in <em>Doctor Who</em>. There is actually a technical writing component here: <a href="https://drive.google.com/file/d/1jzCeNg4tqy2IMLF1HUjr1bOmSdEsKhoZ/view?usp=sharing" target="_blank" rel="noopener noreferrer" class=""><strong>I wrote a user manual on how to grow a Type 40 TARDIS using a piece of a TARDIS coral</strong></a>. It was a fun exercise in technical writing and world-building. <a href="https://youtu.be/7fixNsuYRmg?si=ml2CoErH1KI3zV8G&amp;t=37" target="_blank" rel="noopener noreferrer" class="">In this case, my Subject Matter Experts (SMEs) were the Doctor and Donna Noble themselves.</a></p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="freelance--ux-writing">Freelance &amp; UX Writing<a href="https://pvega62.github.io/software/blog/technical-writing-and-me#freelance--ux-writing" class="hash-link" aria-label="Direct link to Freelance &amp; UX Writing" title="Direct link to Freelance &amp; UX Writing" translate="no">​</a></h3>
-<p>During this period, I worked as a part-time UX Writer, crafting microcopy for the app and site of a startup called Culangex. The app hasn't launched yet, but I'm proud of the work the team has done. Between that and various freelance writing gigs, I haven't stopped being a technical writer; I've just been applying the skill set in new ways.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="something-of-a-sabbatical">Something of a sabbatical<a href="https://pvega62.github.io/software/blog/technical-writing-and-me#something-of-a-sabbatical" class="hash-link" aria-label="Direct link to Something of a sabbatical" title="Direct link to Something of a sabbatical" translate="no">​</a></h3>
-<p>I also took time to be with my family. The upside to this career break was spending the last year with my grandma before she passed away. To return the favor of decades of her care and to be there for her in her final hours is a privilege I will never regret. Prioritizing my family was the right choice.</p>
-<p>Now, I am ready to return to the field full-time. I’ve taken the time to grieve, reflect, and prepare. I'm a free agent, ready to sign with a new team.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="the-road-thus-far">The road thus far<a href="https://pvega62.github.io/software/blog/technical-writing-and-me#the-road-thus-far" class="hash-link" aria-label="Direct link to The road thus far" title="Direct link to The road thus far" translate="no">​</a></h3>
-<p>My entire career path has led to technical writing. Every role has been a stepping stone:</p>
-<ul>
-<li class=""><strong>Journalism:</strong> I learned to research deeply and interview people—skills that translate directly to working with SMEs.</li>
-<li class=""><strong>Publishing (W.W. Norton):</strong> As an editorial intern, I learned to write clearly and concisely for specific audiences when drafting reader reports and marketing copy.</li>
-<li class=""><strong>Higher Ed (City Tech):</strong> As the only English major in the Media Services department, I became the default drafter for all department guides and documentation.</li>
-<li class=""><strong>Education:</strong> As an English tutor, I learned how to break down complex topics into digestible pieces for students.</li>
-<li class=""><strong>UX Writing:</strong> At Culangex, I honed my skills in writing microcopy and designing user flows.</li>
-<li class=""><strong>Manufacturing (Felix Storch):</strong> This gave me my first full-time technical writing role, where I learned the ins and outs of manuals, installation guides, and industry standards.</li>
-</ul>
-<p>All roads lead to Rome—or in this case, technical writing.</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="tools-ive-mastered-or-brushed-up-on">Tools I've mastered or brushed up on<a href="https://pvega62.github.io/software/blog/technical-writing-and-me#tools-ive-mastered-or-brushed-up-on" class="hash-link" aria-label="Direct link to Tools I've mastered or brushed up on" title="Direct link to Tools I've mastered or brushed up on" translate="no">​</a></h3>
-<p>In the meantime, I've been adding new tools to my technical writing tool belt:</p>
-<ul>
-<li class=""><strong>VS Code</strong>: Primary editor for writing, editing, and coding.</li>
-<li class=""><strong>Figma</strong>: For UX writing and design collaboration.</li>
-<li class=""><strong>Postman</strong>: For API testing and documentation.</li>
-<li class=""><strong>Swagger/OpenAPI</strong>: For API reference and validation.</li>
-<li class=""><strong>Vale</strong>: For linting and ensuring style guide adherence.</li>
-<li class=""><strong>Docusaurus</strong>: For generating static documentation sites (like this one).</li>
-<li class=""><strong>React</strong>: For customizing Docusaurus sites.</li>
-<li class=""><strong>Git/GitHub</strong>: For version control and collaboration.</li>
-<li class=""><strong>Markdown</strong>: For writing and formatting documentation.</li>
-<li class=""><strong>Writage</strong>: For editing GitHub Wiki pages directly from Microsoft Word.</li>
-<li class=""><strong>Notion</strong>: For organizing notes and documentation drafts.</li>
-<li class=""><strong>NotebookLM</strong>: For AI-assisted research.</li>
-<li class=""><strong>Gemini</strong>: For AI-assisted content generation and editing.</li>
-</ul>
-<p>I've been busy. I've been writing. I've been learning. And I'm ready to get back to work.</p>
-<p>If you're looking for a dedicated, passionate technical writer who loves to learn and explain complex topics, let's connect.
-Reach out to me on <strong><a href="https://www.linkedin.com/in/pvega62" target="_blank" rel="noopener noreferrer" class="">LinkedIn</a></strong> or via email at <strong><a href="mailto:vega.pedro96@gmail.com" target="_blank" rel="noopener noreferrer" class="">vega.pedro96@gmail.com</a></strong>.</p>]]></content:encoded>
-            <category>Life</category>
-            <category>Technical Writing</category>
-            <category>Career</category>
-        </item>
-        <item>
             <title><![CDATA[Pop Philosophy - Examining Deontology and Utilitarianism Using Marvel's Civil War]]></title>
             <link>https://pvega62.github.io/software/blog/pop-philosophy</link>
             <guid>https://pvega62.github.io/software/blog/pop-philosophy</guid>
-            <pubDate>Sat, 02 Dec 2017 00:00:00 GMT</pubDate>
+            <pubDate>Tue, 02 Dec 2025 00:00:00 GMT</pubDate>
             <description><![CDATA[Fair Warning: This is an essay I wrote for a Philosophy class in college. I've updated the citations to be complete and accurate, but the body of the essay remains the same as it was when I wrote it back then. I just converted it into Markdown in order to play around with the blog feature. Enjoy. It also contains spoilers for Marvel's Civil War movie and comic series.]]></description>
             <content:encoded><![CDATA[<p><strong>Fair Warning:</strong> This is an essay I wrote for a Philosophy class in college. I've updated the citations to be complete and accurate, but the body of the essay remains the same as it was when I wrote it back then. I just converted it into Markdown in order to play around with the blog feature. Enjoy. It also contains spoilers for Marvel's <em>Civil War</em> movie and comic series.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="introduction">Introduction<a href="https://pvega62.github.io/software/blog/pop-philosophy#introduction" class="hash-link" aria-label="Direct link to Introduction" title="Direct link to Introduction" translate="no">​</a></h2>
