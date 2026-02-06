@@ -7,7 +7,7 @@ slug: intro
 ---
 ## Welcome to my documentation portfolio
 
-This section of my **Docs-as-Code portfolio** provides a comprehensive look at technical documentation samples, all authored and published entirely in Markdown using Docusaurus. Here you'll find examples of developer guides, API references, and insights into the workflows used to create them.
+This section of my **Technical Writing portfolio** provides a comprehensive look at software documentation samples, all authored and published entirely in Markdown using Docusaurus. Here you'll find examples of developer guides, API references, and insights into the workflows used to create them.
 
 ## Navigation
 **Guides**
@@ -49,9 +49,8 @@ To view the raw markdown files for these docs, head to **[GitHub](https://github
 - **Vale**: For linting and ensuring style guide adherence.
 - **Git/GitHub**: For version control and hosting.
 - **Mermaid Chart**: Converting Mermaid code into images.
-- **DeepL**: For translation of documentation into multiple languages.
+- **DeepL MCP**: For translation of documentation into multiple languages.
 
 This mirrors how professional teams maintain developer documentation portals such as Docusaurus or similar static-site generators.
 
-> Each sample demonstrates end-to-end doc creation: research → drafting → review → publishing.
-
+> Each piece demonstrates end-to-end doc creation: research → drafting → review → publishing.
