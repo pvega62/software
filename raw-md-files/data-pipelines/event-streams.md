@@ -9,7 +9,7 @@ description: Conceptual overview of event streams, routing, processing, and mode
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Modern systems emit massive amounts of telemetry—logs, metrics, traces, security events, and everything between.  
+Modern systems emit massive amounts of telemetry—logs, metrics, traces, security events, and everything in-between.  
 This document explains how **observability pipelines** help teams collect, shape, route, and optimize this data in real time.
 
 Whether you're handling microservices, cloud platforms, containers, or security workloads, understanding these concepts is key to building scalable, cost-effective data flows.
@@ -20,7 +20,7 @@ Whether you're handling microservices, cloud platforms, containers, or security 
 Observability pipelines solve real-world challenges:
 - **Reduce cost** by filtering or sampling noisy logs before they hit expensive tools  
 - **Improve data quality** with parsing, normalization, and metadata enrichment  
-- **Protect privacy** by masking or removing PII early  
+- **Protect privacy** by masking or removing Personally Identifiable Information (PII) early  
 - **Increase flexibility** with multi-destination routing  
 - **Speed up troubleshooting** with real-time processing and transformation  
 
@@ -78,7 +78,7 @@ flowchart TD
 </TabItem>
 </Tabs>
 ---
-## What's an event stream
+## What's an event stream?
 
 An **event stream** is a continuous flow of time-ordered telemetry data.  
 
@@ -99,7 +99,7 @@ Event streams are high-volume, dynamic, and often unbounded—making real-time p
 ### 1. Ingestion layer
 
 Responsible for:
-- Handling input from agents, APIs, syslog, forwarders, cloud providers
+- Handling input from agents, APIs, syslog, forwarders, and cloud providers
 - Authenticating and validating data
 - Managing backpressure
 - Normalizing different event formats
@@ -111,7 +111,7 @@ This is where raw data first enters the system.
 Here’s where the magic happens. Typical operations:
 - **Parsing**: JSON, Syslog, CSV, regular expression, custom formats
 - **Normalization**: Standardize timestamps, severity levels, field names
-- **Enrichment**: Add metadata like host, environment, geo, service name
+- **Enrichment**: Add metadata like host, environment, geolocation data, service name
 - **Masking & PII scrubbing**: Protect sensitive fields
 - **Transformations**: Reshape or remodel data for downstream tools
 - **Filtering**: Remove low-value or noisy events
@@ -122,8 +122,8 @@ The processing layer shapes your data into something clean, usable, and consiste
 Determines **where events should go** based on business, compliance, or engineering needs.
 
 Routing strategies include:
-- Forwarding security logs to a **SIEM**
-- Sending long-term storage data to **S3/GCS**
+- Forwarding security logs to a **Security Information and Event Management (SIEM)**
+- Sending long-term storage data to **S3/Google CLoud Storage (GCS)**
 - Shipping app logs to **Elastic**
 - Sending metrics to **Datadog**
 - Fanning out data to various tools at once

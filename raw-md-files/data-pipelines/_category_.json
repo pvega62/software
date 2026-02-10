@@ -1,8 +1,8 @@
 {
-  "label": "Data Pipeline Documentation",
+  "label": "Cloud Data Pipeline Documentation",
   "position": 4,
   "link": {
     "type": "generated-index",
-    "description": "Learn how to design, build, and route event streams for modern observability pipelines. This section covers core concepts, ingestion APIs, and hands-on routing workflows."
+    "description": "Learn how to design, build, and route event streams for modern observability pipelines. This section covers core concepts, ingestion APIs, and hands-on routing workflows. Also, learn how to set up a mock server using Postman to test your API documentation examples without needing a live backend."
   }
 }

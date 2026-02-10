@@ -15,7 +15,7 @@ This guide explains how to use the provided Postman sample files to create a moc
 
 ## Prerequisites
 
-* [Postman](https://www.postman.com/downloads/) (desktop or web version)
+* **[Postman](https://www.postman.com/downloads/)** (desktop or web version)
 * Three JSON files included with this project:
 
   * `DataPipeline-Environment.json` - defines reusable variables such as `base_url`, `mock_base_url`, `api_token`, and `stream_id`.
@@ -30,7 +30,7 @@ Download all three here:
 ## 1. Import the files into Postman
 
 1. Open Postman and click **Import**.
-2. Upload:
+2. Select the downloaded JSON files:
 
    * The two collections (`DataPipeline-postman-collection.json` and `DataPipeline-MockServer-Collection.json`).
    * The environment (`DataPipeline-Environment.json`).
@@ -106,10 +106,19 @@ Remove a required header or edit the JSON body to trigger a `400 Bad Request` re
   "detail": "Missing or invalid 'timestamp' field. Expected ISO 8601 format."
 }
 ```
+---
+
+## 6. Switch between live and mock testing
+
+* To test “live” examples, use **DataPipeline-postman-collection.json** with `{{base_url}}`.
+* To test locally or offline, use **DataPipeline-MockServer-Collection.json** with `{{mock_base_url}}`.
+* Both rely on the same `DataPipeline-Environment.json` for variable management.
+
+This lets you test both your documentation examples and mock API without changing URLs manually.
 
 ---
 
-## 6. Visualizing the request flow
+## Visualizing the request flow
 
 <Tabs>
 <tabitem value="diagram" label="Mermaid (code)" default>
@@ -145,15 +154,6 @@ sequenceDiagram
 ```
 </tabitem>
 </Tabs>
----
-
-## 7. Switch between live and mock testing
-
-* To test “live” examples, use **DataPipeline-postman-collection.json** with `{{base_url}}`.
-* To test locally or offline, use **DataPipeline-MockServer-Collection.json** with `{{mock_base_url}}`.
-* Both rely on the same `DataPipeline-Environment.json` for variable management.
-
-This lets you test both your documentation examples and mock API without changing URLs manually.
 
 ---
 
@@ -168,9 +168,3 @@ Using Postman Mock Servers and collections enables you to:
 
 
 ---
-
-## Next steps
-
-* Review the [Ingest API Reference](/docs/data-pipelines/api-ingest-stream)
-* Try the [Routing Cloud Application Logs Guide](/docs/data-pipelines/route-cloud-app-logs-guide)
-* Complete the [Before You Start](/docs/data-pipelines/before-you-start) checklist
