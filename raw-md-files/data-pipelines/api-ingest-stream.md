@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 Use this API to send event data into a pipeline for processing, filtering, enrichment, and routing.
 
 This endpoint supports **high-throughput, real-time ingestion** and supports structured and semi-structured JSON events. It’s ideal for cloud apps, microservices, IoT devices, or any system emitting telemetry.
-1
+
 ---
 
 ## API functions
