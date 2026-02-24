@@ -10,7 +10,9 @@ description: A tutorial on how to perform a write operation using the SuiClient 
 # Using write operation to send a transaction 
 
 **Audience:** Developers ready to perform their first state-changing operation.
+
 **Prerequisites:** A funded Sui Devnet wallet and a basic Node.js setup.
+
 **Goal:** Write a script to transfer Sui tokens to another address, understanding the role of Gas and Signatures.
 
 ---

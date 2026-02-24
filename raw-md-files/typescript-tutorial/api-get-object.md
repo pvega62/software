@@ -145,5 +145,5 @@ if (owner && owner.AddressOwner === '0xMyAddress...') {
 
 ## See also
 
-* [`getMultiGetObjects`](./api-get-multi-objects.md)**: Fetch many objects in a single network request, for batching.
+* **[`getMultiGetObjects`](./api-get-multi-objects.md)**: Fetch many objects in a single network request, for batching.
 * **[`getOwnedObjects`](./api-get-owned-objects.md)**: Find all objects owned by a specific address.

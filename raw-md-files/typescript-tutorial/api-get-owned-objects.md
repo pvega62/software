@@ -121,18 +121,16 @@ console.log(`Total objects fetched: ${allObjects.length}`);
 ```
 
 ---
-
 ## Common errors
 
 | Error Code | Cause | Resolution |
 | :--- | :--- | :--- |
 | `cursor_invalid` | The string passed to `cursor` isn't valid or from a different query. | Make sure to pass the exact string returned in `nextCursor` from the *previous* call. |
-
-| `limit_exceeded` | If you request a limit higher than the node permits, for example, 1000, reduce your limit. The standard max is typically 50. |
+| `limit_exceeded` | If you request a limit higher than the node permits, for example, 1000. | Reduce your limit. The standard max is typically 50. |
 
 ---
 
 ## See also
 
 * **[`getObject`](./api-get-object.md)**: Fetch a single object by its ID.
-* [`multiGetObjects`](./api-get-multi-objects.md)**: Fetch many objects by their IDs in a single request.
+* **[`multiGetObjects`](./api-get-multi-objects.md)**: Fetch many objects by their IDs in a single request.

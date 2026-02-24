@@ -67,9 +67,9 @@ console.log(`✅ Connected to Sui ${NETWORK}`);
 ## Step 3: Write the query logic
 
 Query a known "`devnet` Non-Fungible Token (NFT)" object.
-
-> **Note:** On `devnet`, objects are frequently deleted during network wipes. If the ID below fails, you may need to find a fresh Object ID from the [Sui Explorer](https://suiscan.xyz/devnet/home).
-
+:::note
+> On `devnet`, objects are frequently deleted during network wipes. If the ID below fails, you may need to find a fresh Object ID from the [Sui Explorer](https://suiscan.xyz/devnet/home).
+:::
 Append the following code to `index.js`:
 
 ```javascript
@@ -144,5 +144,5 @@ You should see a JSON structure like this:
 
 ## Next steps
 
-You have successfully fetched raw data, but you likely noticed the `options` parameter in the code. To understand exactly what data you can request, consult the API Reference.
+You have successfully fetched raw data, but you likely noticed the `options` parameter in the code. To understand exactly what data you can request, consult the API reference documents.
 

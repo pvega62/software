@@ -110,7 +110,7 @@ for (const batch of chunks) {
 ## Best practices
 
 ### 1. Always handle partial failures
-Unlike a standard database query that might stop the whole batch on error, `multiGetObjects` returns a result for *every* ID. Even if you delete one object ( ***** ), the others still return successfully ( **** ). You must check `data` vs `error` for **each item** in the returned array.
+Unlike a standard database query that might stop the whole batch on error, `multiGetObjects` returns a result for *every* ID. Even if one object fails (e.g., it was deleted), the others in the batch still return successfully. You must check `data` vs `error` for **each item** in the returned array.
 
 ### 2. Order preservation
 The SDK guarantees that the output array matches the index of the input array.
