@@ -1,123 +1,155 @@
 ---
 id: before-you-start
 slug: before-you-start
-title: Before You Start
+title: Before you start - parallel observability for cloud and AI
 sidebar_label: Before You Start
 sidebar_position: 1
-description: Prerequisites, tooling, and context to help you get started with event pipelines, ingestion, and routing workflows.
+description: Prerequisites, tooling, and context for working with Datadog log pipelines and Galileo large language model (LLM) observability.
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This page provides the essential context, prerequisites, and tooling you'll need before diving into the Data Pipelines documentation.  
-Whether you're new to observability pipelines or just new to this set of docs, start here.
+This page covers the prerequisites, tools, and conceptual model you'll need before working through the pipeline and observability documentation. Whether you're setting up log ingestion in Datadog, tracing large language model (LLM) calls in Galileo, or both, start here.
 
-A little preparation goes a long way toward making the API reference, how-to guides, and architecture concepts easier to understand.
+## What this section covers
 
----
+This documentation covers two complementary observability workflows:
 
-## What you’ll learn in this section
+1. **Operational log ingestion and routing with Datadog**
 
-This documentation section covers:
+   - Ingest JSON logs from cloud apps via the Datadog Log Ingestion application programming interface (API), apply pipeline processors, and route data to downstream destinations.
 
-1. **Foundational Concepts**  
-   Understanding event streams, processing layers, routing, and destinations.
+2. **LLM tracing and evaluation with Galileo**
 
-2. **Ingestion Mechanics**  
-   How to send logs and metrics directly into a pipeline using a high-throughput API.
+   - Instrument AI-powered services with the Galileo software development kit (SDK) to capture traces, spans, and evaluation metrics for every LLM call.
 
-3. **Hands-On Workflows**  
-   How to route cloud app logs, verify ingestion, and deliver data to different destinations.
+Follow the docs in the recommended order:
 
-If you want to explore the docs in the recommended order:
-
-### Start with concepts  
+### Start with concepts
 [Event Streams & Observability Pipelines](./concept-observability-pipelines)
 
-### Then learn the ingestion API  
-[Ingest Events Using the Streaming Ingest API](./api-ingest-stream.md)
+### Then learn the ingestion API
+[Ingest events using the Datadog Log Ingestion API](./api-ingest-stream.md)
 
-### Then follow the hands-on guide  
-[Route Cloud Application Logs Into a Pipeline](./route-cloud-app-logs-guide)
+### Then follow the hands-on guide
+[Routing cloud app logs with Datadog and Galileo](./route-cloud-app-logs-guide)
 
----
+## Tools you'll need
 
-## Tools you’ll need
+### For Datadog log ingestion
+- **cURL or [Postman](https://www.postman.com/)**—Use these tools for sending API requests to the Datadog Log Ingestion API.
+- **A terminal or shell**—macOS, Linux, or Windows PowerShell all work.
+- **`jq`** (optional but recommended)—Use this tool for validating JSON payloads before sending them.
 
-You’ll get the most out of the examples if you have the following installed:
+### For Galileo LLM tracing
+- **Python 3.8+** or **Node.js 18+**—The Galileo SDK supports both environments.
+- **`pip` or `npm`**—Use these tools to install the SDK.
 
-- **cURL** or **Postman**  
-  For sending API requests and experimenting with ingestion.
-- **A code editor**, preferably **VS Code**  
-  For editing sample JSON payloads.
-- **A terminal or shell**  
-  macOS, Linux, or Windows PowerShell all work.
-- **A browser**  
-  To view live events, routing rules, and pipeline diagrams once implemented.
+  <Tabs>
+  <TabItem value="python" label="Python" default>
 
-None of these tools are required to *read* the docs, but they unlock the full hands-on experience.
+  ```bash
+  pip install galileo
+  ```
 
----
+  </TabItem>
+  <TabItem value="typescript" label="TypeScript">
 
-## Access & credentials you may need
+  ```bash
+  npm install galileo
+  ```
 
-Some examples reference:
+  </TabItem>
+  </Tabs>
 
-- An **ingestion-enabled API token**  
-- A **Stream ID**  
-- Basic JSON log samples
+- **A code editor**, preferably [VS Code](https://code.visualstudio.com/download) ([Cursor](https://www.cursor.com/), [Antigravity](https://antigravity.google/), or [Codex](https://openai.com/codex) are acceptable alternatives).
 
-These represent standard requirements in event pipelines, even though this portfolio doesn't depend on an actual API back-end.
+## Credentials needed
 
-Treat them as realistic placeholders you’d encounter in a real observability platform.
+### Datadog
+| Credential | Where to find it |
+|---|---|
+| **API key** | Datadog → **Organization Settings** → **API Keys** |
+| **Datadog site address** | Depends on your region, for example, `datadoghq.com` (US) or `datadoghq.eu` (EU). See [Datadog sites](https://docs.datadoghq.com/getting_started/site/) |
 
----
+### Galileo
+| Credential | Where to find it |
+|---|---|
+| **API key** | [app.galileo.ai](https://app.galileo.ai) → **Settings** → **API Keys** |
+| **Project name** | Created when you set up a new project in Galileo |
+| **Log stream name** | Created per environment, such as `dev`, `staging`, or `production`. |
+
+See [Where do I find my project keys?](https://v2docs.galileo.ai/references/faqs/find-keys) in the Galileo docs.
 
 ## Who this documentation is for
 
-I wrote these docs with several personas in mind:
-
-| Persona | Needs |
-|--------|-------|
-| **Platform Engineers** | Build scalable ingestion & routing workflows |
-| **SREs / DevOps** | Normalize logs, reduce noise, build dashboards |
-| **Security Engineers** | Route authentication & audit logs to SIEM |
-| **Developers** | Send app logs and metrics into pipelines |
-| **Architects** | Understand end-to-end data flow and design patterns |
-
-If you work in or near any of these areas, you’re in the right place.
-
----
+| Persona | Primary use |
+|---|---|
+| **Platform engineers** | Build and maintain scalable Datadog log pipelines |
+| **Site reliability engineers (SREs) and DevOps** | Normalize logs, reduce noise, and set up routing and alerting |
+| **AI and machine learning (ML) engineers** | Instrument LLM services and score model quality with Galileo |
+| **Security engineers** | Route audit and authentication logs to security information and event management (SIEM) destinations |
+| **Developers** | Send app logs and trace LLM calls without deep infrastructure knowledge |
 
 ## What you should already know
 
-You don’t need to be an expert—these docs assume:
+These docs assume:
 
-- Basic familiarity with **JSON**
-- Comfort running basic command-line commands
-- General awareness of logs, events, or metrics
-- A high-level understanding of cloud or microservice environments
+- Basic familiarity with JSON
+- Comfort running command-line commands
+- A general understanding of logs, events, or metrics
+- Awareness of cloud or microservice environments
 
-If you don’t know what a POST request is, no problem—the guides walk you through it.
+If you haven't sent a POST request before, the hands-on guide walks through the process step by step.
 
----
+## Conceptual model
 
-## Conceptual model to keep in mind
+All workflows in this section follow a two-track observability model:
 
-Most examples follow a flow like this:
 <Tabs>
-<TabItem value="diagram" label="Mermaid (code)" default>
+<TabItem value="image" label="Mermaid (image)" default>
+
+![Observability pipeline architecture](cloud_data_pipeline.svg)
+
+</TabItem>
+<TabItem value="diagram" label="Mermaid (code)">
+
 ```mermaid
 flowchart LR
-    A["Cloud Apps"] --> B["Ingestion"]
-    B --> C["Processing<br/>Parse • Enrich • Mask"]
-    C --> D["Routing<br/>Filters • Rules • Sampling"]
-    D --> E{{"Destinations"}}
-```
-</TabItem>
-<TabItem value="visual" label="Mermaid (image)" default>
+    A["Cloud App"] -->|HTTP POST| B["Datadog<br/>Log Ingestion API"]
+    B --> C["Pipeline<br/> • Parse<br/> • Enrich<br/> • Route"]
+    C --> D{{"Destinations<br/> • S3<br/> • SIEM<br/> • Alerts"}}
 
-![screenshot of pipeline architecture](cloud_data_pipeline.svg)
+    A -->|Galileo SDK| E["Galileo<br/>Log Stream"]
+    E --> F["Galileo AI Agent"]
+    F --> G{{"Metrics and<br/>Evaluation"}}
+```
+
+</TabItem>
+<TabItem value="ascii" label="ASCII">
+
+```text
+       [Cloud App]
+      /           \
+|HTTP POST|   |Galileo SDK|
+     v               v
+ [Datadog]       [Galileo]
+ [Ingest API]    [Log Stream]
+     |               |
+     v               v
+ [Pipeline]      [Galileo]
+ (Parse, Route)  [AI Agent]
+     |               |
+     v               v
+[Destinations]  [Metrics and]
+(S3, SIEM)      [Evaluation ]
+```
 
 </TabItem>
 </Tabs>
+
+**Datadog** handles your **operational telemetry**, including infrastructure logs, error rates, routing rules, and alerting. 
+
+**Galileo** handles your **AI telemetry**, including LLM inputs and outputs, latency per span, and evaluation scores. 
+
+Together they provide full-stack visibility across both layers of a modern cloud app.

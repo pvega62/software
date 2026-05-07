@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocusaurus=self.webpackChunkdocusaurus||[]).push([["1833"],{5513(s){s.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Pop Philosophy - Examining Deontology and Utilitarianism Using Marvel\'s Civil War","permalink":"/software/blog/pop-philosophy","unlisted":false,"date":"2025-12-02T00:00:00.000Z"}]}')}}]);
