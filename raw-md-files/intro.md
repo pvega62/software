@@ -1,15 +1,15 @@
 ---
 id: intro
-title: 'Introduction'
+title: 'Technical Writing Portfolio'
 sidebar_position: 1
-sidebar_label: 'Introduction'
+sidebar_label: 'Overview'
 slug: intro
 ---
-## Welcome to my documentation portfolio
+# Technical Writing Portfolio
 
 This section of my **Technical Writing portfolio** provides a comprehensive look at software documentation samples, all authored and published entirely in Markdown using Docusaurus. Here you'll find examples of developer guides, API references, and insights into the workflows used to create them.
 
-## Navigation
+## Portfolio Navigation
 **Guides**
 - [Installing and Applying a Theme to Google Chrome](/docs/google-chrome-theme-installation)
 - [Using Postman to Connect to the Stripe API](/docs/stripe-api/using-postman)
@@ -33,7 +33,7 @@ This section of my **Technical Writing portfolio** provides a comprehensive look
 
 To view the raw markdown files for these docs, head to **[GitHub](https://github.com/pvega62/software/tree/01ff338290542a442ffaf6b5daa4d8790a7a880d/docs)**.
 
-## Workflow
+## Documentation Workflow
 - Drafting with Markdown in VS Code
 - Markdown linting with Vale
 - Translation with DeepL
@@ -42,7 +42,7 @@ To view the raw markdown files for these docs, head to **[GitHub](https://github
 - API validation with Postman and Swagger/OpenAPI
 - Publishing with Docusaurus
 
-## Tools
+## Technical Stack
 - **Docusaurus**: For generating the static site and documentation.
 - **VS Code**: Primary editor for all content.
 - **Postman**: For API testing and generating API documentation examples.
