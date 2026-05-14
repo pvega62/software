@@ -31,7 +31,12 @@ Think of the Sui Network as a massive, global postal system.
 You rely on the clerk to interact with the system. You can't sort the mail or drive the delivery trucks yourself; you must make requests through the clerk.
 
 <Tabs>
-  <TabItem value="diagram" label=" Code" default>
+  <TabItem value="visual" label="Image" default>
+
+  ![screenshot of SuiClient architecture](app_service_flow.svg)
+
+  </TabItem>
+  <TabItem value="diagram" label=" Code">
 
   ```mermaid
   flowchart LR
@@ -40,11 +45,6 @@ You rely on the clerk to interact with the system. You can't sort the mail or dr
       C -->|Delivers Result| B
       B -->|Hands Over Item| A
   ```
-
-  </TabItem>
-  <TabItem value="visual" label="Image">
-
-  ![screenshot of SuiClient architecture](app_service_flow.svg)
 
   </TabItem>
 </Tabs>

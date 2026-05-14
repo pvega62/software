@@ -2,14 +2,20 @@
 id: intro
 title: 'Technical Writing Portfolio'
 sidebar_position: 1
-sidebar_label: 'Overview'
+sidebar_label: 'Introduction'
 slug: intro
 ---
-# Technical Writing Portfolio
+# Technical writing portfolio
 
-This section of my **Technical Writing portfolio** provides a comprehensive look at software documentation samples, all authored and published entirely in Markdown using Docusaurus. Here you'll find examples of developer guides, API references, and insights into the workflows used to create them.
+This is a portfolio dedicated soley to the software-related samples of my **Technical Writing portfolio**. It provides a comprehensive look at software documentation samples, all authored and published entirely in Markdown using Docusaurus. Here you'll find examples of developer guides, API references, and insights into the workflows used to create them.
 
-## Portfolio Navigation
+:::note
+
+I can't share most of my work due to NDAs, but this portfolio includes original content that demonstrates my technical writing skills and processes.
+
+:::
+
+## Portfolio navigation
 **Guides**
 - [Installing and Applying a Theme to Google Chrome](/docs/google-chrome-theme-installation)
 - [Using Postman to Connect to the Stripe API](/docs/stripe-api/using-postman)
@@ -31,9 +37,9 @@ This section of my **Technical Writing portfolio** provides a comprehensive look
 - [Before You Start](/docs/data-pipelines/before-you-start)
 - [The SuiClient Architecture](/docs/typescript-tutorial/sui-client-concept)
 
-To view the raw markdown files for these docs, head to **[GitHub](https://github.com/pvega62/software/tree/01ff338290542a442ffaf6b5daa4d8790a7a880d/docs)**.
+To view the raw markdown files for these docs, head to **[GitHub](https://github.com/pvega62/software/tree/01ff338290542a442ffaf6b5daa4d8790a7a880d/docs/raw-md-files)**.
 
-## Documentation Workflow
+## Documentation workflow
 - Drafting with Markdown in VS Code
 - Markdown linting with Vale
 - Translation with DeepL
@@ -42,7 +48,7 @@ To view the raw markdown files for these docs, head to **[GitHub](https://github
 - API validation with Postman and Swagger/OpenAPI
 - Publishing with Docusaurus
 
-## Technical Stack
+## Technical stack
 - **Docusaurus**: For generating the static site and documentation.
 - **VS Code**: Primary editor for all content.
 - **Postman**: For API testing and generating API documentation examples.
@@ -53,4 +59,4 @@ To view the raw markdown files for these docs, head to **[GitHub](https://github
 
 This mirrors how professional teams maintain developer documentation portals such as Docusaurus or similar static-site generators.
 
-> Each piece demonstrates end-to-end doc creation: research → drafting → review → publishing.
+> Each piece demonstrates end-to-end doc creation: research ? drafting ? review ? publishing.
