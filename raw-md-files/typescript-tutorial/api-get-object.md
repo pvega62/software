@@ -69,7 +69,7 @@ If the object exists and accessibility is maintained, the `data` property holds 
 ```
 
 ### 2. Error Response (`error`)
-If you deleted the object, wrapped in another object, or doesn't exist, the `error` property holds a value.
+If the object was deleted, is wrapped in another object, or doesn't exist, the `error` property holds a value.
 
 ```json
 {

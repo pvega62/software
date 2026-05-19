@@ -98,9 +98,9 @@ async function sendTransaction() {
     try {
         console.log("📝 Signing and submitting transaction...");
 
-        const result = await client.signAndExecuteTransactionBlock({
+        const result = await client.signAndExecuteTransaction({
             signer: keypair,
-            transactionBlock: tx,
+            transaction: tx,
         });
 
         console.log("✅ Transaction Submitted!");

@@ -4,7 +4,7 @@ slug: sui-data-fetcher
 title: How to Fetch Object Data
 sidebar_label: How to Fetch Object Data
 sidebar_position: 2
-description: A tutorial on how 5o fetch object data from the Sui `devnet`.
+description: A tutorial on how to fetch object data from the Sui `devnet`.
 ---
 
 **Audience:** developers implementing their first Sui read operation.
