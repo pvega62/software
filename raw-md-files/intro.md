@@ -9,12 +9,6 @@ slug: intro
 
 This is a portfolio dedicated soley to the software-related samples of my **Technical Writing portfolio**. It provides a comprehensive look at software documentation samples, all authored and published entirely in Markdown using Docusaurus. Here you'll find examples of developer guides, API references, and insights into the workflows used to create them.
 
-:::note
-
-I can't share most of my work due to NDAs, but this portfolio includes original content that demonstrates my technical writing skills and processes.
-
-:::
-
 ## Portfolio navigation
 **Guides**
 - [Installing and Applying a Theme to Google Chrome](/docs/google-chrome-theme-installation)
