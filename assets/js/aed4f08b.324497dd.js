@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkdocusaurus=globalThis.webpackChunkdocusaurus||[]).push([[4141],{105:a=>{a.exports=JSON.parse('{"metadata":{"permalink":"/software-docs/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

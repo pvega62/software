@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocusaurus=self.webpackChunkdocusaurus||[]).push([["4375"],{8806(e){e.exports=JSON.parse('{"metadata":{"permalink":"/software/hi/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"\u092C\u094D\u0932\u0949\u0917","blogTitle":"\u092C\u094D\u0932\u0949\u0917"}}')}}]);

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocusaurus=self.webpackChunkdocusaurus||[]).push([["2736"],{1992(e){e.exports=JSON.parse('{"metadata":{"permalink":"/software/cmn/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"\u535A\u5BA2","blogTitle":"\u535A\u5BA2"}}')}}]);
