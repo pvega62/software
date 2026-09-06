@@ -1,0 +1,8 @@
+{
+  "label": "TypeScript SDK Sui Blockchain Documentation",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "description": "A step-by-step instructional series for the Sui TypeScript SDK, designed to streamline developer onboarding. This tutorial walks through the complete workflow of interacting with the Sui blockchain—from environment setup to executing on-chain transactions—showcasing a pedagogical approach that prioritizes clarity and rapid time-to-value."
+  }
+}
