@@ -1,8 +1,0 @@
-{
-  "label": "Cloud Data Pipeline Documentation",
-  "position": 4,
-  "link": {
-    "type": "generated-index",
-    "description": "Master the architectural design and operational routing of modern observability pipelines. This collection showcases event-driven data flows through a combination of detailed ingestion API references, high-fidelity visual diagrams, and standard operating procedures for building resilient event streams."
-  }
-}

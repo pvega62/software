@@ -1,8 +1,0 @@
-{
-  "label": "Store APIs",
-  "position": 2,
-  "link": {
-    "type": "generated-index",
-    "description": "These documents provide detailed information about the Store-related API endpoints in the Pet Store API. They include examples of the URLs needed to make calls to the API, the parameters to attach to them, and the expected responses."
-  }
-}
