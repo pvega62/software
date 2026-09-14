@@ -1,0 +1,225 @@
+<svg id="diagram-graph" xmlns="http://www.w3.org/2000/svg" class="flowchart" style="max-width: 100%; max-height: 100%; width: auto; height: auto; background-color: transparent;" viewBox="-10 -10 384 656" role="graphics-document document" aria-roledescription="flowchart-v2" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <style>
+    #diagram-graph {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 14px;
+      fill: #cccccc;
+    }
+    #diagram-graph svg {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 14px;
+    }
+    #diagram-graph p {
+      margin: 0;
+    }
+    #diagram-graph .label {
+      font-family: "Recursive Variable", arial, sans-serif;
+      color: #e0dfdf;
+    }
+    #diagram-graph .label text,
+    #diagram-graph span,
+    #diagram-graph .nodeLabel {
+      fill: #e0dfdf;
+      color: #e0dfdf;
+    }
+    #diagram-graph .node rect,
+    #diagram-graph .node circle,
+    #diagram-graph .node ellipse,
+    #diagram-graph .node polygon,
+    #diagram-graph .node path {
+      fill: #111113;
+      stroke: #FFFFFF;
+      stroke-width: 2px;
+    }
+    #diagram-graph [data-look="neo"].node rect,
+    #diagram-graph [data-look="neo"].node polygon,
+    #diagram-graph [data-look="neo"].node .outer-path {
+      stroke: #FFFFFF;
+      stroke-width: 2px;
+      filter: url(#diagram-graph-drop-shadow);
+    }
+    #diagram-graph .marker {
+      fill: #cccccc;
+      stroke: #cccccc;
+    }
+    #diagram-graph .arrowheadPath {
+      fill: #cccccc;
+    }
+    #diagram-graph .edgePath .path {
+      stroke: #cccccc;
+      stroke-width: 2px;
+    }
+    #diagram-graph .flowchart-link {
+      stroke: #cccccc;
+      fill: none;
+    }
+    #diagram-graph .edgeLabel {
+      text-align: center;
+    }
+    #diagram-graph .labelBkg {
+      background-color: hsl(180, 1.5873015873%, 28.3529411765%);
+      border-radius: 4px;
+      padding: 4px 10px;
+      display: inline-block;
+      white-space: nowrap;
+      color: #e0dfdf;
+      font-size: 12px;
+      line-height: 1.2;
+    }
+    #diagram-graph foreignObject,
+    #diagram-graph .node foreignObject,
+    #diagram-graph .edgeLabel foreignObject {
+      overflow: visible !important;
+    }
+    #diagram-graph .node foreignObject div {
+      width: 100% !important;
+      height: 100% !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      text-align: center !important;
+      white-space: nowrap !important;
+      box-sizing: border-box !important;
+    }
+    #diagram-graph .edgeLabel foreignObject div {
+      width: 100% !important;
+      height: 100% !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      text-align: center !important;
+      box-sizing: border-box !important;
+    }
+    #diagram-graph .edgeLabel span.edgeLabel {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 12px;
+      color: #e0dfdf;
+    }
+    #diagram-graph .node .nodeLabel {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 14px;
+      color: #e0dfdf;
+      white-space: nowrap;
+    }
+  </style>
+  <defs>
+    <filter id="diagram-graph-drop-shadow" height="130%" width="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+    <marker id="diagram-graph_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto">
+      <path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0; fill: #cccccc;"></path>
+    </marker>
+  </defs>
+  <g class="root">
+    <g class="clusters"></g>
+    <g class="edgePaths">
+      <path d="M80.3046875,53L80.3046875,78L80.3046875,119.58906936645508" id="diagram-graph-L_A_B_0" class="edge-thickness-normal edge-pattern-solid flowchart-link" data-edge="true" data-et="edge" data-id="L_A_B_0" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"></path>
+      <path d="M80.3046875,168.58906936645508L80.3046875,214.61758217841594Q80.3046875,224.67813873291016 88.98224789967695,229.76879131348713L137.36809332358322,258.1541343737068" id="diagram-graph-L_B_C_0" class="edge-thickness-normal edge-pattern-solid flowchart-link" data-edge="true" data-et="edge" data-id="L_B_C_0" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"></path>
+      <path d="M278.0390625,189.17813873291016L278.0390625,214.61758217841594Q278.0390625,224.67813873291016 269.36150210032304,229.76879131348713L220.97565667641678,258.1541343737068" id="diagram-graph-L_KB_C_0" class="edge-thickness-normal edge-pattern-dotted flowchart-link" style="stroke-dasharray: 4,4;" data-edge="true" data-et="edge" data-id="L_KB_C_0" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"></path>
+      <path d="M179.171875,305.17813873291016L179.171875,340.67813873291016L179.171875,372.17813873291016" id="diagram-graph-L_C_D_0" class="edge-thickness-normal edge-pattern-solid flowchart-link" data-edge="true" data-et="edge" data-id="L_C_D_0" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"></path>
+      <path d="M179.171875,421.17813873291016L179.171875,456.67813873291016L179.171875,488.17813873291016" id="diagram-graph-L_D_E_0" class="edge-thickness-normal edge-pattern-solid flowchart-link" data-edge="true" data-et="edge" data-id="L_D_E_0" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"></path>
+      <path d="M179.171875,537.1781387329102L179.171875,562.1781387329102L179.171875,583.1781387329102" id="diagram-graph-L_E_F_0" class="edge-thickness-normal edge-pattern-solid flowchart-link" data-edge="true" data-et="edge" data-id="L_E_F_0" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"></path>
+    </g>
+    <g class="edgeLabels">
+      <g class="edgeLabel" transform="translate(80.3046875, 224.67813873291016)">
+        <g class="label" data-id="L_B_C_0">
+          <foreignObject x="-80" y="-14" width="160" height="28">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="edgeLabel labelBkg">Vector embedding</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="edgeLabel" transform="translate(179.171875, 340.67813873291016)">
+        <g class="label" data-id="L_C_D_0">
+          <foreignObject x="-70" y="-14" width="140" height="28">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="edgeLabel labelBkg">Relevant docs</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="edgeLabel" transform="translate(179.171875, 456.67813873291016)">
+        <g class="label" data-id="L_D_E_0">
+          <foreignObject x="-80" y="-14" width="160" height="28">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="edgeLabel labelBkg">Prompt + context</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+    </g>
+    <g class="nodes">
+      <g class="node default" id="diagram-graph-flowchart-A-0" data-look="neo" data-id="A" data-node="true" data-et="node" transform="translate(80.3046875, 30.5)">
+        <rect class="basic label-container" data-id="A" x="-72.3046875" y="-22.5" width="144.609375" height="45" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-72.3046875" y="-22.5" width="144.609375" height="45">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">🔍 User Question</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="diagram-graph-flowchart-B-1" data-look="neo" data-id="B" data-node="true" data-et="node" transform="translate(80.3046875, 146.08906936645508)">
+        <rect class="basic label-container" data-id="B" x="-71.640625" y="-22.5" width="143.28125" height="45" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-71.640625" y="-22.5" width="143.28125" height="45">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">Query Processing</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="diagram-graph-flowchart-C-3" data-look="neo" data-id="C" data-node="true" data-et="node" transform="translate(179.171875, 282.67813873291016)">
+        <rect class="basic label-container" data-id="C" x="-43.625" y="-22.5" width="87.25" height="45" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-43.625" y="-22.5" width="87.25" height="45">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">Retrieval</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="diagram-graph-flowchart-KB-4" data-look="neo" data-id="KB" data-node="true" data-et="node" transform="translate(278.0390625, 146.08906936645508)">
+        <path d="M0,13.726042841037204 a76.09375,13.726042841037204 0,0,0 152.1875,0 a76.09375,13.726042841037204 0,0,0 -152.1875,0 l0,58.726042841037206 a76.09375,13.726042841037204 0,0,0 152.1875,0 l0,-58.726042841037206" class="basic label-container outer-path" transform="translate(-76.09375, -43.089064261555805)"></path>
+        <g class="label">
+          <foreignObject x="-76.09375" y="-7" width="152.1875" height="40">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">📚 Knowledge Base</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="diagram-graph-flowchart-D-7" data-look="neo" data-id="D" data-node="true" data-et="node" transform="translate(179.171875, 398.67813873291016)">
+        <rect class="basic label-container" data-id="D" x="-72.03125" y="-22.5" width="144.0625" height="45" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-72.03125" y="-22.5" width="144.0625" height="45">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">Context Assembly</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="diagram-graph-flowchart-E-9" data-look="neo" data-id="E" data-node="true" data-et="node" transform="translate(179.171875, 514.6781387329102)">
+        <rect class="basic label-container" data-id="E" x="-50.640625" y="-22.5" width="101.28125" height="45" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-50.640625" y="-22.5" width="101.28125" height="45">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">Generation</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="diagram-graph-flowchart-F-11" data-look="neo" data-id="F" data-node="true" data-et="node" transform="translate(179.171875, 609.6781387329102)">
+        <rect class="basic label-container" data-id="F" x="-92.15625" y="-22.5" width="184.3125" height="45" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-92.15625" y="-22.5" width="184.3125" height="45">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">📄 Grounded Response</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

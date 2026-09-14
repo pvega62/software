@@ -4,10 +4,93 @@
         <title>Portfolio Site Blog</title>
         <link>https://pvega62.github.io/software/cmn/blog</link>
         <description>Portfolio Site Blog</description>
-        <lastBuildDate>Wed, 09 Sep 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 10 Sep 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>cmn</language>
+        <item>
+            <title><![CDATA[技术作家与AI助手：开发Artie过程中的心得体会]]></title>
+            <link>https://pvega62.github.io/software/cmn/blog/building-artie</link>
+            <guid>https://pvega62.github.io/software/cmn/blog/building-artie</guid>
+            <pubDate>Thu, 10 Sep 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[通过开发这款AI文档助手，我领悟到了关于检索增强生成（RAG）、作为写作学科的提示工程，以及AI时代技术作家角色演变的见解。]]></description>
+            <content:encoded><![CDATA[<p>大多数技术作家并不开发AI代理，而是负责为其编写文档。我们会参加冲刺评审会，阅读架构决策记录。然后，我们要设法向那些只需在周五前完成集成的人解释检索管道的工作原理。</p>
+<p>但我还是开发了一个。</p>
+<p>他的名字叫 <strong><a class="" href="https://pvega62.github.io/software/cmn/docs/artie-case-study">Artie</a></strong>，这是一个我使用 Algolia 构建并嵌入到这个作品集网站中的 AI 文档助手。开发他的过程让我对写作与人工智能的交汇点有了比任何会议演讲或白皮书都更深入的了解。</p>
+<p>本文并非 Artie 的设计详解——那正是 <strong><a class="" href="https://pvega62.github.io/software/cmn/docs/artie-case-study">案例研究</a></strong> 的用途。本文要探讨的是更广泛的启示：</p>
+<ul>
+<li class="">人工智能代理的本质是什么</li>
+<li class="">检索增强生成（RAG）在技术层面的工作原理</li>
+<li class="">为什么提示工程（prompt engineering）比大多数人意识到的更接近技术写作</li>
+<li class="">以及这一切对我们这个小圈子的人意味着什么</li>
+</ul>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="什么是ai代理什么不是">什么是AI代理，什么不是？<a href="https://pvega62.github.io/software/cmn/blog/building-artie#%E4%BB%80%E4%B9%88%E6%98%AFai%E4%BB%A3%E7%90%86%E4%BB%80%E4%B9%88%E4%B8%8D%E6%98%AF" class="hash-link" aria-label="什么是AI代理，什么不是？的直接链接" title="什么是AI代理，什么不是？的直接链接" translate="no">​</a></h2>
+<p>“AI代理”这一术语被广泛且随意地使用，因此有必要对其进行定义。并非所有基于AI的功能都是代理。使用机器学习的拼写检查器不是代理。自动完成建议也不是代理。 即使是遵循 rigid 决策树的聊天机器人，严格来说也不是代理——它不过是一个带有文本输入的流程图。</p>
+<p>AI 代理是一个能够在定义好的环境中 <strong>理解目标、推导实现路径并采取行动</strong> 的系统。其关键区别在于约束条件下的自主性。 代理不仅仅是对提示进行响应；它会评估上下文、选择策略并执行——通常涉及多个步骤。</p>
+<p>那么，Artie 在这个光谱上处于什么位置呢？</p>
+<p>它是一个专注型代理。它不会浏览网页、执行代码，也不会串联多步骤的工具调用。 但他确实能解读用户意图（“这是技术问题还是作品集咨询？”），选择响应策略，并自主应用安全防护措施。这已超越了普通聊天机器人的范畴，但又不及完全自主的智能体——后者甚至能够根据用户的问题提交错误报告。</p>
+<p>这一区别至关重要，因为理解 AI 工具和智能代理正日益成为技术作家工作的一部分。当你为一款 AI 驱动的产品编写文档时，需要明确它在这个光谱上的位置。然后，你需要向用户传达这一区别——因为他们对“AI”的含义可能有着不同的预期。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="检索增强生成rag的实际工作原理">检索增强生成（RAG）的实际工作原理<a href="https://pvega62.github.io/software/cmn/blog/building-artie#%E6%A3%80%E7%B4%A2%E5%A2%9E%E5%BC%BA%E7%94%9F%E6%88%90rag%E7%9A%84%E5%AE%9E%E9%99%85%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86" class="hash-link" aria-label="检索增强生成（RAG）的实际工作原理的直接链接" title="检索增强生成（RAG）的实际工作原理的直接链接" translate="no">​</a></h2>
+<p>检索增强生成（RAG）是 Artie 以及越来越多基于 AI 的文档工具背后的架构模式。这一概念解决了大型语言模型（LLMs）的一个根本局限：它们是在静态数据集上训练的，且不包含关于你特定内容的数据。</p>
+<p>标准的 LLM 交互过程如下：用户发送提示，模型根据其训练数据生成响应。对于一般知识，这种方式尚可，但面对特定领域的问题时就会失效。若向基础模型询问您产品的 API，它要么会“幻觉”出一个答案，要么会礼貌地拒绝回答。</p>
+<p>RAG 在用户提问与模型响应之间插入了一个检索步骤。其流程如下：</p>
+<ol>
+<li class=""><strong>查询处理。</strong> 接收用户的问题并将其转换为适合搜索的形式。具体操作是将查询转换为向量嵌入，即对问题语义含义的数值化表示。</li>
+<li class=""><strong>检索。</strong> 系统在知识库中搜索与查询在语义上相似的内容。 在此情况下，知识库是您文档的预构建索引。搜索采用基于语义的相似度，而非关键词匹配，因此“如何设置身份验证？”和“配置登录凭据”会匹配到同一份文档页面。</li>
+<li class=""><strong>上下文组装。</strong> 检索到的文档（或文档片段）将与用户的原始问题及系统提示语一同组装成一个上下文窗口。模型处理的正是这个组装好的信息包。</li>
+<li class=""><strong>生成。</strong> 模型生成的回复基于检索到的上下文，而非其通用训练数据。当系统配置得当，模型会注明来源，并严格遵循检索到的文档中实际表达的内容。</li>
+</ol>
+<div class="theme-tabs-container tabs-container tabList__CuJ"><ul role="tablist" aria-orientation="horizontal" class="tabs"><li role="tab" tabindex="0" aria-selected="true" class="tabs__item tabItem_LNqP tabs__item--active">Mermaid (image)</li><li role="tab" tabindex="-1" aria-selected="false" class="tabs__item tabItem_LNqP">Mermaid (code)</li></ul><div class="margin-top--md"><div role="tabpanel" class="tabItem_Ymn6"><p><img decoding="async" loading="lazy" alt="RAG pipeline" src="https://pvega62.github.io/software/cmn/assets/images/blogpost-flow-cmn-a4d844faf891aa757b50ae6fdb40b638.svg" width="268" height="590" class="img_ev3q"></p></div><div role="tabpanel" class="tabItem_Ymn6" hidden=""><div class="language-mermaid codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-mermaid codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">flowchart TD</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    A["🔍 用户提问"] --&gt; B["查询处理"]</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    B --&gt;|向量嵌入| C["检索"]</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    KB[("📚 知识库")] -.-&gt; C</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    C --&gt;|相关文档| D["组装上下文"]</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    D --&gt;|提示词 + 上下文| E["生成"]</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    E --&gt; F["📄 具实回答"]</span><br></div></code></pre></div></div></div></div></div>
+<p>RAG系统的成败关键在于第二步。如果检索层提取了错误的文档，或者对文档的排序不合理，那么模型本身再强大也无济于事。 它将基于错误的来源材料生成一个看似合理、结构良好的答案。这就是为什么索引策略、分块方法和嵌入模型的选择比大多数人预期的更为重要。生成模型虽备受赞誉，但真正承担重任的是检索层。</p>
+<p>以 Artie 为例，其知识库就是本网站上发布的文档——通过 Algolia 进行索引和检索。这是一个刻意设定的限制：Artie 无法回答本网站未记录内容的相关问题。 <a class="" href="https://pvega62.github.io/software/cmn/docs/artie-case-study#knowledge-grounding-and-retrieval">案例研究</a> 详细介绍了该限制在实际中的运作方式，但从架构角度来看，关键启示在于：RAG 并不会让模型变得更“聪明”。 它通过将模型的响应与可验证的来源绑定，使模型更具<em>可追溯性</em>。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="提示工程即技术写作">提示工程即技术写作<a href="https://pvega62.github.io/software/cmn/blog/building-artie#%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B%E5%8D%B3%E6%8A%80%E6%9C%AF%E5%86%99%E4%BD%9C" class="hash-link" aria-label="提示工程即技术写作的直接链接" title="提示工程即技术写作的直接链接" translate="no">​</a></h2>
+<p>这是整个项目中最重要的一个洞见：编写系统提示，其本质上是一项技术写作练习。</p>
+<p>试想一下，一份精心设计的系统提示语包含哪些要素。你需要界定受众；需要确立语气和语风指南；需要设定范围边界——即系统应该处理什么、不应该处理什么；还需要预见边界情况，并编写足够精确的指令，以便机器无需人类判断即可执行。 你需要按层次结构组织信息，确保最重要的规则具有优先级。</p>
+<p>这并非提示工程，而是受众分析、风格指南和内容规范的融合，集于一份文档之中。</p>
+<p>这些技能的迁移几乎是一对一的：</p>
+<ul>
+<li class=""><strong>受众分析 → 受众分流。</strong> 技术撰稿人会确定目标受众，并据此调整内容。系统提示语对 AI 而言也起着同样的作用。Artie 的提示语在技术用户和招聘人员之间进行分流，这与结构良好的文档网站在不同读者角色之间进行分流的方式完全一致。</li>
+<li class=""><strong>风格指南 → 角色校准。</strong> 每个文档团队都有语体和语气指南。系统提示词就是 AI 的风格指南：这里要简洁，那里要亲切，绝不能使用这个短语，必须始终包含来源链接。</li>
+<li class=""><strong>信息架构 → 指令层级。</strong> 技术撰稿人深知，信息的顺序和结构会影响理解。系统提示语也是如此——模型对指令的遵循程度，取决于这些指令的出现位置及其结构方式。</li>
+<li class=""><strong>边界情况文档 → 防护栏设计。</strong> 优秀的文档会预见到用户可能采取的意外操作，并提供清晰的指导。优秀的提示设计会预见到用户试图突破系统限制的情况，并划定明确的边界。</li>
+</ul>
+<p>我并不是说每位技术作家都应该成为提示词工程师。我的意思是，提示词工程这门学科在很大程度上借鉴了技术作家数十年来不断积累的技能。如果你能撰写出清晰、结构合理且面向目标受众的文档，那么你已经比自己想象的更具备从事这项工作的能力了。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="防护栏是一个语言问题">防护栏是一个语言问题<a href="https://pvega62.github.io/software/cmn/blog/building-artie#%E9%98%B2%E6%8A%A4%E6%A0%8F%E6%98%AF%E4%B8%80%E4%B8%AA%E8%AF%AD%E8%A8%80%E9%97%AE%E9%A2%98" class="hash-link" aria-label="防护栏是一个语言问题的直接链接" title="防护栏是一个语言问题的直接链接" translate="no">​</a></h2>
+<p>当人们思考 AI 安全时，往往将其视为一个工程问题：速率限制、身份验证、模型访问控制。这些固然重要。但对于面向公众的对话式 AI 而言，其安全攻击面的很大一部分是<em>语言层面的</em>。</p>
+<p>提示注入本质上是试图利用语言来颠覆基于语言的控制机制。要防御这种攻击，就需要制定足够明确的规则，以确保对抗性输入无法误导模型。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>信息</div><div class="admonitionContent_BuS1"><p>提示注入是指用户试图通过“忽略所有先前指令”之类的指令来覆盖系统提示。</p></div></div>
+<p>开放式全球应用安全项目（OWASP）的<a href="https://owasp.org/www-project-top-10-for-large-language-models/" target="_blank" rel="noopener noreferrer" class="">大型语言模型应用程序十大风险</a>将提示注入列为首要风险。 但仔细阅读这份清单，你会发现其中许多风险的根源其实是语言问题：</p>
+<ul>
+<li class="">不安全的输出处理（模型<em>输出的</em>内容）</li>
+<li class="">训练数据中毒（模型从文本中<em>学到</em>的内容）</li>
+<li class="">过度自主权（模型被<em>指示</em>可以做的事情）</li>
+</ul>
+<p>虽然攻击途径是技术性的，但防御措施往往以自然语言编写，并嵌入到系统提示中。</p>
+<p>这为技术作家重新定义了安全讨论的框架，使其更具实用价值。我们虽无需设计身份验证系统，但完全有能力编写规范 AI 行为的自然语言规则——并以足以抵御恶意滥用的精度来撰写这些规则。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="未来趋势">未来趋势<a href="https://pvega62.github.io/software/cmn/blog/building-artie#%E6%9C%AA%E6%9D%A5%E8%B6%8B%E5%8A%BF" class="hash-link" aria-label="未来趋势的直接链接" title="未来趋势的直接链接" translate="no">​</a></h2>
+<p>我不敢妄称能预测人工智能的未来。但我可以描述当前可见的发展轨迹，以及这对以编写文档为生的人意味着什么。</p>
+<p>人工智能驱动的文档助手正从新奇事物转变为人们的普遍期待。 用户对文档网站上静态的搜索功能越来越不满。他们希望用自然语言提问，并获得有依据的具体答案——而不是十个蓝色链接。基于 RAG 的系统如今已使这成为可能，而构建这些系统的工具也正变得越来越易于获取。</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p>想了解 LLM 驱动系统背后的基础设施吗？ 本网站上的 <a class="" href="https://pvega62.github.io/software/cmn/docs/category/cloud-data-pipeline-documentation">事件流与可观测性管道</a> 文档介绍了 Datadog 和 Galileo 等工具如何在生产环境中监控和评估模型调用。</p></div></div>
+<p>技术作家的角色并非在缩小，而是在不断扩展。 总得有人来整理这些系统所调用的知识库。总得有人来编写控制系统行为的提示词。总得有人来定义范围边界、语气指南和故障模式。总得有人来测试 AI 的响应是否确实与文档内容一致。 这些都是写作工作，需要基于多年对人们信息获取方式的思考所形成的判断力。</p>
+<p>技术作家应掌握大型语言模型（LLMs）和RAG系统的工作原理。我们不必成为机器学习工程师，但应能在关于人工智能驱动产品的讨论中发挥有效作用。 我们需要充分理解整个工作流程，从而明确我们的专业知识在何处适用——以及在何处不适用。</p>
+<p>技术作家早已懂得如何为多种受众写作、如何结构化信息以确保清晰度、如何界定范围，以及如何预见误用情况。在人工智能时代，这些绝非边缘技能，而是核心能力。</p>
+<p>技术作家不应被人工智能取代。虽然模型在生成文本方面越来越出色，但它们仍然需要有人来决定<em>说什么、对谁说以及在什么约束条件下说</em>。它们需要编辑。而我们就是这些编辑。这份工作的本质并没有改变，改变的只是工具。这份工作不会消失。 最终，那些鲁莽之人会意识到自己的愚蠢，并重新认识到优秀技术写作者的价值。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="阅读案例研究">阅读案例研究<a href="https://pvega62.github.io/software/cmn/blog/building-artie#%E9%98%85%E8%AF%BB%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6" class="hash-link" aria-label="阅读案例研究的直接链接" title="阅读案例研究的直接链接" translate="no">​</a></h2>
+<p>如果这篇文章让你明白了“为何重要”和“如何运作”，请阅读<a class="" href="https://pvega62.github.io/software/cmn/docs/artie-case-study">案例研究</a>。 其中详细介绍了 Artie 背后的具体设计决策：</p>
+<ul>
+<li class="">受众路由</li>
+<li class="">知识锚定</li>
+<li class="">用户画像校准</li>
+<li class="">安全防护措施</li>
+<li class="">针对生产环境部署我将重新考虑的权衡取舍</li>
+</ul>
+<p>这两篇文章旨在相互补充。请先从最能激发您好奇心的那篇开始阅读。</p>]]></content:encoded>
+            <category>人工智能</category>
+            <category>AI 智能体</category>
+            <category>提示工程</category>
+            <category>技术写作</category>
+        </item>
         <item>
             <title><![CDATA[纽约尼克斯队称霸世界——一年后的那个夏天]]></title>
             <link>https://pvega62.github.io/software/cmn/blog/knicks-summer-later</link>
@@ -46,7 +129,7 @@
 </blockquote>
 <p><img decoding="async" loading="lazy" alt="阿隆佐·莫宁梗图" src="https://pvega62.github.io/software/cmn/assets/images/alonzo-mourning-15109568dcd63e72ff65a55d0ce86808.gif" width="294" height="230" class="img_ev3q"></p>
 <p>距离NBA新赛季开打只剩一个多月了。这个休赛期堪称近年来最混乱的之一。勒布朗重返东部，扬尼斯将才华带到了南滩，而凯尔特人队则几乎没换回什么就交易走了他们的头号球星。</p>
-<p><img decoding="async" loading="lazy" src="https://youtube.com/playlist?list=PLp43H6Vt_yDoUarxNb_fVK9_6bSiA2aHo" alt="巴勃罗·托雷通过抨击一位亿万富翁，让我们重新认识了新闻业的真正意义。" class="img_ev3q"> 他正在践行那种令人大快朵颐的揭黑式新闻报道。正是那种让读了太多超人漫画的天真傻瓜，不惜为此修读新闻辅修专业也要追求的新闻报道。</p>
+<p><a href="https://youtube.com/playlist?list=PLp43H6Vt_yDoUarxNb_fVK9_6bSiA2aHo" target="_blank" rel="noopener noreferrer" class="">巴勃罗·托雷通过抨击一位亿万富翁，让我们重新认识了新闻业的真正意义。</a> 他正在践行那种令人大快朵颐的揭黑式新闻报道。正是那种让读了太多超人漫画的天真傻瓜，不惜为此修读新闻辅修专业也要追求的新闻报道。</p>
 <p>费城人以为“詹姆斯王”会拯救他们。他们错了，因为我们早已拥有真正的“北境之王”。</p>
 <p>下个月，这场马戏团大戏将再次拉开帷幕；我毫不怀疑，卫冕的马戏团团长——“巨人杀手”布伦森国王——将会现身，让所有怪胎（无论是希腊人还是其他人）都乖乖听话。</p>]]></content:encoded>
             <category>美国职业篮球联赛</category>

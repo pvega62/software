@@ -1,0 +1,227 @@
+<svg id="diagram-graph" xmlns="http://www.w3.org/2000/svg" class="flowchart" style="max-width: 100%; max-height: 100%; width: auto; height: auto; background-color: transparent;" viewBox="-10 -10 268 590" role="graphics-document document" aria-roledescription="flowchart-v2" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <style>
+    #diagram-graph {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 14px;
+      fill: #cccccc;
+    }
+    #diagram-graph svg {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 14px;
+    }
+    #diagram-graph p {
+      margin: 0;
+    }
+    #diagram-graph .label {
+      font-family: "Recursive Variable", arial, sans-serif;
+      color: #e0dfdf;
+    }
+    #diagram-graph .label text,
+    #diagram-graph span,
+    #diagram-graph .nodeLabel {
+      fill: #e0dfdf;
+      color: #e0dfdf;
+    }
+    #diagram-graph .node rect,
+    #diagram-graph .node circle,
+    #diagram-graph .node ellipse,
+    #diagram-graph .node polygon,
+    #diagram-graph .node path {
+      fill: #111113;
+      stroke: #FFFFFF;
+      stroke-width: 2px;
+    }
+    #diagram-graph [data-look="neo"].node rect,
+    #diagram-graph [data-look="neo"].node polygon,
+    #diagram-graph [data-look="neo"].node .outer-path,
+    #diagram-graph .node rect,
+    #diagram-graph .node path {
+      stroke: #FFFFFF;
+      stroke-width: 2px;
+      filter: url(#diagram-graph-drop-shadow);
+    }
+    #diagram-graph .marker {
+      fill: #cccccc;
+      stroke: #cccccc;
+    }
+    #diagram-graph .arrowheadPath {
+      fill: #cccccc;
+    }
+    #diagram-graph .edgePath .path {
+      stroke: #cccccc;
+      stroke-width: 2px;
+    }
+    #diagram-graph .flowchart-link {
+      stroke: #cccccc;
+      fill: none;
+    }
+    #diagram-graph .edgeLabel {
+      text-align: center;
+    }
+    #diagram-graph .labelBkg {
+      background-color: hsl(180, 1.5873015873%, 28.3529411765%);
+      border-radius: 4px;
+      padding: 4px 10px;
+      display: inline-block;
+      white-space: nowrap;
+      color: #e0dfdf;
+      font-size: 12px;
+      line-height: 1.2;
+    }
+    #diagram-graph foreignObject,
+    #diagram-graph .node foreignObject,
+    #diagram-graph .edgeLabel foreignObject {
+      overflow: visible !important;
+    }
+    #diagram-graph .node foreignObject div {
+      width: 100% !important;
+      height: 100% !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      text-align: center !important;
+      white-space: nowrap !important;
+      box-sizing: border-box !important;
+    }
+    #diagram-graph .edgeLabel foreignObject div {
+      width: 100% !important;
+      height: 100% !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      text-align: center !important;
+      box-sizing: border-box !important;
+    }
+    #diagram-graph .edgeLabel span.edgeLabel {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 12px;
+      color: #e0dfdf;
+    }
+    #diagram-graph .node .nodeLabel {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 14px;
+      color: #e0dfdf;
+      white-space: nowrap;
+    }
+  </style>
+  <defs>
+    <filter id="diagram-graph-drop-shadow" height="130%" width="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+    <marker id="diagram-graph_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto">
+      <path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0; fill: #cccccc;"></path>
+    </marker>
+  </defs>
+  <g class="root">
+    <g class="clusters"></g>
+    <g class="edgePaths">
+      <path d="M52.8984375,36L52.8984375,40.166666666666664C52.8984375,44.333333333333336,52.8984375,52.666666666666664,52.8984375,62.729509862263996C52.8984375,72.79235305786132,52.8984375,84.58470611572265,52.8984375,90.48088264465332L52.8984375,96.37705917358399" id="L-A-B-0" class="edge-thickness-normal edge-pattern-solid flowchart-link" data-edge="true" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"></path>
+      <path d="M52.8984375,137.67705917358398L52.8984375,146.206569035848C52.8984375,154.73607889811197,52.8984375,171.79509862263998,59.63906011237043,185.69108917426195C66.37968272474086,199.5870797258839,79.8609279494817,210.32004110459988,86.60155056185214,215.68652179395784L93.34217317422257,221.05300248331585" id="L-B-C-0" class="edge-thickness-normal edge-pattern-solid flowchart-link" data-edge="true" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"></path>
+      <path d="M187.296875,153.35411834716797L187.296875,159.27078501383463C187.296875,165.1874516805013,187.296875,177.02078501383463,180.55625238762957,188.30393236985927C173.81562977525914,199.5870797258839,160.3343845505183,210.32004110459988,153.59376193814788,215.68652179395784L146.85313932577745,221.05300248331585" id="L-KB-C-0" class="edge-thickness-normal edge-pattern-dotted flowchart-link" style="stroke-dasharray: 4,4;" data-edge="true" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"></path>
+      <path d="M120.09765625,260.35411834716797L120.09765625,266.27078501383465C120.09765625,272.1874516805013,120.09765625,284.02078501383465,120.09765625,294.97078501383464C120.09765625,305.92078501383463,120.09765625,315.9874516805013,120.09765625,321.02078501383465L120.09765625,326.05411834716796" id="L-C-D-0" class="edge-thickness-normal edge-pattern-solid flowchart-link" data-edge="true" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"></path>
+      <path d="M120.09765625,367.35411834716797L120.09765625,373.27078501383465C120.09765625,379.1874516805013,120.09765625,391.02078501383465,120.09765625,401.9707850138346C120.09765625,412.92078501383463,120.09765625,422.98745168050135,120.09765625,428.02078501383465L120.09765625,433.05411834716796" id="L-D-E-0" class="edge-thickness-normal edge-pattern-solid flowchart-link" data-edge="true" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"></path>
+      <path d="M120.09765625,474.35411834716797L120.09765625,478.52078501383465C120.09765625,482.6874516805013,120.09765625,491.02078501383465,120.09765625,498.4707850138346C120.09765625,505.92078501383463,120.09765625,512.4874516805013,120.09765625,515.7707850138346L120.09765625,519.054118347168" id="L-E-F-0" class="edge-thickness-normal edge-pattern-solid flowchart-link" data-edge="true" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"></path>
+    </g>
+    <g class="edgeLabels">
+      <g class="edgeLabel" transform="translate(52.8984375, 188.85411834716797)">
+        <g class="label" data-id="L_B_C_0">
+          <foreignObject x="-45" y="-14" width="90" height="28">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="edgeLabel labelBkg">向量嵌入</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="edgeLabel" transform="translate(120.09765625, 295.85411834716797)">
+        <g class="label" data-id="L_C_D_0">
+          <foreignObject x="-45" y="-14" width="90" height="28">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="edgeLabel labelBkg">相关文档</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="edgeLabel" transform="translate(120.09765625, 402.85411834716797)">
+        <g class="label" data-id="L_D_E_0">
+          <foreignObject x="-65" y="-14" width="130" height="28">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="edgeLabel labelBkg">提示词 + 上下文</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+    </g>
+    <g class="nodes">
+      <g class="node default" id="flowchart-A-0" data-look="neo" data-id="A" data-node="true" transform="translate(52.8984375, 18)">
+        <rect class="basic label-container" data-id="A" x="-58" y="-22.5" width="116" height="45" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-58" y="-22.5" width="116" height="45">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">🔍 用户提问</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="flowchart-B-1" data-look="neo" data-id="B" data-node="true" transform="translate(52.8984375, 119.67705917358398)">
+        <rect class="basic label-container" data-id="B" x="-45" y="-22.5" width="90" height="45" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-45" y="-22.5" width="90" height="45">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">查询处理</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="flowchart-C-3" data-look="neo" data-id="C" data-node="true" transform="translate(120.09765625, 242.35411834716797)">
+        <rect class="basic label-container" data-id="C" x="-35" y="-22.5" width="70" height="45" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-35" y="-22.5" width="70" height="45">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">检索</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="flowchart-KB-4" data-look="neo" data-id="KB" data-node="true" transform="translate(187.296875, 119.67705917358398)">
+        <path d="M 0,10.451371208263621 a 44.8984375,10.451371208263621 0,0,0 89.796875 0 a 44.8984375,10.451371208263621 0,0,0 -89.796875 0 l 0,46.45137120826362 a 44.8984375,10.451371208263621 0,0,0 89.796875 0 l 0,-46.45137120826362" class="basic label-container outer-path" transform="translate(-44.8984375,-33.677056812395435)"></path>
+        <g class="label">
+          <foreignObject x="-44.8984375" y="-6" width="89.796875" height="36">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">📚 知识库</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="flowchart-D-7" data-look="neo" data-id="D" data-node="true" transform="translate(120.09765625, 349.35411834716797)">
+        <rect class="basic label-container" data-id="D" x="-52.5" y="-22.5" width="105" height="45" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-52.5" y="-22.5" width="105" height="45">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">组装上下文</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="flowchart-E-9" data-look="neo" data-id="E" data-node="true" transform="translate(120.09765625, 456.35411834716797)">
+        <rect class="basic label-container" data-id="E" x="-35" y="-22.5" width="70" height="45" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-35" y="-22.5" width="70" height="45">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">生成</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="flowchart-F-11" data-look="neo" data-id="F" data-node="true" transform="translate(120.09765625, 542.354118347168)">
+        <rect class="basic label-container" data-id="F" x="-58" y="-22.5" width="116" height="45" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-58" y="-22.5" width="116" height="45">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">📄 具实回答</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
