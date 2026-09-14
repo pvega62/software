@@ -1,7 +1,7 @@
 ---
 id: artie-case-study
 title: 'Designing Artie: An AI documentation assistant'
-sidebar_label: '`Ask Artie` AI Assistant Case Study'
+sidebar_label: 'Ask Artie AI Assistant Case Study'
 sidebar_position: 7
 slug: artie-case-study
 description: A case study on designing Artie, an AI documentation assistant.
