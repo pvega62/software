@@ -1,0 +1,227 @@
+<svg id="diagram-graph" xmlns="http://www.w3.org/2000/svg" class="flowchart" style="max-width: 100%; max-height: 100%; width: auto; height: auto; background-color: transparent;" viewBox="-10 -10 305 580" role="graphics-document document" aria-roledescription="flowchart-v2" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <style>
+    #diagram-graph {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 14px;
+      fill: #cccccc;
+    }
+    #diagram-graph svg {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 14px;
+    }
+    #diagram-graph p {
+      margin: 0;
+    }
+    #diagram-graph .label {
+      font-family: "Recursive Variable", arial, sans-serif;
+      color: #e0dfdf;
+    }
+    #diagram-graph .label text,
+    #diagram-graph span,
+    #diagram-graph .nodeLabel {
+      fill: #e0dfdf;
+      color: #e0dfdf;
+    }
+    #diagram-graph .node rect,
+    #diagram-graph .node circle,
+    #diagram-graph .node ellipse,
+    #diagram-graph .node polygon,
+    #diagram-graph .node path {
+      fill: #111113;
+      stroke: #FFFFFF;
+      stroke-width: 2px;
+    }
+    #diagram-graph [data-look="neo"].node rect,
+    #diagram-graph [data-look="neo"].node polygon,
+    #diagram-graph [data-look="neo"].node .outer-path,
+    #diagram-graph .node rect,
+    #diagram-graph .node path {
+      stroke: #FFFFFF;
+      stroke-width: 2px;
+      filter: url(#diagram-graph-drop-shadow);
+    }
+    #diagram-graph .marker {
+      fill: #cccccc;
+      stroke: #cccccc;
+    }
+    #diagram-graph .arrowheadPath {
+      fill: #cccccc;
+    }
+    #diagram-graph .edgePath .path {
+      stroke: #cccccc;
+      stroke-width: 2px;
+    }
+    #diagram-graph .flowchart-link {
+      stroke: #cccccc;
+      fill: none;
+    }
+    #diagram-graph .edgeLabel {
+      text-align: center;
+    }
+    #diagram-graph .labelBkg {
+      background-color: hsl(180, 1.5873015873%, 28.3529411765%);
+      border-radius: 4px;
+      padding: 4px 10px;
+      display: inline-block;
+      white-space: nowrap;
+      color: #e0dfdf;
+      font-size: 12px;
+      line-height: 1.2;
+    }
+    #diagram-graph foreignObject,
+    #diagram-graph .node foreignObject,
+    #diagram-graph .edgeLabel foreignObject {
+      overflow: visible !important;
+    }
+    #diagram-graph .node foreignObject div {
+      width: 100% !important;
+      height: 100% !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      text-align: center !important;
+      white-space: nowrap !important;
+      box-sizing: border-box !important;
+    }
+    #diagram-graph .edgeLabel foreignObject div {
+      width: 100% !important;
+      height: 100% !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      text-align: center !important;
+      box-sizing: border-box !important;
+    }
+    #diagram-graph .edgeLabel span.edgeLabel {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 12px;
+      color: #e0dfdf;
+    }
+    #diagram-graph .node .nodeLabel {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 14px;
+      color: #e0dfdf;
+      white-space: nowrap;
+    }
+  </style>
+  <defs>
+    <filter id="diagram-graph-drop-shadow" height="130%" width="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+    <marker id="diagram-graph_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto">
+      <path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0; fill: #cccccc;"></path>
+    </marker>
+  </defs>
+  <g class="root">
+    <g class="clusters"></g>
+    <g class="edgePaths">
+      <path d="M59.0234375,36L59.0234375,40.166666666666664C59.0234375,44.333333333333336,59.0234375,52.666666666666664,59.0234375,63.21150385538737C59.0234375,73.75634104410807,59.0234375,86.51268208821614,59.0234375,92.89085261027019L59.0234375,99.26902313232422" id="L-A-B-0" class="edge-thickness-normal edge-pattern-solid flowchart-link" data-edge="true" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"></path>
+      <path d="M59.0234375,138.56902313232422L59.0234375,147.41386032104492C59.0234375,156.25869750976562,59.0234375,173.94837188720703,66.93682001283929,188.05416591367032C74.85020252567858,202.1599599401336,90.67696755135717,212.68187361561877,98.59035006419644,217.94283045336135L106.50373257703573,223.20378729110394" id="L-B-C-0" class="edge-thickness-normal edge-pattern-solid flowchart-link" data-edge="true" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"></path>
+      <path d="M213.953125,157.13804626464844L213.953125,162.88804626464844C213.953125,168.63804626464844,213.953125,180.13804626464844,206.03974248716068,191.14900310239102C198.12635997432142,202.1599599401336,182.29959494864283,212.68187361561877,174.38621243580351,217.94283045336135L166.47282992296425,223.20378729110394" id="L-KB-C-0" class="edge-thickness-normal edge-pattern-dotted flowchart-link" style="stroke-dasharray: 4,4;" data-edge="true" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"></path>
+      <path d="M136.48828125,260.13804626464844L136.48828125,265.88804626464844C136.48828125,271.63804626464844,136.48828125,283.13804626464844,136.48828125,293.7547129313151C136.48828125,304.3713795979818,136.48828125,314.1047129313151,136.48828125,318.97137959798175L136.48828125,323.8380462646484" id="L-C-D-0" class="edge-thickness-normal edge-pattern-solid flowchart-link" data-edge="true" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"></path>
+      <path d="M136.48828125,363.13804626464844L136.48828125,368.88804626464844C136.48828125,374.63804626464844,136.48828125,386.13804626464844,136.48828125,396.75471293131505C136.48828125,407.3713795979818,136.48828125,417.10471293131513,136.48828125,421.97137959798175L136.48828125,426.8380462646484" id="L-D-E-0" class="edge-thickness-normal edge-pattern-solid flowchart-link" data-edge="true" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"></path>
+      <path d="M136.48828125,466.13804626464844L136.48828125,470.3047129313151C136.48828125,474.47137959798175,136.48828125,482.8047129313151,136.48828125,490.25471293131505C136.48828125,497.7047129313151,136.48828125,504.2713795979818,136.48828125,507.5547129313151L136.48828125,510.8380462646484" id="L-E-F-0" class="edge-thickness-normal edge-pattern-solid flowchart-link" data-edge="true" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"></path>
+    </g>
+    <g class="edgeLabels">
+      <g class="edgeLabel" transform="translate(59.0234375, 191.63804626464844)">
+        <g class="label" data-id="L_B_C_0">
+          <foreignObject x="-50" y="-14" width="100" height="28">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="edgeLabel labelBkg">تضمين موجه</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="edgeLabel" transform="translate(136.48828125, 294.63804626464844)">
+        <g class="label" data-id="L_C_D_0">
+          <foreignObject x="-60" y="-14" width="120" height="28">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="edgeLabel labelBkg">مستندات ذات صلة</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="edgeLabel" transform="translate(136.48828125, 397.63804626464844)">
+        <g class="label" data-id="L_D_E_0">
+          <foreignObject x="-60" y="-14" width="120" height="28">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="edgeLabel labelBkg">الموجه + السياق</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+    </g>
+    <g class="nodes">
+      <g class="node default" id="flowchart-A-0" data-look="neo" data-id="A" data-node="true" transform="translate(59.0234375, 18)">
+        <rect class="basic label-container" data-id="A" x="-64" y="-22.5" width="128" height="45" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-64" y="-22.5" width="128" height="45">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">🔍 سؤال المستخدم</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="flowchart-B-1" data-look="neo" data-id="B" data-node="true" transform="translate(59.0234375, 121.56902313232422)">
+        <rect class="basic label-container" data-id="B" x="-55" y="-22.5" width="110" height="45" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-55" y="-22.5" width="110" height="45">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">معالجة الاستعلام</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="flowchart-C-3" data-look="neo" data-id="C" data-node="true" transform="translate(136.48828125, 243.13804626464844)">
+        <rect class="basic label-container" data-id="C" x="-35" y="-22.5" width="70" height="45" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-35" y="-22.5" width="70" height="45">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">استرجاع</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="flowchart-KB-4" data-look="neo" data-id="KB" data-node="true" transform="translate(213.953125, 121.56902313232422)">
+        <path d="M 0,11.71537695117901 a 55.1171875,11.71537695117901 0,0,0 110.234375 0 a 55.1171875,11.71537695117901 0,0,0 -110.234375 0 l 0,47.71537695117901 a 55.1171875,11.71537695117901 0,0,0 110.234375 0 l 0,-47.71537695117901" class="basic label-container outer-path" transform="translate(-55.1171875,-35.573065426768515)"></path>
+        <g class="label">
+          <foreignObject x="-55.1171875" y="-6" width="110.234375" height="38">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">📚 قاعدة المعرفة</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="flowchart-D-7" data-look="neo" data-id="D" data-node="true" transform="translate(136.48828125, 346.13804626464844)">
+        <rect class="basic label-container" data-id="D" x="-50" y="-22.5" width="100" height="45" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-50" y="-22.5" width="100" height="45">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">تجميع السياق</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="flowchart-E-9" data-look="neo" data-id="E" data-node="true" transform="translate(136.48828125, 449.13804626464844)">
+        <rect class="basic label-container" data-id="E" x="-30" y="-22.5" width="60" height="45" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-30" y="-22.5" width="60" height="45">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">توليد</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="flowchart-F-11" data-look="neo" data-id="F" data-node="true" transform="translate(136.48828125, 534.1380462646484)">
+        <rect class="basic label-container" data-id="F" x="-55" y="-22.5" width="110" height="45" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-55" y="-22.5" width="110" height="45">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">📄 إجابة موثقة</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

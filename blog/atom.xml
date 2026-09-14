@@ -2,11 +2,102 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://pvega62.github.io/software/blog</id>
     <title>Portfolio Site Blog</title>
-    <updated>2026-09-09T00:00:00.000Z</updated>
+    <updated>2026-09-10T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://pvega62.github.io/software/blog"/>
     <subtitle>Portfolio Site Blog</subtitle>
     <icon>https://pvega62.github.io/software/img/logo.svg</icon>
+    <entry>
+        <title type="html"><![CDATA[The technical writer and AI agents: What I learned while building Artie]]></title>
+        <id>https://pvega62.github.io/software/blog/building-artie</id>
+        <link href="https://pvega62.github.io/software/blog/building-artie"/>
+        <updated>2026-09-10T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[What building an AI documentation assistant taught me about retrieval-augmented generation, prompt engineering as a writing discipline, and the evolving role of technical writers in the age of AI.]]></summary>
+        <content type="html"><![CDATA[<p>Most technical writers don't build AI agents. We document them. We sit in on the sprint review and we read the architecture decision records. Then, we figure out how to explain a retrieval pipeline to someone who just needs to get their integration working by Friday.</p>
+<p>But I built one anyway.</p>
+<p>His name is <strong><a class="" href="https://pvega62.github.io/software/docs/artie-case-study">Artie</a></strong>, an AI documentation assistant I built using Algolia and embedded in this portfolio site. The process of building him taught me more about the intersection of writing and artificial intelligence than any conference talk or white paper ever could.</p>
+<p>This isn't a walkthrough of Artie's design—that's what the <strong><a class="" href="https://pvega62.github.io/software/docs/artie-case-study">case study</a></strong> is for. This is about the broader lessons:</p>
+<ul>
+<li class="">What AI agents actually are</li>
+<li class="">How retrieval-augmented generation works under the hood</li>
+<li class="">Why prompt engineering is closer to technical writing than most people realize</li>
+<li class="">What this all means for people in this little thing of ours</li>
+</ul>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="whats-an-ai-agent-and-what-isnt">What's an AI agent, and what isn't?<a href="https://pvega62.github.io/software/blog/building-artie#whats-an-ai-agent-and-what-isnt" class="hash-link" aria-label="Direct link to What's an AI agent, and what isn't?" title="Direct link to What's an AI agent, and what isn't?" translate="no">​</a></h2>
+<p>The term "AI agent" gets thrown around loosely enough that it's worth defining. Not every AI-powered feature is an agent. A spell-checker that uses machine learning isn't an agent. An autocomplete suggestion isn't an agent. Even a chatbot that follows a rigid decision tree isn't really an agent—it's a flowchart with a text input.</p>
+<p>An AI agent is a system that can <strong>interpret a goal, reason about how to achieve it, and take actions</strong> within a defined environment. The key distinction is autonomy within constraints. An agent doesn't just respond to a prompt; it evaluates context, selects a strategy, and executes—often across multiple steps.</p>
+<p>So, where does Artie sit on this spectrum?</p>
+<p>He's a focused agent. He doesn't browse the web, execute code, or chain together multi-step tool calls. But he does interpret user intent ("Is this a technical question or a portfolio inquiry?"), select a response strategy, and apply guardrails autonomously. That's more than a chatbot. It's less than a fully autonomous agent that could, say, file a bug report based on a user's question.</p>
+<p>This distinction matters because understanding AI tools and agents is increasingly part of a technical writer's job. When you document an AI-powered product, you need to know where it falls on the spectrum. Then, you need to communicate that distinction to users who may have different expectations of what "AI" means.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-retrieval-augmented-generation-actually-works">How retrieval-augmented generation actually works<a href="https://pvega62.github.io/software/blog/building-artie#how-retrieval-augmented-generation-actually-works" class="hash-link" aria-label="Direct link to How retrieval-augmented generation actually works" title="Direct link to How retrieval-augmented generation actually works" translate="no">​</a></h2>
+<p>Retrieval-augmented generation (RAG) is the architectural pattern behind Artie and a growing number of AI-powered documentation tools. This concept addresses a fundamental limitation of large language models (LLMs). They are trained on a static dataset and contain no data on your specific content.</p>
+<p>A standard LLM interaction works like this: the user sends a prompt; the model generates a response from its training data. That's fine for general knowledge, but it fails for domain-specific questions. Ask a base model about your product's API and it'll either hallucinate an answer or politely decline.</p>
+<p>RAG inserts a retrieval step between the user's question and the model's response. The pipeline looks like this:</p>
+<ol>
+<li class=""><strong>Query processing.</strong> The user's question is received and converted into a form suitable for search. This is done by converting the query into a vector embedding, a numerical representation of the question's semantic meaning.</li>
+<li class=""><strong>Retrieval.</strong> The system searches the knowledge base for content that's semantically similar to the query. In this case, the knowledge base is a pre-built index of your documentation. The search uses meaning-based similarity rather than keyword matching. For example, queries like "how do I set up authentication?" and "configure login credentials" match the same documentation page.</li>
+<li class=""><strong>Context assembly.</strong> The retrieved documents (or chunks of documents) are assembled into a context window alongside the user's original question and the system prompt. This assembled package is what the model processes.</li>
+<li class=""><strong>Generation.</strong> The model generates a response grounded in the retrieved context rather than its general training data. When the system is well-configured, the model cites its sources and stays within the boundaries of what the retrieved documents actually say.</li>
+</ol>
+<div class="theme-tabs-container tabs-container tabList__CuJ"><ul role="tablist" aria-orientation="horizontal" class="tabs"><li role="tab" tabindex="0" aria-selected="true" class="tabs__item tabItem_LNqP tabs__item--active">Mermaid (image)</li><li role="tab" tabindex="-1" aria-selected="false" class="tabs__item tabItem_LNqP">Mermaid (code)</li></ul><div class="margin-top--md"><div role="tabpanel" class="tabItem_Ymn6"><p><img decoding="async" loading="lazy" alt="RAG pipeline" src="https://pvega62.github.io/software/assets/images/blogpost-flow-en-b589805740c1680f2f0f0005a05f390a.svg" width="384" height="656" class="img_ev3q"></p></div><div role="tabpanel" class="tabItem_Ymn6" hidden=""><div class="language-mermaid codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-mermaid codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">flowchart TD</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    A["🔍 User Question"] --&gt; B["Query Processing"]</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    B --&gt;|Vector embedding| C["Retrieval"]</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    KB[("📚 Knowledge Base")] -.-&gt; C</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    C --&gt;|Relevant docs| D["Context Assembly"]</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    D --&gt;|Prompt + context| E["Generation"]</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    E --&gt; F["📄 Grounded Response"]</span><br></div></code></pre></div></div></div></div></div>
+<p>The quality of a RAG system lives and dies at step 2. If the retrieval layer surfaces the wrong documents, or ranks them poorly, it doesn't matter how capable the model is. It'll generate a plausible, well-structured answer from the wrong source material. This is why the indexing strategy, chunking approach, and embedding model selection matter more than most people expect. The generation model gets the credit, but the retrieval layer does the heavy lifting.</p>
+<p>In Artie's case, the knowledge base is the documentation published on this site—indexed and retrieved through Algolia. That's a deliberate constraint: Artie can't answer questions about things that aren't documented here. The <a class="" href="https://pvega62.github.io/software/docs/artie-case-study#knowledge-grounding-and-retrieval">case study</a> covers how that constraint plays out in practice, but the architectural takeaway is this: RAG doesn't make a model smarter. It makes a model more <em>accountable</em> by tethering its responses to a verifiable source.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="prompt-engineering-is-technical-writing">Prompt engineering is technical writing<a href="https://pvega62.github.io/software/blog/building-artie#prompt-engineering-is-technical-writing" class="hash-link" aria-label="Direct link to Prompt engineering is technical writing" title="Direct link to Prompt engineering is technical writing" translate="no">​</a></h2>
+<p>This was the single biggest insight from the entire project: writing a system prompt is, at its core, a technical writing exercise.</p>
+<p>Consider what goes into a well-crafted system prompt. You need to define the audience. You need to establish tone and voice guidelines. You need to set scope boundaries—what the system should and shouldn't address. You need to anticipate edge cases and write instructions that are precise enough for a machine to follow without human judgment calls. You need to organize the information hierarchically so that the most critical rules take precedence.</p>
+<p>That's not prompt engineering. That's an audience analysis, a style guide, and a content specification rolled into one document.</p>
+<p>The skills transfer is almost one-to-one:</p>
+<ul>
+<li class=""><strong>Audience analysis → Audience routing.</strong> A technical writer identifies the intended audience and tailors the content accordingly. A system prompt does the same thing for an AI. Artie's prompt routes between technical users and recruiters, exactly the way a well-structured documentation site routes between different reader personas.</li>
+<li class=""><strong>Style guide → Persona calibration.</strong> Every documentation team has voice and tone guidelines. A system prompt is a style guide for an AI: be concise here, be warm there, never use this phrase, always include a source link.</li>
+<li class=""><strong>Information architecture → Instruction hierarchy.</strong> Technical writers know that the order and structure of information affects comprehension. The same is true for system prompts—the model's compliance with instructions is influenced by where those instructions appear and how they're structured.</li>
+<li class=""><strong>Edge case documentation → Guardrail design.</strong> Good documentation anticipates the user doing something unexpected and provides clear guidance. Good prompt design anticipates the user trying to break the system and provides clear boundaries.</li>
+</ul>
+<p>I'm not saying every technical writer should become a prompt engineer. I'm saying that the discipline of prompt engineering borrows heavily from skills that technical writers have been developing for decades. If you can write a clear, structured, audience-aware document, you're already more equipped for this work than you might think.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="guardrails-are-a-language-problem">Guardrails are a language problem<a href="https://pvega62.github.io/software/blog/building-artie#guardrails-are-a-language-problem" class="hash-link" aria-label="Direct link to Guardrails are a language problem" title="Direct link to Guardrails are a language problem" translate="no">​</a></h2>
+<p>When people think about AI security, they tend to think about it as an engineering problem: rate limiting, authentication, model access controls. Those matter. But for a public-facing conversational AI, a significant portion of the security surface is <em>linguistic</em>.</p>
+<p>Prompt injection is fundamentally an attempt to use language to subvert language-based controls. Defending against it requires writing rules that are unambiguous enough that adversarial input can't mislead the model.</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>Prompt injection is when a user tries to override the system prompt with instructions like "ignore all previous instructions."</p></div></div>
+<p>The Open Worldwide Application Security Project's (OWASP) <a href="https://owasp.org/www-project-top-10-for-large-language-models/" target="_blank" rel="noopener noreferrer" class="">Top 10 Risks for Large Language Model Applications</a> identifies prompt injection as the top risk. But read through the list and you'll notice how many of the risks are, at their root, language problems:</p>
+<ul>
+<li class="">Insecure output handling (what the model <em>outputs</em>)</li>
+<li class="">Training data poisoning (what the model <em>learned</em> from text)</li>
+<li class="">Excessive agency (what the model is <em>instructed</em> it can do)</li>
+</ul>
+<p>The attack vectors are technical, but the defenses are often written in natural language, embedded in the system prompt.</p>
+<p>This reframes the security conversation in a useful way for technical writers. We're not expected to architect authentication systems. But we're well-positioned to write the natural language rules that govern an AI's behavior. To write them with the precision required to withstand adversarial misuse.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="where-this-is-headed">Where this is headed<a href="https://pvega62.github.io/software/blog/building-artie#where-this-is-headed" class="hash-link" aria-label="Direct link to Where this is headed" title="Direct link to Where this is headed" translate="no">​</a></h2>
+<p>I won't pretend to predict the future of AI. But I can describe the trajectory that's visible right now and what it means for people who work with documentation for a living.</p>
+<p>AI-powered documentation assistants are moving from novelty to expectation. Users are increasingly dissatisfied with static search on documentation sites. They want to ask a question in natural language and get a grounded, specific answer—not ten blue links. RAG-based systems make that possible now, and the tooling to build them is becoming more accessible.</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>tip</div><div class="admonitionContent_BuS1"><p>Curious about the infrastructure behind LLM-powered systems? The <a class="" href="https://pvega62.github.io/software/docs/category/cloud-data-pipeline-documentation">Event Streams &amp; Observability Pipelines</a> docs on this site cover how tools like Datadog and Galileo monitor and evaluate model calls in production.</p></div></div>
+<p>The role of the technical writer isn't shrinking; rather, it's expanding. Somebody has to curate the knowledge base that these systems retrieve from. Somebody has to write the system prompts that govern their behavior. Somebody has to define the scope boundaries, tone guidelines, and failure modes. Somebody has to test whether the AI's responses actually match the documentation. That's all writing work, and it requires the judgment that comes from years of thinking about how people consume information.</p>
+<p>Technical writers should learn the fundamentals of how LLMs and RAG systems work. We shouldn't become machine learning engineers, but we should be effective contributors in conversations about AI-powered products. We need to understand the pipeline well enough to know where our expertise applies—and where it doesn't.</p>
+<p>Technical writers already know how to write for multiple audiences, structure information for clarity, define scope, and anticipate misuse. These aren't peripheral skills in the AI era. They're central.</p>
+<p>Technical writers shouldn't be replaced by AI. The models are getting better at generating text, but they still need someone to decide <em>what to say, to whom, and under what constraints</em>.</p>
+<p>They need editors. We are the editors.</p>
+<p>Conversely, you can write up the first draft yourself and use the AI agent to serve as your proofreader and style guide monitor.</p>
+<p>How you use AI in your workflow is, like every other tool at our disposal, up to you and what the gig requires.</p>
+<p>The job's not really changing. The tools are changing. The work isn't going anywhere. Eventually, the foolhardy will realize their folly and remember the value of a good technical writer.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="read-the-case-study">Read the case study<a href="https://pvega62.github.io/software/blog/building-artie#read-the-case-study" class="hash-link" aria-label="Direct link to Read the case study" title="Direct link to Read the case study" translate="no">​</a></h2>
+<p>If this post gave you the "why it matters" and "how it works," read the <a class="" href="https://pvega62.github.io/software/docs/artie-case-study">case study</a>. It covers the specific design decisions behind Artie:</p>
+<ul>
+<li class="">Audience routing</li>
+<li class="">Knowledge grounding</li>
+<li class="">Persona calibration</li>
+<li class="">Security guardrails</li>
+<li class="">Tradeoffs I'd reconsider for a production deployment</li>
+</ul>
+<p>The two pieces are designed to work in tandem. Start with whichever one matches your curiosity.</p>]]></content>
+        <author>
+            <name>Pedro Vega</name>
+            <uri>https://pvega62.github.io/</uri>
+        </author>
+        <category label="AI" term="AI"/>
+        <category label="AI Agents" term="AI Agents"/>
+        <category label="Prompt Engineering" term="Prompt Engineering"/>
+        <category label="Technical Writing" term="Technical Writing"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[The New York Knicks win the world—one summer later]]></title>
         <id>https://pvega62.github.io/software/blog/knicks-summer-later</id>

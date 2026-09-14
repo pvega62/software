@@ -2,11 +2,98 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://pvega62.github.io/software/ja/blog</id>
     <title>Portfolio Site Blog</title>
-    <updated>2026-09-09T00:00:00.000Z</updated>
+    <updated>2026-09-10T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://pvega62.github.io/software/ja/blog"/>
     <subtitle>Portfolio Site Blog</subtitle>
     <icon>https://pvega62.github.io/software/ja/img/logo.svg</icon>
+    <entry>
+        <title type="html"><![CDATA[テクニカルライターとAIエージェント：Artieの開発を通じて学んだこと]]></title>
+        <id>https://pvega62.github.io/software/ja/blog/building-artie</id>
+        <link href="https://pvega62.github.io/software/ja/blog/building-artie"/>
+        <updated>2026-09-10T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[AIドキュメントアシスタントの構築を通じて学んだこと――検索強化生成（RAG）、執筆の技法としてのプロンプトエンジニアリング、そしてAI時代におけるテクニカルライターの役割の変容について。]]></summary>
+        <content type="html"><![CDATA[<p>テクニカルライターの多くは、AIエージェントを開発するわけではありません。私たちはそれらをドキュメント化します。スプリントレビューに参加し、アーキテクチャの決定事項を記録した資料を読み込みます。そして、金曜日までに統合を機能させる必要がある人に、検索パイプラインをどのように説明すべきかを考えます。</p>
+<p>しかし、私はあえて一つ作ってみました。</p>
+<p>その名は**<a class="" href="https://pvega62.github.io/software/ja/docs/artie-case-study">Artie</a>**。Algoliaを使用して構築し、このポートフォリオサイトに組み込んだAIドキュメントアシスタントです。彼を作る過程で、私はどのカンファレンスの講演やホワイトペーパーよりも、ライティングと人工知能の交差点について多くを学びました。</p>
+<p>これはArtieの設計に関する解説ではありません――それについては**<a class="" href="https://pvega62.github.io/software/ja/docs/artie-case-study">ケーススタディ</a>**をご覧ください。ここでは、より広範な教訓についてお話しします：</p>
+<ul>
+<li class="">AIエージェントとは実際に何なのか</li>
+<li class="">リトリバル・オーグメンテッド・ジェネレーション（RAG）の仕組み</li>
+<li class="">プロンプトエンジニアリングが、多くの人が思っている以上にテクニカルライティングに近い理由</li>
+<li class="">そして、これらすべてが私たちのこの小さな世界にとって何を意味するのか</li>
+</ul>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="aiエージェントとは何かそうでないものは何か">AIエージェントとは何か、そうでないものは何か？<a href="https://pvega62.github.io/software/ja/blog/building-artie#ai%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E3%81%A8%E3%81%AF%E4%BD%95%E3%81%8B%E3%81%9D%E3%81%86%E3%81%A7%E3%81%AA%E3%81%84%E3%82%82%E3%81%AE%E3%81%AF%E4%BD%95%E3%81%8B" class="hash-link" aria-label="AIエージェントとは何か、そうでないものは何か？ への直接リンク" title="AIエージェントとは何か、そうでないものは何か？ への直接リンク" translate="no">​</a></h2>
+<p>「AIエージェント」という用語は、かなり大雑把に使われているため、定義しておく価値があります。AIを活用した機能すべてがエージェントというわけではありません。機械学習を用いたスペルチェッカーはエージェントではありません。オートコンプリートの候補表示もエージェントではありません。 厳格な決定木に従うチャットボットでさえ、実際にはエージェントとは言えません。それは、テキスト入力を備えたフローチャートに過ぎないからです。</p>
+<p>AIエージェントとは、定義された環境内で<strong>目標を解釈し、その達成方法を推論し、行動を起こす</strong>ことができるシステムのことです。重要な違いは、制約条件内での自律性にあります。 エージェントは単にプロンプトに応答するだけでなく、文脈を評価し、戦略を選択し、実行します――多くの場合、複数のステップにまたがって行われます。</p>
+<p>では、Artieはこのスペクトラムのどこに位置するのでしょうか？</p>
+<p>彼は特化型のエージェントです。ウェブを閲覧したり、コードを実行したり、複数のステップにわたるツール呼び出しを連鎖させたりはしません。 しかし、ユーザーの意図（「これは技術的な質問か、それともポートフォリオに関する問い合わせか？」）を解釈し、応答戦略を選択し、自律的にガードレールを適用することは行います。これは単なるチャットボット以上のものです。一方で、例えばユーザーの質問に基づいてバグ報告を提出できるような、完全に自律的なエージェントには及びません。</p>
+<p>この区別が重要なのは、AIツールやエージェントを理解することが、テクニカルライターの仕事においてますます重要な要素となっているからです。AIを活用した製品のドキュメントを作成する際には、それがこのスペクトラムのどこに位置するかを把握する必要があります。そして、「AI」という言葉に対して異なる期待を抱いている可能性のあるユーザーに対して、その違いを明確に伝える必要があります。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="リトリバルオーグメンテッドジェネレーションragの実際の仕組み">リトリバル・オーグメンテッド・ジェネレーション（RAG）の実際の仕組み<a href="https://pvega62.github.io/software/ja/blog/building-artie#%E3%83%AA%E3%83%88%E3%83%AA%E3%83%90%E3%83%AB%E3%82%AA%E3%83%BC%E3%82%B0%E3%83%A1%E3%83%B3%E3%83%86%E3%83%83%E3%83%89%E3%82%B8%E3%82%A7%E3%83%8D%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3rag%E3%81%AE%E5%AE%9F%E9%9A%9B%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF" class="hash-link" aria-label="リトリバル・オーグメンテッド・ジェネレーション（RAG）の実際の仕組み への直接リンク" title="リトリバル・オーグメンテッド・ジェネレーション（RAG）の実際の仕組み への直接リンク" translate="no">​</a></h2>
+<p>リトリバル・オーグメンテッド・ジェネレーション（RAG）は、Artieや、増え続けるAI搭載ドキュメントツールの背後にあるアーキテクチャパターンです。この概念は、大規模言語モデル（LLM）が抱える根本的な制限に対処するものです。つまり、LLMは静的なデータセットで学習されており、特定のコンテンツに関するデータを含んでいないという点です。</p>
+<p>標準的なLLMとのやり取りは次のように行われます。ユーザーがプロンプトを送信すると、モデルは学習データに基づいて応答を生成します。これは一般的な知識については問題ありませんが、特定の分野に関する質問に対しては機能しません。ベースモデルに自社製品のAPIについて尋ねても、モデルはでたらめな回答を返すか、丁寧に回答を拒否するでしょう。</p>
+<p>RAGは、ユーザーの質問とモデルの応答の間に「検索」というステップを挿入します。その処理の流れは以下の通りです：</p>
+<ol>
+<li class=""><strong>クエリ処理。</strong> ユーザーの質問を受け取り、検索に適した形式に変換します。これは、クエリをベクトル埋め込み（質問の意味的意味を数値で表現したもの）に変換することで行われます。</li>
+<li class=""><strong>検索。</strong> システムはナレッジベースを検索し、クエリと意味的に類似したコンテンツを探します。 この場合、ナレッジベースはドキュメントの事前構築済みインデックスとなります。検索ではキーワードマッチングではなく、意味に基づく類似性が使用されるため、「認証の設定方法は？」と「ログイン認証情報の設定」は、同じドキュメントページと一致することになります。</li>
+<li class=""><strong>コンテキストの組み立て。</strong> 検索されたドキュメント（またはドキュメントの断片）は、ユーザーの元の質問やシステムのプロンプトとともに、コンテキストウィンドウに組み立てられます。この組み立てられたパッケージが、モデルによって処理される対象となります。</li>
+<li class=""><strong>生成。</strong> モデルは、一般的な学習データではなく、検索されたコンテキストに基づいて応答を生成します。システムが適切に構成されている場合、モデルは出典を明記し、検索されたドキュメントに実際に記載されている内容の範囲内にとどまります。</li>
+</ol>
+<div class="theme-tabs-container tabs-container tabList__CuJ"><ul role="tablist" aria-orientation="horizontal" class="tabs"><li role="tab" tabindex="0" aria-selected="true" class="tabs__item tabItem_LNqP tabs__item--active">Mermaid (image)</li><li role="tab" tabindex="-1" aria-selected="false" class="tabs__item tabItem_LNqP">Mermaid (code)</li></ul><div class="margin-top--md"><div role="tabpanel" class="tabItem_Ymn6"><p><img decoding="async" loading="lazy" alt="RAG pipeline" src="https://pvega62.github.io/software/ja/assets/images/blogpost-flow-ja-38d6f1da957a69fbcd231feb319217f4.svg" width="365" height="630" class="img_ev3q"></p></div><div role="tabpanel" class="tabItem_Ymn6" hidden=""><div class="language-mermaid codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-mermaid codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">flowchart TD</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    A["🔍 ユーザーの 質問"] --&gt; B["クエリ 処理"]</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    B --&gt;|ベクトル 埋め込み| C["検索・抽出"]</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    KB[("📚 ナレッジベース")] -.-&gt; C</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    C --&gt;|関連 ドキュメント| D["コンテキスト 統合"]</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    D --&gt;|プロンプト + コンテキスト| E["生成"]</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    E --&gt; F["📄 根拠のある 回答"]</span><br></div></code></pre></div></div></div></div></div>
+<p>RAGシステムの品質は、ステップ2で決まります。検索層が誤った文書を抽出したり、優先順位付けを誤ったりすれば、モデルがどれほど高性能であっても意味がありません。 間違った情報源から、もっともらしく、構成の整った回答を生成してしまうことになるからです。だからこそ、インデックス作成戦略、チャンキング手法、そして埋め込みモデルの選択は、多くの人が予想する以上に重要になるのです。生成モデルが評価されることが多いですが、実際の重労働を担っているのは検索層なのです。</p>
+<p>Artieの場合、ナレッジベースは当サイトに公開されているドキュメントであり、Algoliaを通じてインデックス化および検索が行われます。これは意図的な制約です。Artieは、ここに記載されていない事柄に関する質問には答えられません。 <a class="" href="https://pvega62.github.io/software/ja/docs/artie-case-study#knowledge-grounding-and-retrieval">ケーススタディ</a>では、その制約が実際にどのように機能するかを解説していますが、アーキテクチャ上の重要なポイントは次の通りです。RAGはモデルをより賢くするものではありません。 RAGは、モデルの応答を検証可能な情報源に紐付けることで、モデルをより<em>説明責任のある</em>ものにするのです。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="プロンプトエンジニアリングとはテクニカルライティングである">プロンプトエンジニアリングとはテクニカルライティングである<a href="https://pvega62.github.io/software/ja/blog/building-artie#%E3%83%97%E3%83%AD%E3%83%B3%E3%83%97%E3%83%88%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%A8%E3%81%AF%E3%83%86%E3%82%AF%E3%83%8B%E3%82%AB%E3%83%AB%E3%83%A9%E3%82%A4%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%81%A7%E3%81%82%E3%82%8B" class="hash-link" aria-label="プロンプトエンジニアリングとはテクニカルライティングである への直接リンク" title="プロンプトエンジニアリングとはテクニカルライティングである への直接リンク" translate="no">​</a></h2>
+<p>これが、プロジェクト全体を通じて得られた最大の気づきでした。システムプロンプトの作成は、その本質においてテクニカルライティングの実践なのです。</p>
+<p>よく練られたシステムプロンプトには何が含まれるかを考えてみてください。対象読者を定義する必要があります。トーンや語り口のガイドラインを確立する必要があります。範囲の境界、つまりシステムが扱うべきこと、扱うべきでないことを設定する必要があります。エッジケースを予測し、人間の判断を必要とせずに機械が従えるほど正確な指示を書く必要があります。 また、最も重要なルールが優先されるよう、情報を階層的に整理する必要があります。</p>
+<p>これは単なるプロンプトエンジニアリングではありません。これは、対象読者分析、スタイルガイド、コンテンツ仕様書が1つの文書にまとめられたものです。</p>
+<p>必要なスキルの転用はほぼ1対1です：</p>
+<ul>
+<li class=""><strong>対象者分析 → 対象者へのルーティング。</strong> テクニカルライターは対象読者を特定し、それに応じてコンテンツを調整します。システムプロンプトは、AI に対して同じことを行います。Artie のプロンプトは、テクニカルユーザーと採用担当者との間でルーティングを行いますが、これは、よく構成されたドキュメントサイトが異なる読者ペルソナの間でルーティングを行うのと同じ仕組みです。</li>
+<li class=""><strong>スタイルガイド → ペルソナの調整。</strong> どのドキュメントチームにも、文体やトーンに関するガイドラインがあります。システムプロンプトはAIのためのスタイルガイドです。「ここでは簡潔に」「あそこでは親しみやすく」「このフレーズは絶対に使わない」「出典リンクは常に記載する」といった指示です。</li>
+<li class=""><strong>情報アーキテクチャ → 指示の階層構造。</strong> テクニカルライターは、情報の順序や構造が理解度に影響を与えることを知っています。システムプロンプトについても同様で、モデルが指示に従うかどうかは、その指示がどこに配置され、どのように構成されているかによって左右されます。</li>
+<li class=""><strong>エッジケースのドキュメント → ガードレール設計。</strong> 優れたドキュメントは、ユーザーが予期せぬ行動をとることを想定し、明確な指針を提供します。優れたプロンプト設計もまた、ユーザーがシステムを破壊しようと試みることを想定し、明確な境界線を提示します。</li>
+</ul>
+<p>すべてのテクニカルライターがプロンプトエンジニアになるべきだと言っているわけではありません。私が言いたいのは、プロンプトエンジニアリングという分野が、テクニカルライターが数十年にわたって培ってきたスキルから多大な影響を受けているということです。明確で、構造化され、対象読者を意識したドキュメントを書けるのであれば、あなたは想像以上にこの仕事に必要な資質を備えているのです。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="ガードレールは言語の問題である">ガードレールは言語の問題である<a href="https://pvega62.github.io/software/ja/blog/building-artie#%E3%82%AC%E3%83%BC%E3%83%89%E3%83%AC%E3%83%BC%E3%83%AB%E3%81%AF%E8%A8%80%E8%AA%9E%E3%81%AE%E5%95%8F%E9%A1%8C%E3%81%A7%E3%81%82%E3%82%8B" class="hash-link" aria-label="ガードレールは言語の問題である への直接リンク" title="ガードレールは言語の問題である への直接リンク" translate="no">​</a></h2>
+<p>AIのセキュリティについて考える際、人々はそれをエンジニアリング上の問題として捉えがちです。例えば、レート制限、認証、モデルへのアクセス制御などです。これらは確かに重要です。しかし、一般向けに公開されている対話型AIの場合、セキュリティ上のリスクの大部分は<em>言語的</em>なものです。</p>
+<p>プロンプトインジェクションとは、本質的に、言語を用いて言語ベースの制御を迂回しようとする試みです。これに対抗するには、敵対的な入力がモデルを誤導できないほど曖昧さのないルールを策定する必要があります。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>備考</div><div class="admonitionContent_BuS1"><p>プロンプトインジェクションとは、ユーザーが「これまでの指示をすべて無視する」といった指示を用いて、システムのプロンプトを上書きしようと試みることを指します。</p></div></div>
+<p>Open Worldwide Application Security Project（OWASP）の<a href="https://owasp.org/www-project-top-10-for-large-language-models/" target="_blank" rel="noopener noreferrer" class="">大規模言語モデルアプリケーションのトップ10リスク</a>では、プロンプトインジェクションが最大のリスクとして挙げられています。 しかし、このリストを読み進めると、リスクの多くが根本的には言語の問題であることに気づくでしょう：</p>
+<ul>
+<li class="">出力処理の不備（モデルが<em>出力</em>するもの）</li>
+<li class="">トレーニングデータの汚染（モデルがテキストから<em>学習した</em>内容）</li>
+<li class="">過剰な主体性（モデルが<em>実行可能だと指示された</em>こと）</li>
+</ul>
+<p>攻撃ベクトルは技術的なものですが、防御策は多くの場合、自然言語で記述され、システムのプロンプトに組み込まれています。</p>
+<p>これにより、セキュリティに関する議論が、テクニカルライターにとって有益な形で再構築されます。私たちに認証システムの設計が求められるわけではありません。しかし、AIの振る舞いを規定する自然言語のルールを記述することに関しては、私たちは最適な立場にあります。悪意ある悪用にも耐えうる精度で、それらを記述することができるのです。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="今後の方向性">今後の方向性<a href="https://pvega62.github.io/software/ja/blog/building-artie#%E4%BB%8A%E5%BE%8C%E3%81%AE%E6%96%B9%E5%90%91%E6%80%A7" class="hash-link" aria-label="今後の方向性 への直接リンク" title="今後の方向性 への直接リンク" translate="no">​</a></h2>
+<p>AIの未来を予測するつもりはありません。しかし、現時点で見て取れる方向性と、それがドキュメント作成を仕事とする人々にとって何を意味するのかについては説明できます。</p>
+<p>AIを活用したドキュメントアシスタントは、単なる目新しさから「当たり前」のものへと変わりつつあります。 ユーザーは、ドキュメントサイトでの静的な検索にますます不満を抱いています。彼らは、自然言語で質問をし、10個の青いリンクではなく、根拠に基づいた具体的な回答を得たいと望んでいます。RAGベースのシステムは今やそれを可能にしており、それらを構築するためのツールもより利用しやすくなってきています。</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>ヒント</div><div class="admonitionContent_BuS1"><p>LLMを活用したシステムの背後にあるインフラストラクチャについて興味がありますか？ 当サイトの <a class="" href="https://pvega62.github.io/software/ja/docs/category/cloud-data-pipeline-documentation">イベントストリームと可観測性パイプライン</a> のドキュメントでは、Datadog や Galileo といったツールが、本番環境におけるモデル呼び出しをどのように監視・評価しているかについて解説しています。</p></div></div>
+<p>テクニカルライターの役割は縮小しているわけではなく、むしろ拡大しています。 これらのシステムが参照するナレッジベースを管理する役割は誰かが担わなければなりません。システムの動作を制御するプロンプトを作成する役割も誰かが担わなければなりません。適用範囲の境界、文体のガイドライン、およびエラーモードを定義する役割も誰かが担わなければなりません。AIの応答が実際にドキュメントと一致しているかどうかをテストする役割も誰かが担わなければなりません。 これらはすべてライティング業務であり、人々が情報をどのように消費するかを長年考えてきた経験から得られる判断力を必要とします。</p>
+<p>テクニカルライターは、LLM（大規模言語モデル）やRAGシステムの仕組みの基本を学ぶべきです。私たちは機械学習エンジニアになる必要はありませんが、AIを活用した製品に関する議論において、効果的な貢献者であるべきです。 パイプラインを十分に理解し、自分の専門知識がどこに適用され、どこには適用されないかを把握する必要があります。</p>
+<p>テクニカルライターはすでに、多様な読者層に向けた文章の書き方、情報をわかりやすく構成する方法、範囲の定義、誤用の予測といったスキルを持っています。これらはAI時代において周辺的なスキルではなく、中核となるものです。</p>
+<p>テクニカルライターはAIに取って代わられるべきではありません。テキスト生成モデルの精度は向上していますが、それでも<em>何を、誰に、どのような制約の下で伝えるか</em>を決定する人間が必要です。彼らには編集者が必要です。私たちこそが編集者なのです。仕事そのものは本質的に変わっていません。変わっているのはツールだけです。この仕事は消えることはありません。 いずれ、無謀な人々は自らの愚かさに気づき、優れたテクニカルライターの価値を再認識することになるでしょう。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="ケーススタディを読む">ケーススタディを読む<a href="https://pvega62.github.io/software/ja/blog/building-artie#%E3%82%B1%E3%83%BC%E3%82%B9%E3%82%B9%E3%82%BF%E3%83%87%E3%82%A3%E3%82%92%E8%AA%AD%E3%82%80" class="hash-link" aria-label="ケーススタディを読む への直接リンク" title="ケーススタディを読む への直接リンク" translate="no">​</a></h2>
+<p>この記事で「なぜ重要なのか」と「どのように機能するのか」が理解できた方は、<a class="" href="https://pvega62.github.io/software/ja/docs/artie-case-study">ケーススタディ</a>をお読みください。 ここでは、Artieの背後にある具体的な設計上の判断について解説しています：</p>
+<ul>
+<li class="">対象読者へのルーティング</li>
+<li class="">知識の基盤</li>
+<li class="">ペルソナの調整</li>
+<li class="">セキュリティ上のガードレール</li>
+<li class="">本番環境への展開において再考すべきトレードオフ</li>
+</ul>
+<p>この2つの記事は、互いに補完し合うように設計されています。まずは、あなたの興味に合った方から読んでみてください。</p>]]></content>
+        <author>
+            <name>Pedro Vega</name>
+            <uri>https://pvega62.github.io/</uri>
+        </author>
+        <category label="AI" term="AI"/>
+        <category label="AIエージェント" term="AIエージェント"/>
+        <category label="プロンプトエンジニアリング" term="プロンプトエンジニアリング"/>
+        <category label="テクニカルライティング" term="テクニカルライティング"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[ニューヨーク・ニックスが世界制覇を果たす――その夏から1年後]]></title>
         <id>https://pvega62.github.io/software/ja/blog/knicks-summer-later</id>
