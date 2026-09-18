@@ -1,0 +1,8 @@
+{
+    "label": "Refund APIs",
+    "position": 5,
+    "link": {
+        "type": "generated-index",
+        "description": "Process customer refunds and reverse settled charges safely. Access API references to issue full or partial refunds, paginate through refund histories, retrieve transaction receipts, and update dispute metadata."
+    }
+}

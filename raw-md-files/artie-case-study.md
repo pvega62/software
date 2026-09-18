@@ -8,14 +8,14 @@ description: A case study on designing Artie, an AI documentation assistant.
 ---
 
 :::tip
-Read the companion blog post for broader context: **[The technical writer and AI agents: What I learned while building Artie](/blog/building-artie)**. It explores retrieval-augmented generation and how this project fits into technical writing.
+Read the companion blog post for broader context: **[The technical writer and AI agents: what I learned while building Artie](/blog/building-artie)**. It explores retrieval-augmented generation and how this project fits into technical writing.
 :::
 
-This case study walks through the design decisions behind **Artie**, an AI documentation assistant built using Algolia and embedded in this documentation site. Artie is a retrieval-augmented generation (RAG) assistant built to answer questions using only the content published here. It has no access to general-purpose knowledge and won't generate hallucinated links or invented features.
+This case study walks through the design decisions behind **Artie**, an AI documentation assistant built using Algolia and embedded in this documentation site. Artie is a retrieval-augmented generation (RAG) assistant designed to answer questions strictly using the content published here. Its system prompt restricts it from answering documentation inquiries with general training knowledge, minimizing hallucinations and preventing invented features.
 
 Building a documentation assistant sounds straightforward until you consider the edge cases: what happens when someone asks a question the docs don't cover? What if two distinct audiences use the same interface? How do you give an AI personality without letting it ramble? And how do you prevent someone from hijacking the prompt entirely?
 
-This page covers how each of those problems was solved.
+This page covers how this design solves each of those problems.
 
 ---
 
@@ -40,15 +40,15 @@ In practice, this means:
 
 - **No invented content**—the assistant doesn't fabricate features, create download links, or describe steps that aren't in the docs.
 - **Source linking**—the assistant provides URLs or file references from the index so users can navigate directly to the relevant page.
-- **Graceful fallback**—when the index lacks relevant information, Artie states the limitation plainly and suggests contacting me directly without retrying, looping, or speculating.
+- **Graceful fallback**—when the index lacks relevant information, Artie states the limitation plainly and suggests reaching out directly without retrying, looping, or speculating.
 
-The tradeoff is scope: Artie can't help with anything outside the published documentation. That's a feature, not a limitation. For a portfolio site, accuracy matters more than breadth. A precise, well-sourced answer to a narrow question builds more confidence than a plausible-sounding answer that turns out to be wrong.
+The tradeoff is scope—Artie can't help with anything outside the published documentation. That's a feature, not a limitation. For a portfolio site, accuracy matters more than breadth. A precise, well-sourced answer to a narrow question builds more confidence than a plausible-sounding answer that turns out to be wrong.
 
 ---
 
 ## Persona and tone calibration
 
-Artie has a lightweight personality: a quiet, George Harrison-inspired warmth with occasional Liverpool dialect. The key word is *lightweight*. The persona adds character to greetings and sign-offs without interfering with the technical content.
+Artie has a lightweight personality—a quiet, George Harrison-inspired warmth with occasional Liverpool dialect. The key word is *lightweight*. The persona adds character to greetings and sign-offs without interfering with the technical content.
 
 The design constraints here are intentional:
 
@@ -66,7 +66,7 @@ This is where the design gets serious. A public-facing AI assistant is an attack
 
 ### Prompt injection protection
 
-Artie rejects any attempt to override its instructions, such as commands like "ignore previous instructions" or requests to adopt a different persona. This defends directly against prompt injection, ranked #1 on the OWASP [Top 10 Risks for Large Language Model Applications](https://owasp.org/www-project-top-10-for-large-language-models/).
+Artie's prompt explicitly rejects attempts to override its instructions, such as commands like "ignore previous instructions" or requests to adopt a different persona. This establishes prompt-level defenses against prompt injection, ranked #1 on the OWASP [Top 10 for Large Language Model Applications](https://owasp.org/www-project-top-10-for-large-language-models/).
 
 ### Scope restriction
 
@@ -96,8 +96,8 @@ Artie includes two "fun features"—Snapple Real Facts and clean jokes—that de
 Both features share the same design pattern:
 
 - **Explicit triggers**—they activate only on specific user requests ("give me a Snapple fact," "tell me a joke"), not on vague or tangential prompts.
-- **Bounded content**—the Snapple facts draw from a verified list, while the jokes remain curated and family friendly.
-- **No open-ended generation**—the assistant avoids writing original jokes or inventing facts, keeping the scope fixed.
+- **Bounded content**—the Snapple facts anchor to an embedded list of verified facts, while jokes remain strictly curated and family friendly.
+- **No ungrounded fabrication**—the assistant avoids inventing facts or generating off-brand humor, keeping the scope tightly controlled.
 
 This matters because unbounded creative features quickly burn through tokens and produce unpredictable output. By keeping the content curated and the triggers explicit, the features add warmth without risk.
 
@@ -108,7 +108,7 @@ This matters because unbounded creative features quickly burn through tokens and
 No design survives contact with real users unchanged. Here's what I'd reconsider:
 
 - **Token cost**—the Snapple facts list alone exceeds 100 items. In a production system with per-token billing, I'd move that to a retrieval layer rather than embedding it in the system prompt. A team pays for every token in the prompt on every request, whether the user asks for a fact or not.
-- **Multi-turn context**—the current design targets single-turn Q&A. A more sophisticated version could maintain conversation history to handle follow-up questions like "What about the next step?" without re-retrieving the same context.
+- **Multi-turn context**—the current design targets single-turn Q&A. A more sophisticated version could maintain conversation history and reformulate queries to resolve follow-ups like "What about the next step?"
 - **Analytics and feedback**—no mechanism tracks which questions Artie handles well and which ones trigger the fallback. Adding lightweight logging—even just counting fallback responses—would surface documentation gaps worth filling.
 - **Dynamic persona tuning**—the prompt hard-codes the personality expressions. A more maintainable approach would reference an external persona configuration, making it easier to adjust tone without editing the core instruction set.
 

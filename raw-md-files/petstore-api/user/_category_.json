@@ -1,0 +1,8 @@
+{
+  "label": "User APIs",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Authenticate users and manage customer account lifecycles. Learn how to register individual or batched users, establish active sessions, handle secure sign-outs, and maintain profile data."
+  }
+}
