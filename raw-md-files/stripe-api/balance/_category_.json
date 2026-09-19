@@ -1,8 +1,0 @@
-    {
-        "label": "Balance APIs",
-        "position": 4,
-        "link": {
-            "type": "generated-index",
-            "description": "Inspect real-time account balances and historical ledger movements. This guide details how to query available or pending funds across payment types and drill into individual balance transactions."
-        }
-    }

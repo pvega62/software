@@ -1,8 +1,0 @@
-{
-    "label": "Stripe API Documentation",
-    "position": 4,
-    "link": {
-        "type": "generated-index",
-        "description": "Examine production-grade financial API documentation modeled after the Stripe platform. This section highlights modular endpoint architectures, secure secret-key authentication, structured parameter tables, and JSON payloads."
-    }
-}

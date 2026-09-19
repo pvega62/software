@@ -1,8 +1,0 @@
-{
-  "label": "Pet Store API Documentation",
-  "position": 5,
-  "link": {
-    "type": "generated-index",
-    "description": "Explore RESTful service documentation modeled after the Swagger/OpenAPI standard. This section demonstrates comprehensive endpoint definitions, multi-scheme authentication patterns, and structured request/response schemas for an online pet store."
-  }
-}

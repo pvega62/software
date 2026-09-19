@@ -1,8 +1,0 @@
-{
-  "label": "Pets APIs",
-  "position": 2,
-  "link": {
-    "type": "generated-index",
-    "description": "Manage pet records within the store database. This reference covers creating new entries, querying animals by status or tags, updating details with form data, uploading media, and removing records."
-  }
-}

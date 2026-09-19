@@ -1,8 +1,0 @@
-{
-  "label": "Store APIs",
-  "position": 3,
-  "link": {
-    "type": "generated-index",
-    "description": "Monitor store inventory levels and process customer orders. Explore endpoints to track stock across availability states, place new pet orders, look up purchase receipts, and cancel existing orders."
-  }
-}
