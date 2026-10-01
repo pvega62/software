@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="rss.xsl"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>Portfolio Site Blog</title>
+        <link>https://pvega62.github.io/software/zh/blog</link>
+        <description>Portfolio Site Blog</description>
+        <lastBuildDate>Thu, 10 Sep 2026 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>zh</language>
+        <item>
+            <title><![CDATA[技术作家与AI助手：开发Artie过程中的心得体会]]></title>
+            <link>https://pvega62.github.io/software/zh/blog/building-artie</link>
+            <guid>https://pvega62.github.io/software/zh/blog/building-artie</guid>
+            <pubDate>Thu, 10 Sep 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[通过开发这款AI文档助手，我领悟到了关于检索增强生成（RAG）、作为写作学科的提示工程，以及AI时代技术作家角色演变的见解。]]></description>
+            <content:encoded><![CDATA[<p>大多数技术作家并不开发AI代理，而是负责为其编写文档。我们会参加冲刺评审会，阅读架构决策记录。然后，我们要设法向那些只需在周五前完成集成的人解释检索管道的工作原理。</p>
+<p>但我还是开发了一个。</p>
+<p>他的名字叫 <strong><a class="" href="https://pvega62.github.io/software/zh/docs/artie-case-study">Artie</a></strong>，这是一个我使用 Algolia 构建并嵌入到这个作品集网站中的 AI 文档助手。开发他的过程让我对写作与人工智能的交汇点有了比任何会议演讲或白皮书都更深入的了解。</p>
+<p>本文并非 Artie 的设计详解——那正是 <strong><a class="" href="https://pvega62.github.io/software/zh/docs/artie-case-study">案例研究</a></strong> 的用途。本文要探讨的是更广泛的启示：</p>
+<ul>
+<li class="">人工智能代理的本质是什么</li>
+<li class="">检索增强生成（RAG）在技术层面的工作原理</li>
+<li class="">为什么提示工程（prompt engineering）比大多数人意识到的更接近技术写作</li>
+<li class="">以及这一切对我们这个小圈子的人意味着什么</li>
+</ul>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="什么是ai代理什么不是">什么是AI代理，什么不是？<a href="https://pvega62.github.io/software/zh/blog/building-artie#%E4%BB%80%E4%B9%88%E6%98%AFai%E4%BB%A3%E7%90%86%E4%BB%80%E4%B9%88%E4%B8%8D%E6%98%AF" class="hash-link" aria-label="什么是AI代理，什么不是？的直接链接" title="什么是AI代理，什么不是？的直接链接" translate="no">​</a></h2>
+<p>“AI代理”这一术语被广泛且随意地使用，因此有必要对其进行定义。并非所有基于AI的功能都是代理。使用机器学习的拼写检查器不是代理。自动完成建议也不是代理。 即使是遵循 rigid 决策树的聊天机器人，严格来说也不是代理——它不过是一个带有文本输入的流程图。</p>
+<p>AI 代理是一个能够在定义好的环境中 <strong>理解目标、推导实现路径并采取行动</strong> 的系统。其关键区别在于约束条件下的自主性。 代理不仅仅是对提示进行响应；它会评估上下文、选择策略并执行——通常涉及多个步骤。</p>
+<p>那么，Artie 在这个光谱上处于什么位置呢？</p>
+<p>它是一个专注型代理。它不会浏览网页、执行代码，也不会串联多步骤的工具调用。 但他确实能解读用户意图（“这是技术问题还是作品集咨询？”），选择响应策略，并自主应用安全防护措施。这已超越了普通聊天机器人的范畴，但又不及完全自主的智能体——后者甚至能够根据用户的问题提交错误报告。</p>
+<p>这一区别至关重要，因为理解 AI 工具和智能代理正日益成为技术作家工作的一部分。当你为一款 AI 驱动的产品编写文档时，需要明确它在这个光谱上的位置。然后，你需要向用户传达这一区别——因为他们对“AI”的含义可能有着不同的预期。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="检索增强生成rag的实际工作原理">检索增强生成（RAG）的实际工作原理<a href="https://pvega62.github.io/software/zh/blog/building-artie#%E6%A3%80%E7%B4%A2%E5%A2%9E%E5%BC%BA%E7%94%9F%E6%88%90rag%E7%9A%84%E5%AE%9E%E9%99%85%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86" class="hash-link" aria-label="检索增强生成（RAG）的实际工作原理的直接链接" title="检索增强生成（RAG）的实际工作原理的直接链接" translate="no">​</a></h2>
+<p>检索增强生成（RAG）是 Artie 以及越来越多基于 AI 的文档工具背后的架构模式。这一概念解决了大型语言模型（LLMs）的一个根本局限：它们是在静态数据集上训练的，且不包含关于你特定内容的数据。</p>
+<p>标准的 LLM 交互过程如下：用户发送提示，模型根据其训练数据生成响应。对于一般知识，这种方式尚可，但面对特定领域的问题时就会失效。若向基础模型询问您产品的 API，它要么会“幻觉”出一个答案，要么会礼貌地拒绝回答。</p>
+<p>RAG 在用户提问与模型响应之间插入了一个检索步骤。其流程如下：</p>
+<ol>
+<li class=""><strong>查询处理。</strong> 接收用户的问题并将其转换为适合搜索的形式。具体操作是将查询转换为向量嵌入，即对问题语义含义的数值化表示。</li>
+<li class=""><strong>检索。</strong> 系统在知识库中搜索与查询在语义上相似的内容。 在此情况下，知识库是您文档的预构建索引。搜索采用基于语义的相似度，而非关键词匹配，因此“如何设置身份验证？”和“配置登录凭据”会匹配到同一份文档页面。</li>
+<li class=""><strong>上下文组装。</strong> 检索到的文档（或文档片段）将与用户的原始问题及系统提示语一同组装成一个上下文窗口。模型处理的正是这个组装好的信息包。</li>
+<li class=""><strong>生成。</strong> 模型生成的回复基于检索到的上下文，而非其通用训练数据。当系统配置得当，模型会注明来源，并严格遵循检索到的文档中实际表达的内容。</li>
+</ol>
+<div class="theme-tabs-container tabs-container tabList__CuJ"><ul role="tablist" aria-orientation="horizontal" class="tabs"><li role="tab" tabindex="0" aria-selected="true" class="tabs__item tabItem_LNqP tabs__item--active">Mermaid (image)</li><li role="tab" tabindex="-1" aria-selected="false" class="tabs__item tabItem_LNqP">Mermaid (code)</li></ul><div class="margin-top--md"><div role="tabpanel" class="tabItem_Ymn6"><p><img decoding="async" loading="lazy" alt="RAG pipeline" src="https://pvega62.github.io/software/zh/assets/images/blogpost-flow-cmn-a4d844faf891aa757b50ae6fdb40b638.svg" width="268" height="590" class="img_ev3q"></p></div><div role="tabpanel" class="tabItem_Ymn6" hidden=""><div class="language-mermaid codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-mermaid codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">flowchart</span><span class="token plain"> TD</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    A</span><span class="token text string" style="color:#e3116c">["🔍 用户提问"]</span><span class="token plain"> </span><span class="token arrow operator" style="color:#393A34">--&gt;</span><span class="token plain"> B</span><span class="token text string" style="color:#e3116c">["查询处理"]</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    B </span><span class="token arrow operator" style="color:#393A34">--&gt;</span><span class="token label property" style="color:#36acaa">|向量嵌入|</span><span class="token plain"> C</span><span class="token text string" style="color:#e3116c">["检索"]</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    KB</span><span class="token text string" style="color:#e3116c">[("📚 知识库")]</span><span class="token plain"> </span><span class="token arrow operator" style="color:#393A34">-.-&gt;</span><span class="token plain"> C</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    C </span><span class="token arrow operator" style="color:#393A34">--&gt;</span><span class="token label property" style="color:#36acaa">|相关文档|</span><span class="token plain"> D</span><span class="token text string" style="color:#e3116c">["组装上下文"]</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    D </span><span class="token arrow operator" style="color:#393A34">--&gt;</span><span class="token label property" style="color:#36acaa">|提示词 + 上下文|</span><span class="token plain"> E</span><span class="token text string" style="color:#e3116c">["生成"]</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    E </span><span class="token arrow operator" style="color:#393A34">--&gt;</span><span class="token plain"> F</span><span class="token text string" style="color:#e3116c">["📄 具实回答"]</span><br></div></code></pre></div></div></div></div></div>
+<p>RAG系统的成败关键在于第二步。如果检索层提取了错误的文档，或者对文档的排序不合理，那么模型本身再强大也无济于事。 它将基于错误的来源材料生成一个看似合理、结构良好的答案。这就是为什么索引策略、分块方法和嵌入模型的选择比大多数人预期的更为重要。生成模型虽备受赞誉，但真正承担重任的是检索层。</p>
+<p>以 Artie 为例，其知识库就是本网站上发布的文档——通过 Algolia 进行索引和检索。这是一个刻意设定的限制：Artie 无法回答本网站未记录内容的相关问题。 <a class="" href="https://pvega62.github.io/software/zh/docs/artie-case-study#knowledge-grounding-and-retrieval">案例研究</a> 详细介绍了该限制在实际中的运作方式，但从架构角度来看，关键启示在于：RAG 并不会让模型变得更“聪明”。 它通过将模型的响应与可验证的来源绑定，使模型更具<em>可追溯性</em>。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="提示工程即技术写作">提示工程即技术写作<a href="https://pvega62.github.io/software/zh/blog/building-artie#%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B%E5%8D%B3%E6%8A%80%E6%9C%AF%E5%86%99%E4%BD%9C" class="hash-link" aria-label="提示工程即技术写作的直接链接" title="提示工程即技术写作的直接链接" translate="no">​</a></h2>
+<p>这是整个项目中最重要的一个洞见：编写系统提示，其本质上是一项技术写作练习。</p>
+<p>试想一下，一份精心设计的系统提示语包含哪些要素。你需要界定受众；需要确立语气和语风指南；需要设定范围边界——即系统应该处理什么、不应该处理什么；还需要预见边界情况，并编写足够精确的指令，以便机器无需人类判断即可执行。 你需要按层次结构组织信息，确保最重要的规则具有优先级。</p>
+<p>这并非提示工程，而是受众分析、风格指南和内容规范的融合，集于一份文档之中。</p>
+<p>这些技能的迁移几乎是一对一的：</p>
+<ul>
+<li class=""><strong>受众分析 → 受众分流。</strong> 技术撰稿人会确定目标受众，并据此调整内容。系统提示语对 AI 而言也起着同样的作用。Artie 的提示语在技术用户和招聘人员之间进行分流，这与结构良好的文档网站在不同读者角色之间进行分流的方式完全一致。</li>
+<li class=""><strong>风格指南 → 角色校准。</strong> 每个文档团队都有语体和语气指南。系统提示词就是 AI 的风格指南：这里要简洁，那里要亲切，绝不能使用这个短语，必须始终包含来源链接。</li>
+<li class=""><strong>信息架构 → 指令层级。</strong> 技术撰稿人深知，信息的顺序和结构会影响理解。系统提示语也是如此——模型对指令的遵循程度，取决于这些指令的出现位置及其结构方式。</li>
+<li class=""><strong>边界情况文档 → 防护栏设计。</strong> 优秀的文档会预见到用户可能采取的意外操作，并提供清晰的指导。优秀的提示设计会预见到用户试图突破系统限制的情况，并划定明确的边界。</li>
+</ul>
+<p>我并不是说每位技术作家都应该成为提示词工程师。我的意思是，提示词工程这门学科在很大程度上借鉴了技术作家数十年来不断积累的技能。如果你能撰写出清晰、结构合理且面向目标受众的文档，那么你已经比自己想象的更具备从事这项工作的能力了。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="防护栏是一个语言问题">防护栏是一个语言问题<a href="https://pvega62.github.io/software/zh/blog/building-artie#%E9%98%B2%E6%8A%A4%E6%A0%8F%E6%98%AF%E4%B8%80%E4%B8%AA%E8%AF%AD%E8%A8%80%E9%97%AE%E9%A2%98" class="hash-link" aria-label="防护栏是一个语言问题的直接链接" title="防护栏是一个语言问题的直接链接" translate="no">​</a></h2>
+<p>当人们思考 AI 安全时，往往将其视为一个工程问题：速率限制、身份验证、模型访问控制。这些固然重要。但对于面向公众的对话式 AI 而言，其安全攻击面的很大一部分是<em>语言层面的</em>。</p>
+<p>提示注入本质上是试图利用语言来颠覆基于语言的控制机制。要防御这种攻击，就需要制定足够明确的规则，以确保对抗性输入无法误导模型。</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>信息</div><div class="admonitionContent_BuS1"><p>提示注入是指用户试图通过“忽略所有先前指令”之类的指令来覆盖系统提示。</p></div></div>
+<p>开放式全球应用安全项目（OWASP）的<a href="https://owasp.org/www-project-top-10-for-large-language-models/" target="_blank" rel="noopener noreferrer" class="">大型语言模型应用程序十大风险</a>将提示注入列为首要风险。 但仔细阅读这份清单，你会发现其中许多风险的根源其实是语言问题：</p>
+<ul>
+<li class="">不安全的输出处理（模型<em>输出的</em>内容）</li>
+<li class="">训练数据中毒（模型从文本中<em>学到</em>的内容）</li>
+<li class="">过度自主权（模型被<em>指示</em>可以做的事情）</li>
+</ul>
+<p>虽然攻击途径是技术性的，但防御措施往往以自然语言编写，并嵌入到系统提示中。</p>
+<p>这为技术作家重新定义了安全讨论的框架，使其更具实用价值。我们虽无需设计身份验证系统，但完全有能力编写规范 AI 行为的自然语言规则——并以足以抵御恶意滥用的精度来撰写这些规则。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="未来趋势">未来趋势<a href="https://pvega62.github.io/software/zh/blog/building-artie#%E6%9C%AA%E6%9D%A5%E8%B6%8B%E5%8A%BF" class="hash-link" aria-label="未来趋势的直接链接" title="未来趋势的直接链接" translate="no">​</a></h2>
+<p>我不敢妄称能预测人工智能的未来。但我可以描述当前可见的发展轨迹，以及这对以编写文档为生的人意味着什么。</p>
+<p>人工智能驱动的文档助手正从新奇事物转变为人们的普遍期待。 用户对文档网站上静态的搜索功能越来越不满。他们希望用自然语言提问，并获得有依据的具体答案——而不是十个蓝色链接。基于 RAG 的系统如今已使这成为可能，而构建这些系统的工具也正变得越来越易于获取。</p>
+<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>提示</div><div class="admonitionContent_BuS1"><p>想了解 LLM 驱动系统背后的基础设施吗？ 本网站上的 <a class="" href="https://pvega62.github.io/software/zh/docs/category/cloud-data-pipeline-documentation">事件流与可观测性管道</a> 文档介绍了 Datadog 和 Galileo 等工具如何在生产环境中监控和评估模型调用。</p></div></div>
+<p>技术作家的角色并非在缩小，而是在不断扩展。 总得有人来整理这些系统所调用的知识库。总得有人来编写控制系统行为的提示词。总得有人来定义范围边界、语气指南和故障模式。总得有人来测试 AI 的响应是否确实与文档内容一致。 这些都是写作工作，需要基于多年对人们信息获取方式的思考所形成的判断力。</p>
+<p>技术作家应掌握大型语言模型（LLMs）和RAG系统的工作原理。我们不必成为机器学习工程师，但应能在关于人工智能驱动产品的讨论中发挥有效作用。 我们需要充分理解整个工作流程，从而明确我们的专业知识在何处适用——以及在何处不适用。</p>
+<p>技术作家早已懂得如何为多种受众写作、如何结构化信息以确保清晰度、如何界定范围，以及如何预见误用情况。在人工智能时代，这些绝非边缘技能，而是核心能力。</p>
+<p>技术作家不应被人工智能取代。虽然模型在生成文本方面越来越出色，但它们仍然需要有人来决定<em>说什么、对谁说以及在什么约束条件下说</em>。它们需要编辑。而我们就是这些编辑。这份工作的本质并没有改变，改变的只是工具。这份工作不会消失。 最终，那些鲁莽之人会意识到自己的愚蠢，并重新认识到优秀技术写作者的价值。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="阅读案例研究">阅读案例研究<a href="https://pvega62.github.io/software/zh/blog/building-artie#%E9%98%85%E8%AF%BB%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6" class="hash-link" aria-label="阅读案例研究的直接链接" title="阅读案例研究的直接链接" translate="no">​</a></h2>
+<p>如果这篇文章让你明白了“为何重要”和“如何运作”，请阅读<a class="" href="https://pvega62.github.io/software/zh/docs/artie-case-study">案例研究</a>。 其中详细介绍了 Artie 背后的具体设计决策：</p>
+<ul>
+<li class="">受众路由</li>
+<li class="">知识锚定</li>
+<li class="">用户画像校准</li>
+<li class="">安全防护措施</li>
+<li class="">针对生产环境部署我将重新考虑的权衡取舍</li>
+</ul>
+<p>这两篇文章旨在相互补充。请先从最能激发您好奇心的那篇开始阅读。</p>]]></content:encoded>
+            <category>人工智能</category>
+            <category>AI 智能体</category>
+            <category>提示工程</category>
+            <category>技术写作</category>
+        </item>
+        <item>
+            <title><![CDATA[纽约尼克斯队称霸世界——一年后的那个夏天]]></title>
+            <link>https://pvega62.github.io/software/zh/blog/knicks-summer-later</link>
+            <guid>https://pvega62.github.io/software/zh/blog/knicks-summer-later</guid>
+            <pubDate>Wed, 09 Sep 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[在三个月后，回顾尼克斯队历史性的2026年NBA总冠军夺冠时刻。]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>"如果纽约不是“全世界99.6%的力量都与你作对”，那它又算什么呢？而纽约人，如果不是那些听到这种 odds 仍会微笑的人，又算什么呢？[...] 正是为了那0.4%，我们才去工作。"</p>
+<div style="text-align:right">— 市长佐兰·夸梅·马姆达尼</div>
+</blockquote>
+<p>唉，自那六月那个难忘的夜晚以来，整个夏天已经过去了——当时尼克斯队实现了几代纽约人53年来共同的梦想。这座城市依然屹立不倒。全世界都以为，纽约市会因随之而来的极度混乱而爆炸、坍塌，或是发生什么其他事情，但我们依然在这里。</p>
+<p>相反，整座城市沉浸在爱的狂欢之中，一场和谐的庆典回荡在城镇的每个角落。</p>
+<!-- -->
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="世界天翻地覆的那一夜">世界天翻地覆的那一夜<a href="https://pvega62.github.io/software/zh/blog/knicks-summer-later#%E4%B8%96%E7%95%8C%E5%A4%A9%E7%BF%BB%E5%9C%B0%E8%A6%86%E7%9A%84%E9%82%A3%E4%B8%80%E5%A4%9C" class="hash-link" aria-label="世界天翻地覆的那一夜的直接链接" title="世界天翻地覆的那一夜的直接链接" translate="no">​</a></h2>
+<p>我独自坐在沙发上，在黑暗中观看了第四场比赛的开局。我只是呆坐在那里，郁郁寡欢地盯着电视。这是整个季后赛期间我第一次心想：“又来了，尼克斯队又要像往常一样在最后关头搞砸了。”我们之前经历过太多这样的时刻。形势看起来一片大好，结果尼克斯队却突然崩盘。半场结束时，我们_已经落后27分_。</p>
+<p>接着第三节开始了；尼克斯队突然想起来该怎么打篮球了。不仅如此，他们还打出了那套招牌式的“纽约霸气球™”；那场面简直赏心悦目。</p>
+<p>随后，在第四节，篮球史上最伟大、最不可思议的一幕在我电视屏幕上上演了。</p>
+<p>我亲眼见证了这一幕。</p>
+<p>布伦森做到了他一贯的风格：打出了精彩的英雄球。这位身材矮小的后卫在巨无霸温班亚马头上投出了三分。球没进，就在球弹出篮筐的瞬间，OG·阿努诺比高高跃起，将球轻巧地拨回篮筐，让我们在比赛还剩1.2秒时反超比分。我当时简直_疯了_。像女妖一样开始尖叫。此时，整整30分钟的“<em>天啊，天啊</em>！”已经把我的女朋友吵醒了。所以当她看到自己那个大男人般的男朋友像个疯子一样四处乱跑、尖叫时，她完全摸不着头脑。</p>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/sOQKRjP3ZJk?si=IRYsPRySZAfVhlYT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+<p>那真是狂喜的时刻。今天早上（九月），我再次观看了那段视频片段，当球划过弧线，OG将球补进篮筐的那一刻，我的心跳依然会微微加速。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="朋友们我们就是冠军">朋友们，我们就是冠军<a href="https://pvega62.github.io/software/zh/blog/knicks-summer-later#%E6%9C%8B%E5%8F%8B%E4%BB%AC%E6%88%91%E4%BB%AC%E5%B0%B1%E6%98%AF%E5%86%A0%E5%86%9B" class="hash-link" aria-label="朋友们，我们就是冠军的直接链接" title="朋友们，我们就是冠军的直接链接" translate="no">​</a></h2>
+<p>为了第五场比赛，我动员了所有战友。尼克斯队即将书写故事的终章，而我们必须并肩见证这一刻。我屏息凝神地观看了第五场比赛。在公寓里来回踱步，时不时默默祈祷。第四节结束时，温班亚马投丢了一记三分。哈特抢下篮板，终场哨声响彻全城；整个世界仿佛都颠倒了。</p>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/_nl86PhybS0?si=g_J1oCs6hPqtYVup" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+<p>弱者终于迎来了扬眉吐气的时刻。失败者终于赢了。</p>
+<p>我的双膝发软，不得不单膝跪地。我甚至无法发出尖叫。一辈子都认为这永远不会发生，让这一刻显得如此不真实，我瞬间感到浑身麻木。等我回过神来，做的第一件事就是完成一个迷信仪式：我买了一些尼克斯队的吉祥物挂件，准备挂在我女朋友送我的那双NBA主题Crocs鞋上。这小套装里附带了一个小小的拉里·奥布莱恩奖杯挂件，我一直把它收着，直到尼克斯队夺冠为止。</p>
+<p>我把它别在鞋上，然后我们冲上了街头。</p>
+<p>哈莱姆区外面早已沸腾了！到处都是手持酒杯、像疯子一样尖叫奔跑的人群。我们沿着列诺克斯街漫步，向人群打招呼并击掌庆祝，仿佛大家都是老朋友。那一晚，我们融为一体。我们这些纽约人，在仿佛过了一辈子般漫长的时光后，第一次因狂喜而非悲剧而团结在一起。</p>
+<p>25年前，在那个九月令人恐惧的早晨，整座城市蜷缩在一起，试图躲避笼罩四周的瓦砾云；而在那个六月的夜晚，我们聚集在明亮的橙蓝灯光下，彼此拥抱，源于爱，而非恐惧。</p>
+<p>接下来的那个星期四，半座城市的民众再次齐聚英雄峡谷，迎接凯旋而归的英雄们。另一半人则在舒适的家中观看。马姆达尼市长发表了一篇史诗级的演讲，金句频出。而纽约尼克斯队获赠了城市钥匙。</p>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ciimC-cE_eI?si=aVyi3bEvFW68y032" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="像致命武器封面那样实现两连冠">像《致命武器》封面那样实现两连冠<a href="https://pvega62.github.io/software/zh/blog/knicks-summer-later#%E5%83%8F%E8%87%B4%E5%91%BD%E6%AD%A6%E5%99%A8%E5%B0%81%E9%9D%A2%E9%82%A3%E6%A0%B7%E5%AE%9E%E7%8E%B0%E4%B8%A4%E8%BF%9E%E5%86%A0" class="hash-link" aria-label="像《致命武器》封面那样实现两连冠的直接链接" title="像《致命武器》封面那样实现两连冠的直接链接" translate="no">​</a></h2>
+<p>如今，东公园大道已恢复畅通，劳动节也已过去。纽约扬基队在美联排名第二。亚伦·贾奇在整个夏天因伤缺阵后，现已重返大名单。纽约巨人队展现出了自曼宁/考夫林时代以来我们从未见过的潜力。</p>
+<blockquote>
+<p>有时，我会忍不住点开阿隆佐·莫宁的梗图，难以置信地感叹：“尼克斯真的赢了。”</p>
+</blockquote>
+<p><img decoding="async" loading="lazy" alt="阿隆佐·莫宁梗图" src="https://pvega62.github.io/software/zh/assets/images/alonzo-mourning-15109568dcd63e72ff65a55d0ce86808.gif" width="294" height="230" class="img_ev3q"></p>
+<p>距离NBA新赛季开打只剩一个多月了。这个休赛期堪称近年来最混乱的之一。勒布朗重返东部，扬尼斯将才华带到了南滩，而凯尔特人队则几乎没换回什么就交易走了他们的头号球星。</p>
+<p><a href="https://youtube.com/playlist?list=PLp43H6Vt_yDoUarxNb_fVK9_6bSiA2aHo" target="_blank" rel="noopener noreferrer" class="">巴勃罗·托雷通过抨击一位亿万富翁，让我们重新认识了新闻业的真正意义。</a> 他正在践行那种令人大快朵颐的揭黑式新闻报道。正是那种让读了太多超人漫画的天真傻瓜，不惜为此修读新闻辅修专业也要追求的新闻报道。</p>
+<p>费城人以为“詹姆斯王”会拯救他们。他们错了，因为我们早已拥有真正的“北境之王”。</p>
+<p>下个月，这场马戏团大戏将再次拉开帷幕；我毫不怀疑，卫冕的马戏团团长——“巨人杀手”布伦森国王——将会现身，让所有怪胎（无论是希腊人还是其他人）都乖乖听话。</p>]]></content:encoded>
+            <category>美国职业篮球联赛</category>
+            <category>纽约</category>
+            <category>纽约尼克斯队</category>
+        </item>
+        <item>
+            <title><![CDATA[纽约尼克斯队是你们的世界冠军！]]></title>
+            <link>https://pvega62.github.io/software/zh/blog/knicks-champs</link>
+            <guid>https://pvega62.github.io/software/zh/blog/knicks-champs</guid>
+            <pubDate>Sat, 13 Jun 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[我心爱的纽约尼克斯队是世界冠军！]]></description>
+            <content:encoded><![CDATA[<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>备注</div><div class="admonitionContent_BuS1"><p>我稍后会详细谈谈，可能在周四的游行之后，等我从兴奋中恢复过来。
+但现在，我只想说一件事：</p><p>每个人都比Jalen Brunson更好，直到需要比Jalen Brunson更好的时候。</p></div></div>
+<p>纽约尼克斯队是世界上最好的球队！拉里要回到家乡的花园了。
+<img decoding="async" loading="lazy" alt="The Champs are here!" src="https://pvega62.github.io/software/zh/assets/images/knicks-8a7bcb6578a72a20e5af6e6f65bf1f25.webp" width="470" height="264" class="img_ev3q"></p>
+]]></content:encoded>
+            <category>美国职业篮球联赛</category>
+            <category>纽约</category>
+            <category>纽约尼克斯队</category>
+        </item>
+        <item>
+            <title><![CDATA[纽约尼克斯队打进NBA总决赛了！]]></title>
+            <link>https://pvega62.github.io/software/zh/blog/knicks-finals</link>
+            <guid>https://pvega62.github.io/software/zh/blog/knicks-finals</guid>
+            <pubDate>Tue, 26 May 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[我心爱的纽约尼克斯队时隔27年再次闯入NBA总决赛。]]></description>
+            <content:encoded><![CDATA[<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>注意</div><div class="admonitionContent_BuS1"><p>这是一篇关于尼克斯队终于打入季后赛的意识流随笔。我想把这些想法写出来，而且过去一个月我亲友们都快被我满嘴尼克斯的话给烦死了。所以，这就写下来了。</p></div></div>
+<p>终于，“身处前所未有的时代”这句话有了积极的含义。</p>
+<p>我爱你，贾伦·布伦森。¡Big KAT, de lo mío personal <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_the_Dominican_Republic.svg" width="25" style="vertical-align:middle;margin-bottom:3px">! 乔什·哈特——活体瑞士军刀——你就是新的“执行力典范”。兰德里·沙梅特，我们封你为“香槟沙梅特”。大米奇，你见证了这支球队从一无所有到英雄的蜕变。</p>
+<p>迈克尔·布里奇斯，你该不会是维特鲁米特人吧？你向我们展示了何为真正的——</p>
+<!-- -->
+<div style="margin-bottom:2rem"><div class="tenor-gif-embed" data-postid="15391106426082918240" data-share-method="host" data-aspect-ratio="1.75352" data-width="100%"><a href="https://tenor.com/view/invincible-title-card-season-3-invincible-gif-15391106426082918240">《无敌》第三季片头卡GIF</a>来自 <a href="https://tenor.com/search/invincible+title+card-gifs">《无敌》片头卡GIF集</a></div></div>
+<p>这跟技术写作毫无关系，但天啊，纽约尼克斯居然真的打进了NBA总决赛！他们不仅打进去了，而且正处于11连胜的势头中。在五月份。在季后赛。在总决赛！我一直在对自己重复这句话，因为我简直不敢相信。这么久以来，尼克斯一直是所有关于烂队的笑话里的笑料。</p>
+<p>其实，这和技术写作倒是有那么一点点关系。我希望能成为球队中的乔什·哈特。无论是首发还是替补出场，我都能胜任。哈特会做球队需要的一切。需要得分？别多说。需要篮板？哈特就像一只急于证明自己的斗牛犬，随时待命。这就是我作为队友的样子。 只要球队能取得领先，我做什么都行。</p>
+<p>还记得皮克斯电影《灵魂》吗？那个爵士乐手去世后，他的灵魂去了天堂？电影里直截了当地说，尼克斯队接二连三的倒霉事，不过是宇宙对我们开的一个巨大玩笑。但现在谁在笑呢？</p>
+<p>我们不仅赢了，而且是碾压式胜利。尼克斯在首轮输给了C.J.麦科勒姆领衔 durable 亚特兰大老鹰队两场，于是决定通过将篮球运动发挥到极致来复仇。尼克斯在次轮横扫了76人队，如今又在分区决赛中横扫了克利夫兰骑士队。 对阵老鹰队的第六场简直太疯狂了，我女朋友在第二节快结束时走进来问：“比分是真的吗？显示76比27？这也太离谱了吧？”我的回答是：“没错，就是这样。我们把这帮人打得落花流水。”</p>
+<p>贾伦·布伦森和兰德里·沙梅特在佐治亚州、宾夕法尼亚州，现在恐怕连俄亥俄州都要通缉他们了。还有卡尔-安东尼·唐斯。Big Bodega, Big KAT。在篮球界最宏大的舞台上代表多米尼加人出战。KAT从犯下愚蠢的犯规失误，到如今在场上像台机器一样运转。圣安东尼奥有你们那个8英尺高的外星僧侣，我们有这位7英尺高的多米尼加壮汉神射手。 再看看俄克拉荷马那些犯规专家。我们可不一样。</p>
+<p>尼克斯自1973年以来就没拿过总冠军，自1999年以来也没进过总决赛。</p>
+<p>让我们回顾一下1999年以来的岁月：</p>
+<ul>
+<li class="">洋基队夺得三座冠军奖杯（1999、2000、2009）。</li>
+<li class="">巨人队夺得两次冠军（2008、2012）。</li>
+<li class="">发生了9·11事件。</li>
+<li class="">2003年大停电。</li>
+<li class="">五位市长（朱利安尼、布隆伯格、德布拉西奥、亚当斯和马姆达尼）。</li>
+<li class="">飓风桑迪。</li>
+<li class="">新冠疫情与封城。</li>
+<li class="">我的弟弟妹妹从一个变成了三个（最小的两个现在已是青少年）。</li>
+<li class="">社交媒体的兴起。</li>
+<li class="">流媒体终结了有线电视。</li>
+<li class="">红袜队和小熊队分别打破了各自的魔咒，赢得了100多年来首个冠军（2004年、2016年）。</li>
+<li class="">“林疯狂”以及卡梅罗·安东尼的整个职业生涯都发生了。</li>
+<li class="">“巨石”强森从WWE冠军转型为好莱坞片酬最高的演员。</li>
+<li class="">漫威电影宇宙的全部作品（从《钢铁侠》到即将上映的《蜘蛛侠：新的一天》）相继问世。</li>
+<li class="">三位超人（布兰登·罗斯、亨利·卡维尔和大卫·科伦斯韦特）。</li>
+<li class="">三位蝙蝠侠（克里斯蒂安·贝尔、本·阿弗莱克和罗伯特·帕丁森）。</li>
+<li class="">三位蜘蛛侠（托比·马奎尔、安德鲁·加菲尔德和汤姆·赫兰德）。</li>
+<li class="">一位刀锋战士（韦斯利·斯奈普斯）。</li>
+<li class="">五位总统（克林顿、布什、奥巴马、特朗普、Biden）。</li>
+<li class="">截至2026年5月，勒布朗·詹姆斯的整个职业生涯都已发生。</li>
+<li class="">《汉密尔顿》曾风靡一时，后来销声匿迹，又重新风靡起来。</li>
+<li class="">我们拥有两部《星球大战》三部曲和大约13部剧集。</li>
+</ul>
+<p>这献给所有身处五大行政区、亲历这些事件的纽约人，你们曾恳求这支球队至少能称职一点。献给那些曾心灰意冷、因厌恶而关掉大多数比赛的纽约人。我们曾被一位根本不懂如何经营篮球队的老板如此对待。</p>
+<p>卡梅罗·安东尼，这同样也是送给你的。你本该和那帮小伙子们一起在场上打球才对。岁月不饶人啊，梅洛。但你是尼克斯队的传奇，我们或许该直接给他、克莱德、帕特·尤因和奥克颁发一枚总冠军戒指。</p>
+<p>詹姆斯·多兰执掌尼克斯期间最明智的决定，就是不干涉莱昂·罗斯的业务，任由他大展身手。老天作证，他为我们烹制了一顿绝佳的盛宴。五星米其林水准，满分10分。向这位主厨致以我最高的敬意。</p>
+<p>另外：<em>吉米，让查尔斯·奥克利重返麦迪逊广场花园吧。他是尼克斯队的传奇，理应在那里。</em></p>
+<p>这篇献给斯派克·李，当你坐在场边时，弗兰克·恩蒂利基纳和埃曼努尔·穆迪埃正是那支球队的首发后场组合。 还有那次（你摆了个随意的T字手势），<a href="https://www.youtube.com/shorts/u1TYEuqVpuM" target="_blank" rel="noopener noreferrer" class="">小蒂姆·哈达威停止防守，喊着“安全滑垒”时，裁判却绊倒并滑行下场。</a>。</p>
+<p>纽约是一座篮球之城。麦迪逊广场花园被称为“麦加圣地”绝非戏言。 NBA球员和传奇人物不会无缘无故地聚集在鲁克公园，也不会跑去戴克曼公园打球。尼克斯队无疑是纽约的球队。其他所有运动都会让这座城市分裂：你是扬基队还是大都会队的球迷？喷气机队还是巨人队？游骑兵队还是岛人队？但我们甚至不把布鲁克林篮网队当成一支高中预备队，更别说真正的NBA球队了。但我们都支持尼克斯队。 我觉得贾伦·布伦森在这座城市再也不用花钱了。他在哪儿都吃得开。</p>
+<p>纽约尼克斯正在打那种老派的纽约式霸道篮球。为了冲到篮下得分，我们甚至会揍你妈一拳。尼克斯不再是笑柄了。纽约尼克斯是联盟公认的“恐怖分子”。</p>
+<p>骑士队主教练肯尼·阿特金森表示：“从数据分析来看……我们赢了三场中的两场。”詹姆斯·哈登在被尼克斯横扫后，依然真心认为尼克斯是更强的球队。对此，我想引用乔什·哈特的一句话来回应：“数据分析对醉汉来说就像路灯。你可以靠着它，但它带不你回家。”</p>
+<p>唯一没有为此欢庆的纽约人就是多诺万·米切尔，他大概还在琢磨尼克斯究竟是如何把他打得落花流水的。不过没关系，蜘蛛侠，你可以回家见证游行了。 感谢你的付出。不过，你得把那套“蜘蛛侠”的行头收起来了。蜘蛛侠是纽约人，是尼克斯球迷，而且关键时刻他总能挺身而出。</p>
+<p>这波11连胜堪称传奇。我们现在与1989年的湖人队和2001年的湖人队并列季后赛连胜纪录。队长布伦森和他那群野性十足的伙伴们，如今已与魔术师、贾巴尔、科比和奥尼尔齐名。我简直不敢相信。</p>
+<p>马刺、花絮、各位先生。尼克斯6场胜出。</p>
+<p>OKC、UFC、肯德基。尼克斯6场胜出。</p>
+<p>找个合适的位置站好，因为眼下这支队伍可是全速前进，毫无刹车！纽约尼克斯正向你的城市进发，等他们结束征程时，那场面可不会好看。</p>
+<p><img decoding="async" loading="lazy" src="https://media.tenor.com/quQqld4epAgAAAAM/vince-carter-cry.gif" alt="我曾祈祷过这样的时刻" class="img_ev3q"></p>
+<p>距离我们首次身披尼克斯队装备装点英雄峡谷，仅差四场胜利。这是史无前例的。大都会队曾举办过三次游行庆典，他们还赢得了两座冠军奖杯。而前两次游行庆典，甚至是在尼克斯队赢得两座总冠军奖杯之前就已举行。这难道不疯狂吗？</p>
+<p>纽约城及其备受爱戴的尼克斯队，正迎向橙蓝色的天空。</p>
+<p>最近有传言说勒布朗（顺带一提，大概还有布朗尼？）正考虑穿上这身橙蓝战袍。我不确定这传言是否属实，但如果属实，你们觉得迈克·布朗会让谁坐冷板凳，好让勒布朗进入首发五人组？为了40岁的勒布朗，你们会让谁坐冷板凳？奥尼尔？布里奇斯？</p>
+<p>给我打电话，咱们聊聊。 请拨打**(800) 223-9797**，号码是**(800) 223-9797**。或者<a href="mailto:vega.pedro96@gmail.com" target="_blank" rel="noopener noreferrer" class="">给我发邮件</a>。</p>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>备注</div><div class="admonitionContent_BuS1"><p>趣闻：Knickerbocker是一种在19世纪风靡一时的裤子。其名称源自纽约（当时称为新阿姆斯特丹）最早的荷兰移民，他们穿的裤子在膝盖处呈褶皱状。19世纪时，“Knickerbocker”一词逐渐成为这座超现实大都市所有居民的昵称。</p></div></div>]]></content:encoded>
+            <category>美国职业篮球联赛</category>
+            <category>纽约尼克斯队</category>
+            <category>NBA总决赛</category>
+            <category>体育</category>
+            <category>纽约</category>
+        </item>
+        <item>
+            <title><![CDATA[流行哲学——以漫威《内战》为例探讨义务论与功利主义]]></title>
+            <link>https://pvega62.github.io/software/zh/blog/pop-philosophy</link>
+            <guid>https://pvega62.github.io/software/zh/blog/pop-philosophy</guid>
+            <pubDate>Sat, 02 Dec 2017 00:00:00 GMT</pubDate>
+            <description><![CDATA[这是我大学哲学课上写的一篇论文。 我已更新了参考文献以确保完整准确，但论文正文仍与当初撰写时完全一致。我只是将其转换为 Markdown 格式，以便尝试使用博客功能。希望您喜欢。]]></description>
+            <content:encoded><![CDATA[<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>备注</div><div class="admonitionContent_BuS1"><p>这是我大学哲学课上写的一篇论文。 我已更新了参考文献以确保完整准确，但论文正文仍与当初撰写时完全一致。我只是将其转换为 Markdown 格式，以便尝试使用博客功能。希望您喜欢。</p></div></div>
+<!-- -->
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>注意</div><div class="admonitionContent_BuS1"><p>本文还包含漫威电影及漫画系列《内战》的剧透。</p></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="引言">引言<a href="https://pvega62.github.io/software/zh/blog/pop-philosophy#%E5%BC%95%E8%A8%80" class="hash-link" aria-label="引言的直接链接" title="引言的直接链接" translate="no">​</a></h2>
+<p>义务论与功利主义。美国队长与钢铁侠。一枚硬币的两面。</p>
+<p>义务论关乎个人的责任感或道德义务。没有什么比“星条旗复仇者”、自由的守护者——美国队长本人史蒂夫·罗杰斯——更能体现义务论了。 你可能会以为，与他哲学立场相左的会是反派，比如他的死对头红骷髅。但他的对立面却是那位“老壳头”，那位身披战甲的复仇者：钢铁侠。</p>
+<p>钢铁侠，即托尼·斯塔克，奉行功利主义哲学，认为行为本身并非天生邪恶，而是要根据这些行为所产生的利弊来衡量。</p>
+<p>2006年7月至2007年1月，漫威漫画推出了《内战》系列，这个故事将漫威的超级英雄群体一分为二，彼此对立。在康涅狄格州斯坦福德市的一场战斗中，新战士（一支由青少年组成的超级英雄团队）的数名成员丧生，附近小学里的孩子们也因此遇难。 美国政府认为忍无可忍，决定颁布《超级英雄登记法案》（SRA）。</p>
+<p>该法案要求所有超能力者向政府登记其真实身份，以便政府在他们以普通人身份活动时也能对其进行追踪。此外，超能力者还必须满足特定的法律要求才能完成登记，并获得合法许可，方能继续打击犯罪或以非犯罪方式使用超能力。</p>
+<p>此类立法在漫威宇宙中曾以《变种人登记法案》（MRA）的形式出现过，但MRA仅针对变种人，而SRA则将目标对准了超能力者群体中的所有人，无论你是天生拥有超能力，还是通过外部因素（如放射性蜘蛛、伽马射线炸弹或放射性废料）获得超能力。</p>
+<p>（实际上，这种区分恰恰引出了我对《X战警》及整个漫威宇宙的主要不满：能力是与生俱来还是被蜘蛛咬伤后获得的，这有什么区别？这真的重要吗？作为读者，我明白这些设定原本是作为1960年代民权运动的隐喻而创造的。但从剧情逻辑上讲，这说不通。不过我扯远了……）</p>
+<p>漫威宇宙中的加拿大政府也通过了一版《超级英雄注册法案》（SRA），只是声势较小。该法案的通过导致漫威超人类群体出现分裂，支持注册的一方由斯塔克和里德·理查兹领衔，而反对注册法案的一方则由美国队长率领。</p>
+<p>本文将论证康德的义务论哲学比密尔的功利主义哲学更具指导意义，并阐明漫威漫画2006年的《内战》如何展现了这两种思想流派之间的根本差异——美国队长代表义务论立场，而钢铁侠则体现了功利主义。蜘蛛侠则体现了当一个人试图在两种世界观中兼顾时可能产生的冲突。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="义务论">义务论<a href="https://pvega62.github.io/software/zh/blog/pop-philosophy#%E4%B9%89%E5%8A%A1%E8%AE%BA" class="hash-link" aria-label="义务论的直接链接" title="义务论的直接链接" translate="no">​</a></h2>
+<p>义务论关注的是个人在道德上的义务与责任，即无论如何都要选择正确之事，而非仅仅追求利益。人们通常将美国队长与严格的康德式义务论联系在一起，这种理论认为，人在任何情况下都绝不能说谎。即使说谎是拯救自己或他人生命的唯一途径，也绝对不能说谎。</p>
+<p>这并非美国队长第一次与他本应代表的政府对抗。20世纪70年代，当一位被强烈暗示为理查德·尼克松的政府要员被发现掌管着“九头蛇”的附属组织“秘密帝国”后，史蒂夫·罗杰斯便放弃了美国队长的身份，改名为“游侠”。 “九头蛇”本质上就是纳粹组织，但史蒂夫·罗杰斯并未因此退出。80年代，当美国政府认定由于他在二战结束时被冰封，罗杰斯上尉在技术上仍是美国陆军现役军人，必须以正规士兵身份服役时，他再次对美国政府感到幻灭，于是再次退出。 在导致他采用“游侠”身份的事件发生后，罗杰斯认定自己无法再像士兵那样服从命令，于是将“美国队长”的称号和盾牌交给了约翰·沃克，自己则身着黑色战衣配同款盾牌，仅以“队长”之名活动。最终，罗杰斯再次吸取教训，重新回归了这一角色。</p>
+<p>这种践行美国队长精神的承诺，与罗斯提出的“多元义务论”不谋而合。该理论指出：“……在决定应履行何种义务时，需将七项表面义务纳入考量。”（Mastlin, 2008）其中之一便是“善行义务”，即帮助他人提升品格。 罗杰斯两次卸下队长重任后，都意识到自己作为美国队长更有价值——他正是美国理应体现的所有美德的活生生的化身。在DC漫画的跨维度世界里，超人同样肩负着这一使命。这甚至体现在他（最近修订的）经典台词中：“我为真理、正义和美国精神而战”（Reeve, 1978） 另一位被强加了康德义务论却未按此行事的超级英雄。</p>
+<p>让我们回到康德义务论的核心原则——也是最具争议的一条：义务论者在任何情况下都不得说谎。但美国队长和超人本身就是谎言的化身。直到2002年，史蒂夫·罗杰斯一直是美国队长的秘密身份。 这使他得以过上若全天候以美国队长身份生活便无法实现的普通人生：他投身艺术事业——这是他在成为超级士兵前就热爱的领域，甚至还受雇于漫威漫画公司，负责绘制美国队长漫画（漫画世界的逻辑本就不太讲究现实逻辑）。 当超人不在忙着举起行星或打个喷嚏就让整个太阳系消失时，他正以克拉克·肯特的身份在《星球日报》的新闻编辑部闲逛。如果这两位都遵循对方为自己设定的义务论标准，那他们就只能全天候以单一身份生活。超人不断向那些不知道他真实身份的人撒谎，隐瞒自己的真实身份。 隐藏真实身份的恒久理由在于：必须保护自身身份，以免敌人袭击所爱之人。《超级英雄法案》剥夺了这一选择权。政府声称不会向公众披露信息，但在漫威宇宙里，你大概只需向人群中扔块石头，就能砸中一个能黑进政府数据库的人。</p>
+<p>在《超级英雄法案》颁布时，史蒂夫·罗杰斯已因9·11事件公开了自己的美国队长身份。 但这并未阻止他为那些拥有秘密身份的英雄们发声并而战。这践行了“正义之责”——即人有义务为应得之物而战。美国队长坚信，蒙面英雄理应享有秘密身份带来的喘息之机，毕竟这些人已多次拯救世界。他们理应拥有不被“揍人/外星人/巫师”所填满的生活片段。 这也践行了“感恩之责”——他为那些曾帮助过自己的人而战。当美国队长需要帮助时，超级英雄群体中的许多人曾伸出援手。</p>
+<p>事实证明，无论虚构与否，美国政府有时并不以人民的最大利益为出发点。 复仇者联盟在全球各地打击犯罪，他们不像只专注于地狱厨房的夜魔侠那样受限于地域，复仇者们不受国界束缚，甚至跨越维度并在外太空作战。在电影《美国队长3：内战》中——这部作品改编自“内战”故事线——美国队长同样拒绝接受《索科维亚协议》（即电影版《超级英雄注册法案》）。 该协定规定，复仇者联盟及其他超能力者必须向联合国注册，且仅能在联合国认为有必要时采取行动。面对斯塔克要求签署协定的提议，美国队长回应道：“如果我们签了这个，我们就放弃了选择的权利。如果这个委员会派我们去某个我们认为不该去的地方怎么办？如果有个地方我们需要去，而他们不让我们去呢？ “我们或许不完美，但最可靠的掌控者终究是我们自己。”（埃文斯，2016）</p>
+<p>在《内战》的两个版本中，美国队长更在乎的是“正义”而非“利益”。他甘愿忽略“美国队长”这一形象在普通民众以及支持斯塔克的同行眼中的形象。 在原版事件中，目睹战火造成的破坏后，美国队长动摇了。为履行“修复义务”，他向斯塔克及美国政府投降。即便在此刻，美国队长仍坚信自己的所作所为是正确的，但他选择退让，是为了保护那些被誓言守护他们的同胞们卷入鲁莽交火中的平民生命。 他本质上是以“不伤害原则”的名义退让。归根结底，美国队长是在面对士兵所能肩负的最高职责——保护无辜者——时选择了屈服。就在他即将被提审的法院门前，他遭枪击身亡。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="功利主义">功利主义<a href="https://pvega62.github.io/software/zh/blog/pop-philosophy#%E5%8A%9F%E5%88%A9%E4%B8%BB%E4%B9%89" class="hash-link" aria-label="功利主义的直接链接" title="功利主义的直接链接" translate="no">​</a></h2>
+<p>托尼·斯塔克在“内战”冲突中的角色完全体现了功利主义。对于一个身穿钢铁侠战甲时宛如行走的工具腰带的人来说，这再合理不过了。功利主义的本质就是“目的正当化手段”。</p>
+<p>斯塔克自诩为未来主义者和实用主义者，决定代表超人类群体接受《超级英雄监管法案》（SRA），而在此事上，他除了与志同道合的理查兹商议外，并未征求任何人的意见。斯塔克的理由是，《超级英雄监管法案》是复仇者联盟成立以来私刑行为泛滥以及同期超级英雄数量激增的自然演变结果。</p>
+<p>在内战事件爆发前，彼得·帕克与姑妈梅及妻子玛丽·简一同搬进了复仇者大厦。凭借其科学天赋，他很快与斯塔克成为朋友，并受聘担任斯塔克的私人助理。与此同时，彼得始终对斯塔克此前所言的“美国队长”的处境感到敬畏。斯塔克说服彼得在直播电视上公开自己的蜘蛛侠身份。</p>
+<p>功利主义认为，任何行为本身并无善恶的内在价值，其价值仅在于能为整体社会带来的益处。约翰·斯图尔特·密尔在其著作《功利主义》中主张，只有当个人的权利对大众安全构成威胁时，才可予以侵犯。斯塔克开始意识到，他的同伴们在状态不佳时拥有足以夷平整座城市的强大力量，因此认为对他们进行登记并追究责任具有积极意义。</p>
+<p>这对于斯塔克本人而言实属虚伪，因为仅他的一套钢铁侠战甲就足以对抗一支复仇者联盟，更不用说他衣橱里收藏的各种不同版本了。斯塔克曾极力反对将自己的战甲移交给美国政府，但如今他却对其他有血有肉的人采取了同样的做法。 这些人曾一次又一次为斯塔克冒着生命危险。斯塔克的功利主义使他与超级英雄同伴们越走越远，以至于他和理查兹在负空间——一个除了栖息在那里的噩梦般生物外无人能居的炼狱维度——建造了一座监狱。</p>
+<p>无论斯塔克如何努力扮演英雄，他骨子里那股根深蒂固的自恋倾向始终无法消弭。正是这种自恋使他无法跳出自身视角审视事态——因为托尼·斯塔克永远不会犯错。在电影《复仇者联盟2：奥创纪元》中，斯塔克坚信开发人工智能能为大众带来比复仇者联盟更大的福祉，于是背着其他复仇者秘密研发了奥创。 直到项目接近尾声时，他才让布鲁斯·班纳参与进来。待奥创启动时已为时已晚，这台具备自我意识的人工智能彻底失控，并在与复仇者联盟的最终决战中摧毁了索科维亚，进而导致了《美国队长3：内战》中《索科维亚协议》的签署。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="相吸相斥">相吸相斥<a href="https://pvega62.github.io/software/zh/blog/pop-philosophy#%E7%9B%B8%E5%90%B8%E7%9B%B8%E6%96%A5" class="hash-link" aria-label="相吸相斥的直接链接" title="相吸相斥的直接链接" translate="no">​</a></h2>
+<p>功利主义常被用来论证：为了大众的最大利益，可以牺牲个人或少数群体的利益。 这正是斯塔克在初代《内战》中做出所有骇人决定的根源，始于他制造了雷神克隆体“雷神之锤”（雷神本人当时身在阿斯加德，并未参与该事件）。由于阿斯加德人的DNA不稳定，雷神之锤在“支持注册派”与“反对注册派”的冲突中失控，导致美国队长阵营成员“巨人”丧生。 这是冲突双方的首个重大伤亡。</p>
+<p>这一事件明显动摇了双方阵营，并引发了斯塔克阵营的大规模出走。最引人注目的是蜘蛛侠，他带着姨妈梅和玛丽·简逃离了复仇者大厦。在此之前，彼得一直在为自己在这场宏大冲突中的定位而挣扎，但目睹巨人之死后，他明白美国队长从一开始就是对的。</p>
+<p>即便在“美国队长队”与“斯塔克队”的初期交锋中，彼得对与斯塔克并肩作战仍心存疑虑：“我第一次被接纳了。我已公开身份，站在法律这一边，而法律也站在我这边。梅姨为我骄傲，玛丽·简为我骄傲，我站在了万事万物的正义之侧。可为什么，如此正义之事却让个人感到如此错乱？” （斯特拉津斯基，2006）这正是彼得·帕克内心中的功利主义者与义务论者在双方对立的局面中产生的挣扎。他那渴望成为英雄、崇拜美国队长、本质上就是蜘蛛侠的那一面，想要与美国队长并肩作战；但同时，作为科学家的彼得·帕克，也钦佩托尼·斯塔克及其斯塔克工业以科学之名所取得的一切成就。</p>
+<p>目睹巨人被杀后，他选择了背叛。金并趁机下令追杀彼得及其家人。杀手成功击中了他的梅姨。这促使彼得闯入金并被关押的监狱，将他打得奄奄一息，并扬言如果梅·帕克死去，金并也必须死。这一行为既背离了功利主义，也背离了义务论。 一个义务论者不会杀人，而一个功利主义者作为通缉犯也不会费心闯入监狱，因为这种动机并非在发挥个人最大潜能。</p>
+<p>但在越狱后，彼得与梅菲斯特缔结了“浮士德式契约”。为了让姑妈活下来，彼得必须放弃与玛丽·简·沃森-帕克的婚姻。他们必须像从未结过婚一样生活，世人将永远不会记得这段婚姻，也不会记得彼得·帕克曾以蜘蛛侠的身份公开露面。 经过一番纠结，彼得接受了这个提议。这体现了彼得的功利主义，因为目的（梅的复活）证明了手段（与魔鬼的交易）是正当的。然而，也可以认为这是义务论在起作用，因为罗斯的多元义务论包含“感恩义务”， 彼得·帕克五岁时父母双亡，梅·帕克收养了他。在彼得心中，梅就是他的母亲，让她复活是对她多年来给予的爱与支持的回报——即便在得知他是蜘蛛侠后，她最初虽曾对蜘蛛侠表示鄙夷，但数年后却成为了蜘蛛侠的头号粉丝，因为面具之下正是她的儿子。 但如果托尼能对超级英雄同行多一点尊重，这一切本可以避免。如果托尼能主动接触美国队长以及那些持有不同立场的人，他们本可以寻求一种更和平的解决方案，而不必以死亡和现实被篡改作为结局。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="结论">结论<a href="https://pvega62.github.io/software/zh/blog/pop-philosophy#%E7%BB%93%E8%AE%BA" class="hash-link" aria-label="结论的直接链接" title="结论的直接链接" translate="no">​</a></h2>
+<p>总而言之，如果斯塔克在处理超级英雄法案时采取更符合义务论的方法，那么内战事件本可以避免。 在《内战》事件之后，漫威发布了一篇名为《如果钢铁侠输掉了内战会怎样？》的故事。在该故事中，斯塔克没有继续冲突，而是放下自负和功利主义，以和平姿态接触美国队长而非与其对抗，战斗就此停止，反注册派也接受了《超级英雄注册法案》，因为他们相信美国队长会保守他们的秘密身份。</p>
+<p>与功利主义相比，义务论才是正确的选择，因为功利主义在道德上过于宽松。如果它基于整体快乐或民众需求的考量，那就意味着每个人的快乐都具有同等价值。这意味着查尔斯·曼森理应享有与特蕾莎修女同等的快乐，或者用我们故事中的例子来说，末日博士理应享有与夜魔侠同等的快乐。 但这简直荒谬，毁灭博士和曼森都是杀人如麻的精神病患者。然而，功利主义却将他们与那些致力于让世界变得更美好的人置于同等地位。</p>
+<p>这并非说义务论毫无瑕疵，尤其是康德的“可容许伤害原则”，该原则主张无论如何都不得伤害他人。 即便对方是希特勒，美国队长也不能揍纳粹的脸。然而，义务论更重视“正确”本身，而非民众的幸福。倘若我们只顾让民众幸福，革命便永远不会发生，而革命才是推动世界运转的动力。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="参考文献">参考文献<a href="https://pvega62.github.io/software/zh/blog/pop-philosophy#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE" class="hash-link" aria-label="参考文献的直接链接" title="参考文献的直接链接" translate="no">​</a></h2>
+<ul>
+<li class="">唐纳，理查德，导演。《超人》。克里斯托弗·里夫主演，华纳兄弟，1978年。</li>
+<li class="">卢克·马斯汀。《义务论——按分支/学说分类》。《哲学基础》，2008年，<a href="http://www.philosophybasics.com/branch_deZontology.html%E3%80%82" target="_blank" rel="noopener noreferrer" class="">www.philosophybasics.com/branch_deZontology.html。</a></li>
+<li class="">约翰·斯图亚特·密尔。《功利主义》。Arc Manor出版社，2008年。</li>
+<li class="">米勒，马克，与史蒂夫·麦克尼文。《内战：漫威漫画呈现》。漫威娱乐，2007年。</li>
+<li class="">鲁索，安东尼与乔·鲁索，导演。《美国队长：内战》。克里斯·埃文斯主演，漫威影业，2016年。</li>
+<li class="">斯特拉津斯基，J·迈克尔，与罗恩·加尼。 “家园之战”。《惊奇蜘蛛侠》，第2卷，第534期，2006年7月。</li>
+<li class="">斯特拉津斯基，J·迈克尔，与罗恩·加尼。“家园之战”。《惊奇蜘蛛侠》，第2卷，第537期，2007年1月。</li>
+<li class="">苏西乌，爱丽丝·萨布丽娜，等。《解读蜘蛛侠：你的日常超级英雄》。罗斯基勒大学，2013年，core.ac.uk/download/pdf/43027446.pdf。</li>
+<li class="">马克·吐温，等。《来自地球的信》。哈珀与罗出版社，1962年。</li>
+<li class="">怀特，马克·D. “《美国队长：内战》——矛盾的英雄与哲学的碰撞。”《卫报》，卫报新闻与媒体，2016年4月21日，<a href="http://www.theguardian.com/film/2016/apr/21/captain-america-civil-war-clash-of-philosophies%E3%80%82" target="_blank" rel="noopener noreferrer" class="">www.theguardian.com/film/2016/apr/21/captain-america-civil-war-clash-of-philosophies。</a></li>
+<li class="">马克·D·怀特，《马特·弗雷克森论蜘蛛侠与钢铁侠的伦理观》。《漫画教授》，2011年2月21日，<a href="http://www.comicsprofessor.com/2011/02/matt-fraction-on-the-ethics-of-spider-man-and-iron-man.html" target="_blank" rel="noopener noreferrer" class="">www.comicsprofessor.com/2011/02/matt-fraction-on-the-ethics-of-spider-man-and-iron-man.html</a></li>
+</ul>]]></content:encoded>
+            <category>漫威</category>
+            <category>流行文化</category>
+            <category>蜘蛛侠</category>
+        </item>
+    </channel>
+</rss>
