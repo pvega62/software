@@ -1,0 +1,238 @@
+<svg id="diagram-graph" xmlns="http://www.w3.org/2000/svg" class="flowchart" style="max-width: 100%; max-height: 100%; width: auto; height: auto; background-color: transparent;" viewBox="2.5 0.0 677.0 608.0" role="graphics-document document" aria-roledescription="flowchart-v2" aria-label="Five-stage Sweepy sweep pipeline: load profile, discover roles, validate links, score matches, generate reports" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <style>
+    #diagram-graph {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 14px;
+      fill: #cccccc;
+    }
+    #diagram-graph svg {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 14px;
+    }
+    #diagram-graph p {
+      margin: 0;
+    }
+    #diagram-graph .label {
+      font-family: "Recursive Variable", arial, sans-serif;
+      color: #e0dfdf;
+    }
+    #diagram-graph .label text,
+    #diagram-graph span,
+    #diagram-graph .nodeLabel {
+      fill: #e0dfdf;
+      color: #e0dfdf;
+    }
+    #diagram-graph .node rect,
+    #diagram-graph .node circle,
+    #diagram-graph .node ellipse,
+    #diagram-graph .node polygon,
+    #diagram-graph .node path {
+      fill: #111113;
+      stroke: #FFFFFF;
+      stroke-width: 2px;
+    }
+    #diagram-graph [data-look="neo"].node rect,
+    #diagram-graph [data-look="neo"].node polygon,
+    #diagram-graph [data-look="neo"].node .outer-path {
+      stroke: #FFFFFF;
+      stroke-width: 2px;
+      filter: url(#diagram-graph-drop-shadow);
+    }
+    #diagram-graph .marker {
+      fill: #cccccc;
+      stroke: #cccccc;
+    }
+    #diagram-graph .arrowheadPath {
+      fill: #cccccc;
+    }
+    #diagram-graph .edgePath .path {
+      stroke: #cccccc;
+      stroke-width: 2px;
+    }
+    #diagram-graph .flowchart-link {
+      stroke: #cccccc;
+      fill: none;
+      stroke-width: 1.5px;
+    }
+    #diagram-graph .edgeLabel {
+      text-align: center;
+    }
+    #diagram-graph .labelBkg {
+      background-color: hsl(180, 1.5873015873%, 28.3529411765%);
+      border-radius: 4px;
+      padding: 4px 10px;
+      display: inline-block;
+      white-space: nowrap;
+      color: #e0dfdf;
+      font-size: 12px;
+      line-height: 1.2;
+    }
+    #diagram-graph foreignObject,
+    #diagram-graph .node foreignObject,
+    #diagram-graph .edgeLabel foreignObject {
+      overflow: visible !important;
+    }
+    #diagram-graph .node foreignObject div {
+      width: 100% !important;
+      height: 100% !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+      text-align: center !important;
+      box-sizing: border-box !important;
+      line-height: 1.4 !important;
+    }
+    #diagram-graph .edgeLabel foreignObject div {
+      width: 100% !important;
+      height: 100% !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      text-align: center !important;
+      box-sizing: border-box !important;
+    }
+    #diagram-graph .edgeLabel span.edgeLabel {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 12px;
+      color: #e0dfdf;
+    }
+    #diagram-graph .node .nodeLabel {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 14px;
+      color: #e0dfdf;
+    }
+  </style>
+  <defs>
+    <filter id="diagram-graph-drop-shadow" height="130%" width="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+    <marker id="diagram-graph-pointEnd" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto">
+      <path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowheadPath" style="stroke-width: 0; stroke-dasharray: 1, 0; fill: #cccccc;"></path>
+    </marker>
+  </defs>
+  <g class="root">
+    <g class="clusters"></g>
+    <g class="edgePaths">
+      <path d="M279,78.0L279,118.0" id="diagram-graph-L-Load-Discover-0" class="edge-thickness-normal edge-pattern-solid flowchart-link" data-edge="true" data-et="edge" data-id="L-Load-Discover-0" data-look="neo" marker-end="url(#diagram-graph-pointEnd)"></path>
+      <path d="M279,184.0L279,224.0" id="diagram-graph-L-Discover-Validate-0" class="edge-thickness-normal edge-pattern-solid flowchart-link" data-edge="true" data-et="edge" data-id="L-Discover-Validate-0" data-look="neo" marker-end="url(#diagram-graph-pointEnd)"></path>
+      <path d="M233,269.0L233,294L79.0,294L79.0,319.0" id="diagram-graph-L-Validate-Drop-0" class="edge-thickness-normal edge-pattern-solid flowchart-link" data-edge="true" data-et="edge" data-id="L-Validate-Drop-0" data-look="neo" marker-end="url(#diagram-graph-pointEnd)"></path>
+      <path d="M279,269.0L279,319.0" id="diagram-graph-L-Validate-Keep-0" class="edge-thickness-normal edge-pattern-solid flowchart-link" data-edge="true" data-et="edge" data-id="L-Validate-Keep-0" data-look="neo" marker-end="url(#diagram-graph-pointEnd)"></path>
+      <path d="M325,269.0L325,294L541.0,294L541.0,319.0" id="diagram-graph-L-Validate-Unverified-0" class="edge-thickness-normal edge-pattern-solid flowchart-link" data-edge="true" data-et="edge" data-id="L-Validate-Unverified-0" data-look="neo" marker-end="url(#diagram-graph-pointEnd)"></path>
+      <path d="M279,364.0L279,414.0" id="diagram-graph-L-Keep-Score-0" class="edge-thickness-normal edge-pattern-solid flowchart-link" data-edge="true" data-et="edge" data-id="L-Keep-Score-0" data-look="neo" marker-end="url(#diagram-graph-pointEnd)"></path>
+      <path d="M541.0,364.0L541.0,400Q541.0,447 490.0,447L421.0,447" id="diagram-graph-L-Unverified-Score-0" class="edge-thickness-normal edge-pattern-solid flowchart-link" data-edge="true" data-et="edge" data-id="L-Unverified-Score-0" data-look="neo" marker-end="url(#diagram-graph-pointEnd)"></path>
+      <path d="M279,480.0L279,530.0" id="diagram-graph-L-Score-Reports-0" class="edge-thickness-normal edge-pattern-solid flowchart-link" data-edge="true" data-et="edge" data-id="L-Score-Reports-0" data-look="neo" marker-end="url(#diagram-graph-pointEnd)"></path>
+    </g>
+    <g class="edgeLabels">
+      <g class="edgeLabel" transform="translate(156.0, 294)">
+        <g class="label" data-id="L-Validate-Drop-0">
+          <foreignObject x="-72" y="-14" width="144" height="28">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="edgeLabel labelBkg">gone, soft-404, or error</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="edgeLabel" transform="translate(279, 294)">
+        <g class="label" data-id="L-Validate-Keep-0">
+          <foreignObject x="-37.5" y="-14" width="75" height="28">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="edgeLabel labelBkg">reachable</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="edgeLabel" transform="translate(433.0, 294)">
+        <g class="label" data-id="L-Validate-Unverified-0">
+          <foreignObject x="-73" y="-14" width="146" height="28">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="edgeLabel labelBkg">rate limit, bot block, 5xx</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+    </g>
+    <g class="nodes">
+      <g class="node default" id="diagram-graph-flowchart-Load-0" data-look="neo" data-id="Load" data-node="true" data-et="node" transform="translate(279, 45)">
+        <rect class="basic label-container" data-id="Load" x="-122.5" y="-33" width="245" height="66" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-122.5" y="-33" width="245" height="66">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">Load profile<br/>job titles, location, resume path</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="diagram-graph-flowchart-Discover-1" data-look="neo" data-id="Discover" data-node="true" data-et="node" transform="translate(279, 151)">
+        <rect class="basic label-container" data-id="Discover" x="-118" y="-33" width="236" height="66" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-118" y="-33" width="236" height="66">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">Discover roles<br/>hiring platforms and job feeds</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="diagram-graph-flowchart-Validate-2" data-look="neo" data-id="Validate" data-node="true" data-et="node" transform="translate(279, 246.5)">
+        <rect class="basic label-container" data-id="Validate" x="-65.5" y="-22.5" width="131" height="45" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-65.5" y="-22.5" width="131" height="45">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">Validate links</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="diagram-graph-flowchart-Drop-3" data-look="neo" data-id="Drop" data-node="true" data-et="node" transform="translate(79.0, 341.5)">
+        <rect class="basic label-container" data-id="Drop" x="-64.5" y="-22.5" width="129" height="45" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-64.5" y="-22.5" width="129" height="45">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">Drop posting</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="diagram-graph-flowchart-Keep-4" data-look="neo" data-id="Keep" data-node="true" data-et="node" transform="translate(279, 341.5)">
+        <rect class="basic label-container" data-id="Keep" x="-65.5" y="-22.5" width="131" height="45" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-65.5" y="-22.5" width="131" height="45">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">Keep posting</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="diagram-graph-flowchart-Unverified-5" data-look="neo" data-id="Unverified" data-node="true" data-et="node" transform="translate(541.0, 341.5)">
+        <rect class="basic label-container" data-id="Unverified" x="-126.5" y="-22.5" width="253" height="45" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-126.5" y="-22.5" width="253" height="45">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">Keep posting, marked unverified</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="diagram-graph-flowchart-Score-6" data-look="neo" data-id="Score" data-node="true" data-et="node" transform="translate(279, 447)">
+        <rect class="basic label-container" data-id="Score" x="-142" y="-33" width="284" height="66" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-142" y="-33" width="284" height="66">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">Score matches<br/>resume keywords against the posting</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+      <g class="node default" id="diagram-graph-flowchart-Reports-7" data-look="neo" data-id="Reports" data-node="true" data-et="node" transform="translate(279, 563)">
+        <rect class="basic label-container" data-id="Reports" x="-78.5" y="-33" width="157" height="66" rx="6" ry="6"></rect>
+        <g class="label">
+          <foreignObject x="-78.5" y="-33" width="157" height="66">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <span class="nodeLabel">Generate reports<br/>PDF, CSV, JSON</span>
+            </div>
+          </foreignObject>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

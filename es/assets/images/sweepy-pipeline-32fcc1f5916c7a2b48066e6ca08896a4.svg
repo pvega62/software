@@ -1,0 +1,110 @@
+<svg id="diagram-graph" xmlns="http://www.w3.org/2000/svg" class="flowchart" style="max-width: 100%; max-height: 100%; width: auto; height: auto; background-color: transparent;" viewBox="0 0 738.9375 637" role="graphics-document document" aria-roledescription="flowchart-v2" aria-label="Proceso de barrido de Sweepy en cinco etapas: cargar perfil, descubrir puestos, validar enlaces, puntuar coincidencias y generar informes" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style>
+    #diagram-graph {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 14px;
+      fill: #cccccc;
+    }
+    #diagram-graph svg {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 14px;
+    }
+    #diagram-graph p {
+      margin: 0;
+    }
+    #diagram-graph .label {
+      font-family: "Recursive Variable", arial, sans-serif;
+      color: #e0dfdf;
+    }
+    #diagram-graph .label text,
+    #diagram-graph span,
+    #diagram-graph .nodeLabel {
+      fill: #e0dfdf;
+      color: #e0dfdf;
+    }
+    #diagram-graph .node rect,
+    #diagram-graph .node circle,
+    #diagram-graph .node ellipse,
+    #diagram-graph .node polygon,
+    #diagram-graph .node path {
+      fill: #111113;
+      stroke: #FFFFFF;
+      stroke-width: 2px;
+    }
+    #diagram-graph [data-look="neo"].node rect,
+    #diagram-graph [data-look="neo"].node polygon,
+    #diagram-graph [data-look="neo"].node .outer-path {
+      stroke: #FFFFFF;
+      stroke-width: 2px;
+      filter: url(#diagram-graph-drop-shadow);
+    }
+    #diagram-graph .marker {
+      fill: #cccccc;
+      stroke: #cccccc;
+    }
+    #diagram-graph .arrowheadPath {
+      fill: #cccccc;
+    }
+    #diagram-graph .edgePath .path {
+      stroke: #cccccc;
+      stroke-width: 2px;
+    }
+    #diagram-graph .flowchart-link {
+      stroke: #cccccc;
+      fill: none;
+      stroke-width: 1.5px;
+    }
+    #diagram-graph .edgeLabel {
+      text-align: center;
+    }
+    #diagram-graph .labelBkg {
+      background-color: hsl(180, 1.5873015873%, 28.3529411765%);
+      border-radius: 4px;
+      padding: 4px 10px;
+      display: inline-block;
+      white-space: nowrap;
+      color: #e0dfdf;
+      font-size: 12px;
+      line-height: 1.2;
+    }
+    #diagram-graph foreignObject,
+    #diagram-graph .node foreignObject,
+    #diagram-graph .edgeLabel foreignObject {
+      overflow: visible !important;
+    }
+    #diagram-graph .node foreignObject div {
+      width: 100% !important;
+      height: 100% !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+      text-align: center !important;
+      box-sizing: border-box !important;
+      line-height: 1.4 !important;
+    }
+    #diagram-graph .edgeLabel foreignObject div {
+      width: 100% !important;
+      height: 100% !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      text-align: center !important;
+      box-sizing: border-box !important;
+    }
+    #diagram-graph .edgeLabel span.edgeLabel {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 12px;
+      color: #e0dfdf;
+    }
+    #diagram-graph .node .nodeLabel {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 14px;
+      color: #e0dfdf;
+    }
+  </style>
+      <filter id="diagram-graph-drop-shadow" height="130%" width="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  <g><marker id="diagram-graph_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="diagram-graph_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="diagram-graph_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="diagram-graph_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="diagram-graph_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="diagram-graph_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="diagram-graph_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="diagram-graph_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="diagram-graph_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="diagram-graph_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="diagram-graph_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="diagram-graph_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M275.703,74L275.703,77.75C275.703,81.5,275.703,89,275.703,95.833C275.703,102.667,275.703,108.833,275.703,111.917L275.703,115" id="diagram-graph-L_Load_Discover_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 37 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_Load_Discover_0" data-points="W3sieCI6Mjc1LjcwMzEyNSwieSI6NzR9LHsieCI6Mjc1LjcwMzEyNSwieSI6OTYuNX0seyJ4IjoyNzUuNzAzMTI1LCJ5IjoxMTl9XQ==" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"/><path d="M275.703,185L275.703,188.75C275.703,192.5,275.703,200,275.703,206.833C275.703,213.667,275.703,219.833,275.703,222.917L275.703,226" id="diagram-graph-L_Discover_Validate_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 37 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_Discover_Validate_0" data-points="W3sieCI6Mjc1LjcwMzEyNSwieSI6MTg1fSx7IngiOjI3NS43MDMxMjUsInkiOjIwNy41fSx7IngiOjI3NS43MDMxMjUsInkiOjIzMH1d" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"/><path d="M212.359,274.037L190.564,281.447C168.768,288.858,125.177,303.679,103.382,317.673C81.586,331.667,81.586,344.833,81.586,351.417L81.586,358" id="diagram-graph-L_Validate_Drop_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 162.4269256591797 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_Validate_Drop_0" data-points="W3sieCI6MjEyLjM1OTM3NSwieSI6Mjc0LjAzNjkyNTk4NzA0MDd9LHsieCI6ODEuNTg1OTM3NSwieSI6MzE4LjV9LHsieCI6ODEuNTg1OTM3NSwieSI6MzYyfV0=" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"/><path d="M275.703,275L275.703,282.25C275.703,289.5,275.703,304,275.703,317.833C275.703,331.667,275.703,344.833,275.703,351.417L275.703,358" id="diagram-graph-L_Validate_Keep_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 79 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_Validate_Keep_0" data-points="W3sieCI6Mjc1LjcwMzEyNSwieSI6Mjc1fSx7IngiOjI3NS43MDMxMjUsInkiOjMxOC41fSx7IngiOjI3NS43MDMxMjUsInkiOjM2Mn1d" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"/><path d="M339.047,267.022L376.47,275.602C413.893,284.181,488.74,301.341,526.163,316.504C563.586,331.667,563.586,344.833,563.586,351.417L563.586,358" id="diagram-graph-L_Validate_Unverified_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 250.72613525390625 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_Validate_Unverified_0" data-points="W3sieCI6MzM5LjA0Njg3NSwieSI6MjY3LjAyMjE4NTEzMzkyNDk1fSx7IngiOjU2My41ODU5Mzc1LCJ5IjozMTguNX0seyJ4Ijo1NjMuNTg1OTM3NSwieSI6MzYyfV0=" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"/><path d="M275.703,407L275.703,410.75C275.703,414.5,275.703,422,284.807,429.26C293.911,436.52,312.118,443.541,321.222,447.051L330.326,450.561" id="diagram-graph-L_Keep_Score_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 71.64318084716797 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_Keep_Score_0" data-points="W3sieCI6Mjc1LjcwMzEyNSwieSI6NDA3fSx7IngiOjI3NS43MDMxMjUsInkiOjQyOS41fSx7IngiOjMzNC4wNTc3NDkxNTU0MDU0LCJ5Ijo0NTJ9XQ==" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"/><path d="M563.586,407L563.586,410.75C563.586,414.5,563.586,422,554.482,429.26C545.378,436.52,527.171,443.541,518.067,447.051L508.963,450.561" id="diagram-graph-L_Unverified_Score_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 71.6431884765625 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_Unverified_Score_0" data-points="W3sieCI6NTYzLjU4NTkzNzUsInkiOjQwN30seyJ4Ijo1NjMuNTg1OTM3NSwieSI6NDI5LjV9LHsieCI6NTA1LjIzMTMxMzM0NDU5NDYsInkiOjQ1Mn1d" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"/><path d="M419.645,518L419.645,521.75C419.645,525.5,419.645,533,419.645,539.833C419.645,546.667,419.645,552.833,419.645,555.917L419.645,559" id="diagram-graph-L_Score_Reports_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 37 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_Score_Reports_0" data-points="W3sieCI6NDE5LjY0NDUzMTI1LCJ5Ijo1MTh9LHsieCI6NDE5LjY0NDUzMTI1LCJ5Ijo1NDAuNX0seyJ4Ijo0MTkuNjQ0NTMxMjUsInkiOjU2M31d" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"/></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_Load_Discover_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Discover_Validate_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(81.5859375, 318.5)"><g class="label" data-id="L_Validate_Drop_0" transform="translate(-68.875, -10.5)"><foreignObject width="137.75" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>caído, soft-404 o error</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(275.703125, 318.5)"><g class="label" data-id="L_Validate_Keep_0" transform="translate(-29.1875, -10.5)"><foreignObject width="58.375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>accesible</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(563.5859375, 318.5)"><g class="label" data-id="L_Validate_Unverified_0" transform="translate(-100, -21)"><foreignObject width="200" height="42"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="edgeLabel"><p>límite de peticiones, bloqueo de bots, 5xx</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Keep_Score_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Unverified_Score_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Score_Reports_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="diagram-graph-flowchart-Load-0" data-look="neo" transform="translate(275.703125, 41)"><rect class="basic label-container" style="" x="-139.34375" y="-33" width="278.6875" height="66"/><g class="label" style="" transform="translate(-123.34375, -21)"><rect/><foreignObject width="246.6875" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 380px; text-align: center;"><span class="nodeLabel"><p>Cargar perfil<br />puestos, ubicación y ruta del currículum</p></span></div></foreignObject></g></g><g class="node default" id="diagram-graph-flowchart-Discover-1" data-look="neo" transform="translate(275.703125, 152)"><rect class="basic label-container" style="" x="-167.375" y="-33" width="334.75" height="66"/><g class="label" style="" transform="translate(-151.375, -21)"><rect/><foreignObject width="302.75" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 380px; text-align: center;"><span class="nodeLabel"><p>Descubrir puestos<br />plataformas de contratación y fuentes de empleo</p></span></div></foreignObject></g></g><g class="node default" id="diagram-graph-flowchart-Validate-3" data-look="neo" transform="translate(275.703125, 252.5)"><rect class="basic label-container" style="" x="-63.34375" y="-22.5" width="126.6875" height="45"/><g class="label" style="" transform="translate(-47.34375, -10.5)"><rect/><foreignObject width="94.6875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 380px; text-align: center;"><span class="nodeLabel"><p>Validar enlaces</p></span></div></foreignObject></g></g><g class="node default" id="diagram-graph-flowchart-Drop-5" data-look="neo" transform="translate(81.5859375, 384.5)"><rect class="basic label-container" style="" x="-73.5859375" y="-22.5" width="147.171875" height="45"/><g class="label" style="" transform="translate(-57.5859375, -10.5)"><rect/><foreignObject width="115.171875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 380px; text-align: center;"><span class="nodeLabel"><p>Descartar la oferta</p></span></div></foreignObject></g></g><g class="node default" id="diagram-graph-flowchart-Keep-7" data-look="neo" transform="translate(275.703125, 384.5)"><rect class="basic label-container" style="" x="-75.53125" y="-22.5" width="151.0625" height="45"/><g class="label" style="" transform="translate(-59.53125, -10.5)"><rect/><foreignObject width="119.0625" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 380px; text-align: center;"><span class="nodeLabel"><p>Conservar la oferta</p></span></div></foreignObject></g></g><g class="node default" id="diagram-graph-flowchart-Unverified-9" data-look="neo" transform="translate(563.5859375, 384.5)"><rect class="basic label-container" style="" x="-167.3515625" y="-22.5" width="334.703125" height="45"/><g class="label" style="" transform="translate(-151.3515625, -10.5)"><rect/><foreignObject width="302.703125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 380px; text-align: center;"><span class="nodeLabel"><p>Conservar la oferta, marcada como no verificada</p></span></div></foreignObject></g></g><g class="node default" id="diagram-graph-flowchart-Score-11" data-look="neo" transform="translate(419.64453125, 485)"><rect class="basic label-container" style="" x="-159.96875" y="-33" width="319.9375" height="66"/><g class="label" style="" transform="translate(-143.96875, -21)"><rect/><foreignObject width="287.9375" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 380px; text-align: center;"><span class="nodeLabel"><p>Puntuar coincidencias<br />palabras clave del currículum frente a la oferta</p></span></div></foreignObject></g></g><g class="node default" id="diagram-graph-flowchart-Reports-15" data-look="neo" transform="translate(419.64453125, 596)"><rect class="basic label-container" style="" x="-70.46875" y="-33" width="140.9375" height="66"/><g class="label" style="" transform="translate(-54.46875, -21)"><rect/><foreignObject width="108.9375" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 380px; text-align: center;"><span class="nodeLabel"><p>Generar informes<br />PDF, CSV, JSON</p></span></div></foreignObject></g></g></g></g></g><linearGradient id="diagram-graph-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FFFFFF" stop-opacity="1"/><stop offset="100%" stop-color="hsl(240, 0%, 0%)" stop-opacity="1"/></linearGradient>
+</svg>

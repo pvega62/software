@@ -1,0 +1,110 @@
+<svg id="diagram-graph" xmlns="http://www.w3.org/2000/svg" class="flowchart" style="max-width: 100%; max-height: 100%; width: auto; height: auto; background-color: transparent;" viewBox="0 0 565.5703125 616" role="graphics-document document" aria-roledescription="flowchart-v2" aria-label="مسح Sweepy في خمس مراحل: تحميل الملف التعريفي، اكتشاف الوظائف، التحقق من الروابط، احتساب التطابق، إنشاء التقارير" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style>
+    #diagram-graph {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 14px;
+      fill: #cccccc;
+    }
+    #diagram-graph svg {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 14px;
+    }
+    #diagram-graph p {
+      margin: 0;
+    }
+    #diagram-graph .label {
+      font-family: "Recursive Variable", arial, sans-serif;
+      color: #e0dfdf;
+    }
+    #diagram-graph .label text,
+    #diagram-graph span,
+    #diagram-graph .nodeLabel {
+      fill: #e0dfdf;
+      color: #e0dfdf;
+    }
+    #diagram-graph .node rect,
+    #diagram-graph .node circle,
+    #diagram-graph .node ellipse,
+    #diagram-graph .node polygon,
+    #diagram-graph .node path {
+      fill: #111113;
+      stroke: #FFFFFF;
+      stroke-width: 2px;
+    }
+    #diagram-graph [data-look="neo"].node rect,
+    #diagram-graph [data-look="neo"].node polygon,
+    #diagram-graph [data-look="neo"].node .outer-path {
+      stroke: #FFFFFF;
+      stroke-width: 2px;
+      filter: url(#diagram-graph-drop-shadow);
+    }
+    #diagram-graph .marker {
+      fill: #cccccc;
+      stroke: #cccccc;
+    }
+    #diagram-graph .arrowheadPath {
+      fill: #cccccc;
+    }
+    #diagram-graph .edgePath .path {
+      stroke: #cccccc;
+      stroke-width: 2px;
+    }
+    #diagram-graph .flowchart-link {
+      stroke: #cccccc;
+      fill: none;
+      stroke-width: 1.5px;
+    }
+    #diagram-graph .edgeLabel {
+      text-align: center;
+    }
+    #diagram-graph .labelBkg {
+      background-color: hsl(180, 1.5873015873%, 28.3529411765%);
+      border-radius: 4px;
+      padding: 4px 10px;
+      display: inline-block;
+      white-space: nowrap;
+      color: #e0dfdf;
+      font-size: 12px;
+      line-height: 1.2;
+    }
+    #diagram-graph foreignObject,
+    #diagram-graph .node foreignObject,
+    #diagram-graph .edgeLabel foreignObject {
+      overflow: visible !important;
+    }
+    #diagram-graph .node foreignObject div {
+      width: 100% !important;
+      height: 100% !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+      text-align: center !important;
+      box-sizing: border-box !important;
+      line-height: 1.4 !important;
+    }
+    #diagram-graph .edgeLabel foreignObject div {
+      width: 100% !important;
+      height: 100% !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      text-align: center !important;
+      box-sizing: border-box !important;
+    }
+    #diagram-graph .edgeLabel span.edgeLabel {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 12px;
+      color: #e0dfdf;
+    }
+    #diagram-graph .node .nodeLabel {
+      font-family: "Recursive Variable", arial, sans-serif;
+      font-size: 14px;
+      color: #e0dfdf;
+    }
+  </style>
+      <filter id="diagram-graph-drop-shadow" height="130%" width="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  <g><marker id="diagram-graph_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="diagram-graph_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="diagram-graph_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="diagram-graph_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="diagram-graph_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="diagram-graph_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"/></marker><marker id="diagram-graph_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="diagram-graph_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"/></marker><marker id="diagram-graph_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="diagram-graph_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"/></marker><marker id="diagram-graph_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"/></marker><marker id="diagram-graph_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"/></marker><g class="root"><g class="clusters"/><g class="edgePaths"><path d="M231.133,74L231.133,77.75C231.133,81.5,231.133,89,231.133,95.833C231.133,102.667,231.133,108.833,231.133,111.917L231.133,115" id="diagram-graph-L_Load_Discover_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 37 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_Load_Discover_0" data-points="W3sieCI6MjMxLjEzMjgxMjUsInkiOjc0fSx7IngiOjIzMS4xMzI4MTI1LCJ5Ijo5Ni41fSx7IngiOjIzMS4xMzI4MTI1LCJ5IjoxMTl9XQ==" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"/><path d="M231.133,185L231.133,188.75C231.133,192.5,231.133,200,231.133,206.833C231.133,213.667,231.133,219.833,231.133,222.917L231.133,226" id="diagram-graph-L_Discover_Validate_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 37 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_Discover_Validate_0" data-points="W3sieCI6MjMxLjEzMjgxMjUsInkiOjE4NX0seyJ4IjoyMzEuMTMyODEyNSwieSI6MjA3LjV9LHsieCI6MjMxLjEzMjgxMjUsInkiOjIzMH1d" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"/><path d="M174,273.044L157.798,278.87C141.596,284.696,109.193,296.348,92.991,307.007C76.789,317.667,76.789,327.333,76.789,332.167L76.789,337" id="diagram-graph-L_Validate_Drop_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 120.24803924560547 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_Validate_Drop_0" data-points="W3sieCI6MTc0LCJ5IjoyNzMuMDQ0MjE0NDE1ODczN30seyJ4Ijo3Ni43ODkwNjI1LCJ5IjozMDh9LHsieCI6NzYuNzg5MDYyNSwieSI6MzQxfV0=" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"/><path d="M231.133,275L231.133,280.5C231.133,286,231.133,297,231.133,307.333C231.133,317.667,231.133,327.333,231.133,332.167L231.133,337" id="diagram-graph-L_Validate_Keep_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 58 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_Validate_Keep_0" data-points="W3sieCI6MjMxLjEzMjgxMjUsInkiOjI3NX0seyJ4IjoyMzEuMTMyODEyNSwieSI6MzA4fSx7IngiOjIzMS4xMzI4MTI1LCJ5IjozNDF9XQ==" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"/><path d="M288.266,267.224L314.635,274.02C341.005,280.816,393.745,294.408,420.115,306.037C446.484,317.667,446.484,327.333,446.484,332.167L446.484,337" id="diagram-graph-L_Validate_Unverified_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 177.7779541015625 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_Validate_Unverified_0" data-points="W3sieCI6Mjg4LjI2NTYyNSwieSI6MjY3LjIyNDE2MTA3MzgyNTV9LHsieCI6NDQ2LjQ4NDM3NSwieSI6MzA4fSx7IngiOjQ0Ni40ODQzNzUsInkiOjM0MX1d" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"/><path d="M231.133,386L231.133,389.75C231.133,393.5,231.133,401,237.816,408.195C244.498,415.389,257.864,422.278,264.547,425.723L271.23,429.167" id="diagram-graph-L_Keep_Score_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 59.52933120727539 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_Keep_Score_0" data-points="W3sieCI6MjMxLjEzMjgxMjUsInkiOjM4Nn0seyJ4IjoyMzEuMTMyODEyNSwieSI6NDA4LjV9LHsieCI6Mjc0Ljc4NTE1NjI1LCJ5Ijo0MzF9XQ==" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"/><path d="M446.484,386L446.484,389.75C446.484,393.5,446.484,401,439.802,408.195C433.119,415.389,419.753,422.278,413.07,425.723L406.388,429.167" id="diagram-graph-L_Unverified_Score_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 59.52875518798828 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_Unverified_Score_0" data-points="W3sieCI6NDQ2LjQ4NDM3NSwieSI6Mzg2fSx7IngiOjQ0Ni40ODQzNzUsInkiOjQwOC41fSx7IngiOjQwMi44MzIwMzEyNSwieSI6NDMxfV0=" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"/><path d="M338.809,497L338.809,500.75C338.809,504.5,338.809,512,338.809,518.833C338.809,525.667,338.809,531.833,338.809,534.917L338.809,538" id="diagram-graph-L_Score_Reports_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 37 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_Score_Reports_0" data-points="W3sieCI6MzM4LjgwODU5Mzc1LCJ5Ijo0OTd9LHsieCI6MzM4LjgwODU5Mzc1LCJ5Ijo1MTkuNX0seyJ4IjozMzguODA4NTkzNzUsInkiOjU0Mn1d" data-look="neo" marker-end="url(#diagram-graph_flowchart-v2-pointEnd-margin)"/></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_Load_Discover_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Discover_Validate_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(76.7890625, 308)"><g class="label" data-id="L_Validate_Drop_0" transform="translate(-68.7890625, -10.5)"><foreignObject width="137.578125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>محذوف أو soft-404 أو خطأ</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(231.1328125, 308)"><g class="label" data-id="L_Validate_Keep_0" transform="translate(-10.015625, -10.5)"><foreignObject width="20.03125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>متاح</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(446.484375, 308)"><g class="label" data-id="L_Validate_Unverified_0" transform="translate(-84.0546875, -10.5)"><foreignObject width="168.109375" height="21"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>حد الطلبات أو حجب الروبوت (5xx)</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Keep_Score_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Unverified_Score_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_Score_Reports_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="diagram-graph-flowchart-Load-0" data-look="neo" transform="translate(231.1328125, 41)"><rect class="basic label-container" style="" x="-121.7734375" y="-33" width="243.546875" height="66"/><g class="label" style="" transform="translate(-105.7734375, -21)"><rect/><foreignObject width="211.546875" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 380px; text-align: center;"><span class="nodeLabel"><p>تحميل الملف التعريفي<br />المسميات الوظيفية والموقع ومسار السيرة الذاتية</p></span></div></foreignObject></g></g><g class="node default" id="diagram-graph-flowchart-Discover-1" data-look="neo" transform="translate(231.1328125, 152)"><rect class="basic label-container" style="" x="-94.75" y="-33" width="189.5" height="66"/><g class="label" style="" transform="translate(-78.75, -21)"><rect/><foreignObject width="157.5" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 380px; text-align: center;"><span class="nodeLabel"><p>اكتشاف الوظائف<br />منصات التوظيف وتغذيات الوظائف</p></span></div></foreignObject></g></g><g class="node default" id="diagram-graph-flowchart-Validate-3" data-look="neo" transform="translate(231.1328125, 252.5)"><rect class="basic label-container" style="" x="-57.1328125" y="-22.5" width="114.265625" height="45"/><g class="label" style="" transform="translate(-41.1328125, -10.5)"><rect/><foreignObject width="82.265625" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 380px; text-align: center;"><span class="nodeLabel"><p>التحقق من الروابط</p></span></div></foreignObject></g></g><g class="node default" id="diagram-graph-flowchart-Drop-5" data-look="neo" transform="translate(76.7890625, 363.5)"><rect class="basic label-container" style="" x="-50.078125" y="-22.5" width="100.15625" height="45"/><g class="label" style="" transform="translate(-34.078125, -10.5)"><rect/><foreignObject width="68.15625" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 380px; text-align: center;"><span class="nodeLabel"><p>استبعاد الإعلان</p></span></div></foreignObject></g></g><g class="node default" id="diagram-graph-flowchart-Keep-7" data-look="neo" transform="translate(231.1328125, 363.5)"><rect class="basic label-container" style="" x="-59.265625" y="-22.5" width="118.53125" height="45"/><g class="label" style="" transform="translate(-43.265625, -10.5)"><rect/><foreignObject width="86.53125" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 380px; text-align: center;"><span class="nodeLabel"><p>الإبقاء على الإعلان</p></span></div></foreignObject></g></g><g class="node default" id="diagram-graph-flowchart-Unverified-9" data-look="neo" transform="translate(446.484375, 363.5)"><rect class="basic label-container" style="" x="-111.0859375" y="-22.5" width="222.171875" height="45"/><g class="label" style="" transform="translate(-95.0859375, -10.5)"><rect/><foreignObject width="190.171875" height="21"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 380px; text-align: center;"><span class="nodeLabel"><p>الإبقاء على الإعلان بعلامة غير مُتحقَّق منه</p></span></div></foreignObject></g></g><g class="node default" id="diagram-graph-flowchart-Score-11" data-look="neo" transform="translate(338.80859375, 464)"><rect class="basic label-container" style="" x="-92.1015625" y="-33" width="184.203125" height="66"/><g class="label" style="" transform="translate(-76.1015625, -21)"><rect/><foreignObject width="152.203125" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 380px; text-align: center;"><span class="nodeLabel"><p>احتساب التطابق<br />كلمات السيرة الذاتية مقابل الإعلان</p></span></div></foreignObject></g></g><g class="node default" id="diagram-graph-flowchart-Reports-15" data-look="neo" transform="translate(338.80859375, 575)"><rect class="basic label-container" style="" x="-73.0234375" y="-33" width="146.046875" height="66"/><g class="label" style="" transform="translate(-57.0234375, -21)"><rect/><foreignObject width="114.046875" height="42"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 380px; text-align: center;"><span class="nodeLabel"><p>إنشاء التقارير<br />PDF وCSV وJSON</p></span></div></foreignObject></g></g></g></g></g><linearGradient id="diagram-graph-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FFFFFF" stop-opacity="1"/><stop offset="100%" stop-color="hsl(240, 0%, 0%)" stop-opacity="1"/></linearGradient>
+</svg>
