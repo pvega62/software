@@ -3,9 +3,15 @@
   "name": "Data Pipeline Environment",
   "values": [
     {
-      "key": "base_url",
-      "value": "https://api.placeholder-streaming.com",
+      "key": "dd_site",
+      "value": "datadoghq.com",
       "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "dd_api_key",
+      "value": "your_datadog_api_key_here",
+      "type": "secret",
       "enabled": true
     },
     {
@@ -13,18 +19,7 @@
       "value": "https://mock-server-url-from-postman.io",
       "type": "default",
       "enabled": true
-    },
-    {
-      "key": "api_token",
-      "value": "demo-token-123",
-      "type": "default",
-      "enabled": true
-    },
-    {
-      "key": "stream_id",
-      "value": "demo-stream-001",
-      "type": "default",
-      "enabled": true
     }
-  ]
+  ],
+  "_postman_variable_scope": "environment"
 }

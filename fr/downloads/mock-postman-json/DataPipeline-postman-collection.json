@@ -2,73 +2,77 @@
   "info": {
     "_postman_id": "e1c3b8c4-1825-4e0d-b39c-cribl-pipeline-sample",
     "name": "Data Pipeline Documentation Project",
-    "description": "Postman collection for simulating the Streaming Ingest API used in the documentation project.",
+    "description": "Sends log events to the Datadog Log Ingestion API used in the data pipeline documentation.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
     {
-      "name": "Streaming Ingest API",
-      "description": "Simulated endpoint for ingesting events into a pipeline.",
+      "name": "Log Ingestion API",
+      "description": "Sends log events to the Datadog Log Ingestion API.",
       "item": [
         {
-          "name": "/v1/streams/ingest",
+          "name": "POST /api/v2/logs",
           "request": {
             "method": "POST",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}",
+                "key": "DD-API-KEY",
+                "value": "{{dd_api_key}}",
                 "type": "text"
               },
               {
                 "key": "Content-Type",
                 "value": "application/json",
                 "type": "text"
-              },
-              {
-                "key": "X-Stream-Id",
-                "value": "{{stream_id}}",
-                "type": "text"
               }
             ],
-            "url": {
-              "raw": "{{base_url}}/v1/streams/ingest",
-              "host": ["{{base_url}}"],
-              "path": ["v1", "streams", "ingest"]
-            },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"timestamp\": \"2025-02-12T18:20:03Z\",\n  \"source\": \"orders-service\",\n  \"level\": \"info\",\n  \"message\": \"Order processed\",\n  \"orderId\": \"ORD-91122\",\n  \"latency_ms\": 134\n}"
+              "raw": "[\n  {\n    \"message\": \"Transaction failed: Gateway timeout\",\n    \"ddsource\": \"java\",\n    \"ddtags\": \"env:prod,region:us-east-1\",\n    \"hostname\": \"payments-host-01\",\n    \"service\": \"payment-gateway\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             },
-            "description": "Simulated POST request to test ingestion of event data into the streaming pipeline."
+            "url": {
+              "raw": "https://http-intake.logs.{{dd_site}}/api/v2/logs",
+              "protocol": "https",
+              "host": [
+                "http-intake",
+                "logs",
+                "{{dd_site}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "logs"
+              ]
+            },
+            "description": "Sends a JSON array of log events to the Datadog Log Ingestion API."
           },
           "response": [
             {
-              "name": "200 OK - Event Accepted",
+              "name": "202 Accepted - Request accepted",
               "originalRequest": {
                 "method": "POST",
                 "header": [
                   {
-                    "key": "Authorization",
-                    "value": "Bearer {{api_token}}",
+                    "key": "DD-API-KEY",
+                    "value": "{{dd_api_key}}",
                     "type": "text"
                   },
                   {
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
-                  },
-                  {
-                    "key": "X-Stream-Id",
-                    "value": "{{stream_id}}",
-                    "type": "text"
                   }
                 ],
-                "url": "{{base_url}}/v1/streams/ingest"
+                "url": "https://http-intake.logs.{{dd_site}}/api/v2/logs"
               },
-              "status": "OK",
-              "code": 200,
-              "body": "{\n  \"status\": \"accepted\",\n  \"ingested_bytes\": 204,\n  \"stream_id\": \"{{stream_id}}\"\n}",
+              "status": "Accepted",
+              "code": 202,
+              "body": "{}",
               "header": [
                 {
                   "key": "Content-Type",
@@ -77,31 +81,54 @@
               ]
             },
             {
-              "name": "400 Bad Request - Invalid Format",
+              "name": "400 Bad Request - Malformed payload",
               "originalRequest": {
                 "method": "POST",
                 "header": [
                   {
-                    "key": "Authorization",
-                    "value": "Bearer {{api_token}}",
+                    "key": "DD-API-KEY",
+                    "value": "{{dd_api_key}}",
                     "type": "text"
                   },
                   {
                     "key": "Content-Type",
                     "value": "application/json",
                     "type": "text"
-                  },
-                  {
-                    "key": "X-Stream-Id",
-                    "value": "{{stream_id}}",
-                    "type": "text"
                   }
                 ],
-                "url": "{{base_url}}/v1/streams/ingest"
+                "url": "https://http-intake.logs.{{dd_site}}/api/v2/logs"
               },
               "status": "Bad Request",
               "code": 400,
-              "body": "{\n  \"error\": \"invalid_format\",\n  \"detail\": \"The 'timestamp' field must be a valid ISO 8601 string.\"\n}",
+              "body": "{\n  \"errors\": [\n    {\n      \"detail\": \"Malformed payload: the 'message' field is required\",\n      \"status\": \"400\",\n      \"title\": \"Bad Request\"\n    }\n  ]\n}",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            },
+            {
+              "name": "401 Unauthorized - Missing API key",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "DD-API-KEY",
+                    "value": "{{dd_api_key}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": "https://http-intake.logs.{{dd_site}}/api/v2/logs"
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "body": "{\n  \"errors\": [\n    {\n      \"detail\": \"Unauthorized: the DD-API-KEY header is missing\",\n      \"status\": \"401\",\n      \"title\": \"Unauthorized\"\n    }\n  ]\n}",
               "header": [
                 {
                   "key": "Content-Type",
@@ -112,21 +139,6 @@
           ]
         }
       ]
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "key": "base_url",
-      "value": "https://mock.example.com"
-    },
-    {
-      "key": "api_token",
-      "value": "demo-token-123"
-    },
-    {
-      "key": "stream_id",
-      "value": "demo-stream-001"
     }
   ]
 }
