@@ -1,0 +1,1811 @@
+{
+ "generatedFrom": "static/openapi/bludhaven-pets.yaml",
+ "operations": 24,
+ "routes": {
+  "GET /animals": {
+   "status": 200,
+   "contentType": "application/json",
+   "body": {
+    "data": [
+     {
+      "id": "pet_krypto_210",
+      "name": "Krypto",
+      "species": "dog",
+      "breed": "White Shepherd mix",
+      "age_months": 24,
+      "microchip_id": "985141002348123",
+      "status": "AVAILABLE",
+      "intake_branch_id": "loc_harbor_04",
+      "adoption_fee_cents": 15000,
+      "temperament_tags": [
+       "good-with-cats",
+       "apartment-friendly"
+      ],
+      "health_record": {
+       "rabies_tag_number": "RB-2026-9921",
+       "rabies_expiration_date": "2027-11-01",
+       "spay_neuter_certified": true,
+       "veterinarian_license": "DVM-04821",
+       "quarantine_release_date": "2026-11-10T14:00:00Z"
+      },
+      "photo_urls": [
+       "https://images.bludhavenpets.com/animals/pet_krypto_210/front.jpg"
+      ]
+     },
+     {
+      "id": "pet_luna_118",
+      "name": "Luna",
+      "species": "cat",
+      "breed": "Domestic Shorthair",
+      "age_months": 14,
+      "microchip_id": "985141002348198",
+      "status": "AVAILABLE",
+      "intake_branch_id": "loc_harbor_04",
+      "adoption_fee_cents": 9500,
+      "temperament_tags": [
+       "good-with-children"
+      ],
+      "health_record": {
+       "rabies_tag_number": "RB-2026-9934",
+       "rabies_expiration_date": "2027-10-19",
+       "spay_neuter_certified": true,
+       "veterinarian_license": "DVM-04821",
+       "quarantine_release_date": "2026-11-08T09:30:00Z"
+      },
+      "photo_urls": []
+     }
+    ],
+    "next_cursor": "eyJvZmZzZXQiOjQwfQ",
+    "has_more": true
+   }
+  },
+  "POST /animals": {
+   "status": 201,
+   "contentType": "application/json",
+   "body": {
+    "id": "pet_krypto_210",
+    "name": "Krypto",
+    "species": "dog",
+    "breed": "White Shepherd mix",
+    "age_months": 24,
+    "sex": "male",
+    "weight_kg": 28.4,
+    "microchip_id": "985141002348123",
+    "status": "AVAILABLE",
+    "intake_branch_id": "loc_harbor_04",
+    "intake_date": "2026-10-02",
+    "adoption_fee_cents": 15000,
+    "temperament_tags": [
+     "good-with-cats",
+     "apartment-friendly"
+    ],
+    "health_record": {
+     "rabies_tag_number": "RB-2026-9921",
+     "rabies_expiration_date": "2027-11-01",
+     "spay_neuter_certified": true,
+     "veterinarian_license": "DVM-04821",
+     "last_exam_date": "2026-11-09",
+     "quarantine_release_date": "2026-11-10T14:00:00Z"
+    },
+    "photo_urls": [
+     "https://images.bludhavenpets.com/animals/pet_krypto_210/front.jpg"
+    ]
+   }
+  },
+  "GET /animals/{animalId}": {
+   "status": 200,
+   "contentType": "application/json",
+   "body": {
+    "id": "pet_krypto_210",
+    "name": "Krypto",
+    "species": "dog",
+    "breed": "White Shepherd mix",
+    "age_months": 24,
+    "sex": "male",
+    "weight_kg": 28.4,
+    "microchip_id": "985141002348123",
+    "status": "AVAILABLE",
+    "intake_branch_id": "loc_harbor_04",
+    "intake_date": "2026-10-02",
+    "adoption_fee_cents": 15000,
+    "temperament_tags": [
+     "good-with-cats",
+     "apartment-friendly"
+    ],
+    "health_record": {
+     "rabies_tag_number": "RB-2026-9921",
+     "rabies_expiration_date": "2027-11-01",
+     "spay_neuter_certified": true,
+     "veterinarian_license": "DVM-04821",
+     "last_exam_date": "2026-11-09",
+     "quarantine_release_date": "2026-11-10T14:00:00Z"
+    },
+    "photo_urls": [
+     "https://images.bludhavenpets.com/animals/pet_krypto_210/front.jpg"
+    ]
+   }
+  },
+  "PUT /animals/{animalId}": {
+   "status": 200,
+   "contentType": "application/json",
+   "body": {
+    "id": "pet_krypto_210",
+    "name": "Krypto",
+    "species": "dog",
+    "breed": "White Shepherd mix",
+    "age_months": 24,
+    "sex": "male",
+    "weight_kg": 28.4,
+    "microchip_id": "985141002348123",
+    "status": "AVAILABLE",
+    "intake_branch_id": "loc_harbor_04",
+    "intake_date": "2026-10-02",
+    "adoption_fee_cents": 15000,
+    "temperament_tags": [
+     "good-with-cats",
+     "apartment-friendly"
+    ],
+    "health_record": {
+     "rabies_tag_number": "RB-2026-9921",
+     "rabies_expiration_date": "2027-11-01",
+     "spay_neuter_certified": true,
+     "veterinarian_license": "DVM-04821",
+     "last_exam_date": "2026-11-09",
+     "quarantine_release_date": "2026-11-10T14:00:00Z"
+    },
+    "photo_urls": [
+     "https://images.bludhavenpets.com/animals/pet_krypto_210/front.jpg"
+    ]
+   }
+  },
+  "DELETE /animals/{animalId}": {
+   "status": 204,
+   "contentType": "application/json",
+   "body": null
+  },
+  "POST /animals/{animalId}/photos": {
+   "status": 201,
+   "contentType": "application/json",
+   "body": {
+    "photo_id": "pht_9c41ab",
+    "animal_id": "pet_krypto_210",
+    "upload_url": "https://sandbox.bludhaven-pets.workers.dev/uploads/photos/pht_9c41ab?animal_id=pet_krypto_210&exp=1795123456&sig=7a8b9c...",
+    "method": "PUT",
+    "public_url": "https://images.bludhavenpets.com/animals/pet_krypto_210/pht_9c41ab.jpg",
+    "expires_at": "2026-11-19T13:34:11Z",
+    "max_bytes": 8388608
+   }
+  },
+  "GET /animals/{animalId}/health-records": {
+   "status": 200,
+   "contentType": "application/json",
+   "body": {
+    "rabies_tag_number": "RB-2026-9921",
+    "rabies_expiration_date": "2027-11-01",
+    "spay_neuter_certified": true,
+    "veterinarian_license": "DVM-04821",
+    "last_exam_date": "2026-11-09",
+    "quarantine_release_date": "2026-11-10T14:00:00Z"
+   }
+  },
+  "POST /animals/{animalId}/health-records": {
+   "status": 201,
+   "contentType": "application/json",
+   "body": {
+    "rabies_tag_number": "RB-2026-9921",
+    "rabies_expiration_date": "2027-11-01",
+    "spay_neuter_certified": true,
+    "veterinarian_license": "DVM-04821",
+    "last_exam_date": "2026-11-09",
+    "quarantine_release_date": "2026-11-10T14:00:00Z"
+   }
+  },
+  "POST /adoptions/holds": {
+   "status": 201,
+   "contentType": "application/json",
+   "body": {
+    "id": "hld_77a28f",
+    "animal_id": "pet_krypto_210",
+    "applicant_id": "usr_9921bc",
+    "branch_id": "loc_harbor_04",
+    "status": "ACTIVE",
+    "created_at": "2026-11-17T07:45:00Z",
+    "expires_at": "2026-11-17T08:15:00Z",
+    "seconds_remaining": 1180
+   }
+  },
+  "GET /adoptions/holds/{holdId}": {
+   "status": 200,
+   "contentType": "application/json",
+   "body": {
+    "id": "hld_77a28f",
+    "animal_id": "pet_krypto_210",
+    "applicant_id": "usr_9921bc",
+    "branch_id": "loc_harbor_04",
+    "status": "ACTIVE",
+    "created_at": "2026-11-17T07:45:00Z",
+    "expires_at": "2026-11-17T08:15:00Z",
+    "seconds_remaining": 1180
+   }
+  },
+  "DELETE /adoptions/holds/{holdId}": {
+   "status": 204,
+   "contentType": "application/json",
+   "body": null
+  },
+  "POST /adoptions/applications": {
+   "status": 201,
+   "contentType": "application/json",
+   "body": {
+    "id": "app_2026_1188",
+    "hold_id": "hld_77a28f",
+    "animal_id": "pet_krypto_210",
+    "applicant_id": "usr_9921bc",
+    "status": "UNDER_REVIEW",
+    "submitted_at": "2026-11-17T07:58:00Z",
+    "counselor_id": "stf_1042",
+    "placement_fee_cents": 15000,
+    "license_fee_cents": 2500,
+    "reservation_deposit_cents": 5000,
+    "supplies_subtotal_cents": 2500,
+    "placed_at": "2026-11-17T15:12:00Z"
+   }
+  },
+  "GET /retail/inventory": {
+   "status": 200,
+   "contentType": "application/json",
+   "body": {
+    "SKU-FOOD-PUPPY-18KG": {
+     "on_hand": 38,
+     "reserved": 24
+    },
+    "SKU-LITTER-CLUMP-12KG": {
+     "on_hand": 61,
+     "reserved": 6
+    },
+    "SKU-LEASH-NYLON-2M": {
+     "on_hand": 12,
+     "reserved": 0
+    },
+    "SKU-BED-ORTHO-L": {
+     "on_hand": 4,
+     "reserved": 4
+    }
+   }
+  },
+  "POST /retail/orders": {
+   "status": 201,
+   "contentType": "application/json",
+   "body": {
+    "id": "ord_2026_0417",
+    "sku": "SKU-FOOD-PUPPY-18KG",
+    "product_name": "Puppy Formula Dry Food, 18 kg",
+    "quantity": 24,
+    "unit_price_cents": 5899,
+    "location_id": "loc_harbor_04",
+    "status": "PICKING",
+    "placed_at": "2026-11-16T09:05:00Z",
+    "expected_delivery": "2026-11-21"
+   }
+  },
+  "GET /retail/orders/{orderId}": {
+   "status": 200,
+   "contentType": "application/json",
+   "body": {
+    "id": "ord_2026_0417",
+    "sku": "SKU-FOOD-PUPPY-18KG",
+    "product_name": "Puppy Formula Dry Food, 18 kg",
+    "quantity": 24,
+    "unit_price_cents": 5899,
+    "location_id": "loc_harbor_04",
+    "status": "PICKING",
+    "placed_at": "2026-11-16T09:05:00Z",
+    "expected_delivery": "2026-11-21"
+   }
+  },
+  "DELETE /retail/orders/{orderId}": {
+   "status": 204,
+   "contentType": "application/json",
+   "body": null
+  },
+  "POST /applicants": {
+   "status": 201,
+   "contentType": "application/json",
+   "body": {
+    "id": "usr_9921bc",
+    "username": "budbaker",
+    "first_name": "Nadia",
+    "last_name": "Okafor",
+    "email": "nadia.okafor@fastmail.com",
+    "phone": "+1-201-555-0143",
+    "preferred_species": "dog",
+    "account_status": "VERIFIED",
+    "created_at": "2026-09-14T16:22:05Z"
+   }
+  },
+  "GET /applicants/{username}": {
+   "status": 200,
+   "contentType": "application/json",
+   "body": {
+    "id": "usr_9921bc",
+    "username": "budbaker",
+    "first_name": "Nadia",
+    "last_name": "Okafor",
+    "email": "nadia.okafor@fastmail.com",
+    "phone": "+1-201-555-0143",
+    "preferred_species": "dog",
+    "account_status": "VERIFIED",
+    "created_at": "2026-09-14T16:22:05Z"
+   }
+  },
+  "PUT /applicants/{username}": {
+   "status": 200,
+   "contentType": "application/json",
+   "body": {
+    "id": "usr_9921bc",
+    "username": "budbaker",
+    "first_name": "Nadia",
+    "last_name": "Okafor",
+    "email": "nadia.okafor@fastmail.com",
+    "phone": "+1-201-555-0143",
+    "preferred_species": "dog",
+    "account_status": "VERIFIED",
+    "created_at": "2026-09-14T16:22:05Z"
+   }
+  },
+  "DELETE /applicants/{username}": {
+   "status": 204,
+   "contentType": "application/json",
+   "body": null
+  },
+  "POST /sessions": {
+   "status": 200,
+   "contentType": "application/json",
+   "body": {
+    "token": "blud_sess_eyJzdWIiOiJ1c3JfOTkyMWJjIn0.9c1f4d2b7a",
+    "expires_at": "2027-01-15T21:04:11Z",
+    "scope": "read:applicants write:applicants"
+   }
+  },
+  "DELETE /sessions/current": {
+   "status": 204,
+   "contentType": "application/json",
+   "body": null
+  },
+  "POST /refunds": {
+   "status": 201,
+   "contentType": "application/json",
+   "body": {
+    "id": "rfd_01HQ9B7TX4",
+    "application_id": "app_2026_1188",
+    "amount_cents": 10000,
+    "breakdown": {
+     "placement_fee_cents": 7500,
+     "retail_supplies_cents": 2500
+    },
+    "withheld": {
+     "reservation_deposit_cents": 5000,
+     "license_fee_cents": 2500
+    },
+    "status": "PENDING",
+    "settles_at": "2026-11-19T14:00:00Z"
+   }
+  },
+  "POST /webhooks/test-dispatch": {
+   "status": 200,
+   "contentType": "application/json",
+   "body": {
+    "dispatched": true,
+    "event": "adoption.hold.expired",
+    "secret_used": "whsec_sandbox_bludhaven_test_secret_9981",
+    "headers": {
+     "Content-Type": "application/json",
+     "X-Bludhaven-Signature": "t=1795123456,v1=5d41402abc4b2a76b9719d911017c5926c459992f026a0b72a6a8b1a7f05252b",
+     "X-Bludhaven-Timestamp": "1795123456"
+    },
+    "payload": {
+     "id": "evt_wh_901ab2cd",
+     "event": "adoption.hold.expired",
+     "created_at": "2026-11-19T13:30:00Z",
+     "data": {
+      "hold_id": "hld_a8f90b",
+      "animal_id": "pet_krypto_210",
+      "reason": "30_MINUTE_WINDOW_LAPSED"
+     }
+    },
+    "verification_guide": {
+     "scheme": "HMAC-SHA256",
+     "signed_template": "t={timestamp},v1={raw_body}",
+     "header_format": "t={timestamp},v1={hex_signature}"
+    }
+   }
+  }
+ },
+ "errors": {
+  "GET /animals": {
+   "400": {
+    "status": 400,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/invalid-request",
+     "title": "Invalid Request",
+     "status": 400,
+     "detail": "A required field is missing, or a value falls outside its accepted range.",
+     "instance": "/animals"
+    }
+   },
+   "429": {
+    "status": 429,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/rate-limited",
+     "title": "Rate Limited",
+     "status": 429,
+     "detail": "The credential exceeded its window. Retry in 12 seconds.",
+     "instance": "/animals"
+    }
+   }
+  },
+  "POST /animals": {
+   "400": {
+    "status": 400,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/invalid-request",
+     "title": "Invalid Request",
+     "status": 400,
+     "detail": "A required field is missing, or a value falls outside its accepted range.",
+     "instance": "/animals"
+    }
+   },
+   "401": {
+    "status": 401,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/unauthorized",
+     "title": "Unauthorized",
+     "status": 401,
+     "detail": "The request carried no bearer token. Sign in through the staff portal or attach an API key.",
+     "instance": "/animals"
+    }
+   },
+   "403": {
+    "status": 403,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/insufficient-scope",
+     "title": "Insufficient Scope",
+     "status": 403,
+     "detail": "The access token lacks write:animals. Request that scope during authorization, then retry.",
+     "instance": "/animals"
+    }
+   },
+   "409": {
+    "status": 409,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/microchip-already-registered",
+     "title": "Microchip Already Registered",
+     "status": 409,
+     "detail": "Microchip 985141002348123 belongs to pet_krypto_210 at loc_harbor_04.",
+     "instance": "/animals"
+    }
+   },
+   "422": {
+    "status": 422,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/business-rule-rejected",
+     "title": "Business Rule Rejected",
+     "status": 422,
+     "detail": "The request broke a policy rule, such as an ineligible animal or a SKU with no stock.",
+     "instance": "/animals"
+    }
+   },
+   "429": {
+    "status": 429,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/rate-limited",
+     "title": "Rate Limited",
+     "status": 429,
+     "detail": "The credential exceeded its window. Retry in 12 seconds.",
+     "instance": "/animals"
+    }
+   }
+  },
+  "GET /animals/{animalId}": {
+   "404": {
+    "status": 404,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/record-not-found",
+     "title": "Record Not Found",
+     "status": 404,
+     "detail": "No record matches the identifier in the request.",
+     "instance": "/animals/pet_krypto_999"
+    }
+   },
+   "410": {
+    "status": 410,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/record-withdrawn",
+     "title": "Record Withdrawn",
+     "status": 410,
+     "detail": "The record moved to a partner shelter and no longer serves requests.",
+     "instance": "/animals/pet_krypto_210",
+     "request_id": "req_6c1f90ab3d4e"
+    }
+   },
+   "429": {
+    "status": 429,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/rate-limited",
+     "title": "Rate Limited",
+     "status": 429,
+     "detail": "The credential exceeded its window. Retry in 12 seconds.",
+     "instance": "/animals/pet_krypto_210"
+    }
+   }
+  },
+  "PUT /animals/{animalId}": {
+   "400": {
+    "status": 400,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/invalid-request",
+     "title": "Invalid Request",
+     "status": 400,
+     "detail": "A required field is missing, or a value falls outside its accepted range.",
+     "instance": "/animals/pet_krypto_210"
+    }
+   },
+   "401": {
+    "status": 401,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/unauthorized",
+     "title": "Unauthorized",
+     "status": 401,
+     "detail": "The request carried no bearer token. Sign in through the staff portal or attach an API key.",
+     "instance": "/animals/pet_krypto_210"
+    }
+   },
+   "403": {
+    "status": 403,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/insufficient-scope",
+     "title": "Insufficient Scope",
+     "status": 403,
+     "detail": "The access token lacks write:animals. Request that scope during authorization, then retry.",
+     "instance": "/animals/pet_krypto_210"
+    }
+   },
+   "404": {
+    "status": 404,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/record-not-found",
+     "title": "Record Not Found",
+     "status": 404,
+     "detail": "No record matches the identifier in the request.",
+     "instance": "/animals/pet_krypto_999"
+    }
+   },
+   "410": {
+    "status": 410,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/record-withdrawn",
+     "title": "Record Withdrawn",
+     "status": 410,
+     "detail": "The record moved to a partner shelter and no longer accepts amendments.",
+     "instance": "/animals/pet_krypto_210",
+     "request_id": "req_6c1f90ab3d4e"
+    }
+   },
+   "422": {
+    "status": 422,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/business-rule-rejected",
+     "title": "Business Rule Rejected",
+     "status": 422,
+     "detail": "The request broke a policy rule, such as an ineligible animal or a SKU with no stock.",
+     "instance": "/animals/pet_krypto_210"
+    }
+   },
+   "429": {
+    "status": 429,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/rate-limited",
+     "title": "Rate Limited",
+     "status": 429,
+     "detail": "The credential exceeded its window. Retry in 12 seconds.",
+     "instance": "/animals/pet_krypto_210"
+    }
+   }
+  },
+  "DELETE /animals/{animalId}": {
+   "401": {
+    "status": 401,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/unauthorized",
+     "title": "Unauthorized",
+     "status": 401,
+     "detail": "The request carried no bearer token. Sign in through the staff portal or attach an API key.",
+     "instance": "/animals/pet_krypto_210"
+    }
+   },
+   "403": {
+    "status": 403,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/insufficient-scope",
+     "title": "Insufficient Scope",
+     "status": 403,
+     "detail": "The access token lacks write:animals. Request that scope during authorization, then retry.",
+     "instance": "/animals/pet_krypto_210"
+    }
+   },
+   "404": {
+    "status": 404,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/record-not-found",
+     "title": "Record Not Found",
+     "status": 404,
+     "detail": "No record matches the identifier in the request.",
+     "instance": "/animals/pet_krypto_999"
+    }
+   },
+   "409": {
+    "status": 409,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/state-conflict",
+     "title": "State Conflict",
+     "status": 409,
+     "detail": "An active adoption hold blocks withdrawal.",
+     "instance": "/animals/pet_krypto_210",
+     "request_id": "req_6c1f90ab3d4e"
+    }
+   },
+   "429": {
+    "status": 429,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/rate-limited",
+     "title": "Rate Limited",
+     "status": 429,
+     "detail": "The credential exceeded its window. Retry in 12 seconds.",
+     "instance": "/animals/pet_krypto_210"
+    }
+   }
+  },
+  "POST /animals/{animalId}/photos": {
+   "400": {
+    "status": 400,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/invalid-request",
+     "title": "Invalid Request",
+     "status": 400,
+     "detail": "A required field is missing, or a value falls outside its accepted range.",
+     "instance": "/animals/pet_krypto_210/photos"
+    }
+   },
+   "401": {
+    "status": 401,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/unauthorized",
+     "title": "Unauthorized",
+     "status": 401,
+     "detail": "The request carried no bearer token. Sign in through the staff portal or attach an API key.",
+     "instance": "/animals/pet_krypto_210/photos"
+    }
+   },
+   "403": {
+    "status": 403,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/insufficient-scope",
+     "title": "Insufficient Scope",
+     "status": 403,
+     "detail": "The access token lacks write:animals. Request that scope during authorization, then retry.",
+     "instance": "/animals/pet_krypto_210/photos"
+    }
+   },
+   "404": {
+    "status": 404,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/record-not-found",
+     "title": "Record Not Found",
+     "status": 404,
+     "detail": "No record matches the identifier in the request.",
+     "instance": "/animals/pet_krypto_999/photos"
+    }
+   },
+   "429": {
+    "status": 429,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/rate-limited",
+     "title": "Rate Limited",
+     "status": 429,
+     "detail": "The credential exceeded its window. Retry in 12 seconds.",
+     "instance": "/animals/pet_krypto_210/photos"
+    }
+   }
+  },
+  "GET /animals/{animalId}/health-records": {
+   "401": {
+    "status": 401,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/unauthorized",
+     "title": "Unauthorized",
+     "status": 401,
+     "detail": "The request carried no bearer token. Sign in through the staff portal or attach an API key.",
+     "instance": "/animals/pet_krypto_210/health-records"
+    }
+   },
+   "403": {
+    "status": 403,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/insufficient-scope",
+     "title": "Insufficient Scope",
+     "status": 403,
+     "detail": "The access token lacks write:animals. Request that scope during authorization, then retry.",
+     "instance": "/animals/pet_krypto_210/health-records"
+    }
+   },
+   "404": {
+    "status": 404,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/record-not-found",
+     "title": "Record Not Found",
+     "status": 404,
+     "detail": "No record matches the identifier in the request.",
+     "instance": "/animals/pet_krypto_999/health-records"
+    }
+   },
+   "429": {
+    "status": 429,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/rate-limited",
+     "title": "Rate Limited",
+     "status": 429,
+     "detail": "The credential exceeded its window. Retry in 12 seconds.",
+     "instance": "/animals/pet_krypto_210/health-records"
+    }
+   }
+  },
+  "POST /animals/{animalId}/health-records": {
+   "401": {
+    "status": 401,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/unauthorized",
+     "title": "Unauthorized",
+     "status": 401,
+     "detail": "The request carried no bearer token. Sign in through the staff portal or attach an API key.",
+     "instance": "/animals/pet_krypto_210/health-records"
+    }
+   },
+   "403": {
+    "status": 403,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/insufficient-scope",
+     "title": "Insufficient Scope",
+     "status": 403,
+     "detail": "The access token lacks write:animals. Request that scope during authorization, then retry.",
+     "instance": "/animals/pet_krypto_210/health-records"
+    }
+   },
+   "404": {
+    "status": 404,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/record-not-found",
+     "title": "Record Not Found",
+     "status": 404,
+     "detail": "No record matches the identifier in the request.",
+     "instance": "/animals/pet_krypto_999/health-records"
+    }
+   },
+   "422": {
+    "status": 422,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/business-rule-rejected",
+     "title": "Business Rule Rejected",
+     "status": 422,
+     "detail": "The request broke a policy rule, such as an ineligible animal or a SKU with no stock.",
+     "instance": "/animals/pet_krypto_210/health-records"
+    }
+   },
+   "429": {
+    "status": 429,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/rate-limited",
+     "title": "Rate Limited",
+     "status": 429,
+     "detail": "The credential exceeded its window. Retry in 12 seconds.",
+     "instance": "/animals/pet_krypto_210/health-records"
+    }
+   }
+  },
+  "POST /adoptions/holds": {
+   "401": {
+    "status": 401,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/unauthorized",
+     "title": "Unauthorized",
+     "status": 401,
+     "detail": "The request carried no bearer token. Sign in through the staff portal or attach an API key.",
+     "instance": "/adoptions/holds"
+    }
+   },
+   "403": {
+    "status": 403,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/insufficient-scope",
+     "title": "Insufficient Scope",
+     "status": 403,
+     "detail": "The access token lacks write:animals. Request that scope during authorization, then retry.",
+     "instance": "/adoptions/holds"
+    }
+   },
+   "404": {
+    "status": 404,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/record-not-found",
+     "title": "Record Not Found",
+     "status": 404,
+     "detail": "The animal or the applicant does not exist.",
+     "instance": "/adoptions/holds",
+     "request_id": "req_6c1f90ab3d4e"
+    }
+   },
+   "409": {
+    "status": 409,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/adoption-hold-conflict",
+     "title": "Adoption Hold Conflict",
+     "status": 409,
+     "detail": "Animal pet_krypto_210 is currently reserved under active hold hld_77a28f expiring at 2026-11-17T08:15:00Z.",
+     "instance": "/adoptions/holds"
+    }
+   },
+   "422": {
+    "status": 422,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/business-rule-rejected",
+     "title": "Business Rule Rejected",
+     "status": 422,
+     "detail": "The animal is not eligible, such as under medical quarantine.",
+     "instance": "/adoptions/holds",
+     "request_id": "req_6c1f90ab3d4e"
+    }
+   },
+   "429": {
+    "status": 429,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/rate-limited",
+     "title": "Rate Limited",
+     "status": 429,
+     "detail": "The credential exceeded its window. Retry in 12 seconds.",
+     "instance": "/adoptions/holds"
+    }
+   }
+  },
+  "GET /adoptions/holds/{holdId}": {
+   "401": {
+    "status": 401,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/unauthorized",
+     "title": "Unauthorized",
+     "status": 401,
+     "detail": "The request carried no bearer token. Sign in through the staff portal or attach an API key.",
+     "instance": "/adoptions/holds/hld_77a28f"
+    }
+   },
+   "403": {
+    "status": 403,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/insufficient-scope",
+     "title": "Insufficient Scope",
+     "status": 403,
+     "detail": "The access token lacks write:animals. Request that scope during authorization, then retry.",
+     "instance": "/adoptions/holds/hld_77a28f"
+    }
+   },
+   "404": {
+    "status": 404,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/record-not-found",
+     "title": "Record Not Found",
+     "status": 404,
+     "detail": "No record matches the identifier in the request.",
+     "instance": "/adoptions/holds/hld_000000"
+    }
+   },
+   "429": {
+    "status": 429,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/rate-limited",
+     "title": "Rate Limited",
+     "status": 429,
+     "detail": "The credential exceeded its window. Retry in 12 seconds.",
+     "instance": "/adoptions/holds/hld_77a28f"
+    }
+   }
+  },
+  "DELETE /adoptions/holds/{holdId}": {
+   "401": {
+    "status": 401,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/unauthorized",
+     "title": "Unauthorized",
+     "status": 401,
+     "detail": "The request carried no bearer token. Sign in through the staff portal or attach an API key.",
+     "instance": "/adoptions/holds/hld_77a28f"
+    }
+   },
+   "403": {
+    "status": 403,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/insufficient-scope",
+     "title": "Insufficient Scope",
+     "status": 403,
+     "detail": "The access token lacks write:animals. Request that scope during authorization, then retry.",
+     "instance": "/adoptions/holds/hld_77a28f"
+    }
+   },
+   "404": {
+    "status": 404,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/record-not-found",
+     "title": "Record Not Found",
+     "status": 404,
+     "detail": "No record matches the identifier in the request.",
+     "instance": "/adoptions/holds/hld_000000"
+    }
+   },
+   "409": {
+    "status": 409,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/state-conflict",
+     "title": "State Conflict",
+     "status": 409,
+     "detail": "The hold already converted into an application.",
+     "instance": "/adoptions/holds/hld_77a28f",
+     "request_id": "req_6c1f90ab3d4e"
+    }
+   },
+   "429": {
+    "status": 429,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/rate-limited",
+     "title": "Rate Limited",
+     "status": 429,
+     "detail": "The credential exceeded its window. Retry in 12 seconds.",
+     "instance": "/adoptions/holds/hld_77a28f"
+    }
+   }
+  },
+  "POST /adoptions/applications": {
+   "401": {
+    "status": 401,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/unauthorized",
+     "title": "Unauthorized",
+     "status": 401,
+     "detail": "The request carried no bearer token. Sign in through the staff portal or attach an API key.",
+     "instance": "/adoptions/applications"
+    }
+   },
+   "403": {
+    "status": 403,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/insufficient-scope",
+     "title": "Insufficient Scope",
+     "status": 403,
+     "detail": "The access token lacks write:animals. Request that scope during authorization, then retry.",
+     "instance": "/adoptions/applications"
+    }
+   },
+   "404": {
+    "status": 404,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/record-not-found",
+     "title": "Record Not Found",
+     "status": 404,
+     "detail": "No record matches the identifier in the request.",
+     "instance": "/adoptions/applications"
+    }
+   },
+   "409": {
+    "status": 409,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/state-conflict",
+     "title": "State Conflict",
+     "status": 409,
+     "detail": "The hold expired before submission.",
+     "instance": "/adoptions/applications",
+     "request_id": "req_6c1f90ab3d4e"
+    }
+   },
+   "422": {
+    "status": 422,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/business-rule-rejected",
+     "title": "Business Rule Rejected",
+     "status": 422,
+     "detail": "The request broke a policy rule, such as an ineligible animal or a SKU with no stock.",
+     "instance": "/adoptions/applications"
+    }
+   },
+   "429": {
+    "status": 429,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/rate-limited",
+     "title": "Rate Limited",
+     "status": 429,
+     "detail": "The credential exceeded its window. Retry in 12 seconds.",
+     "instance": "/adoptions/applications"
+    }
+   }
+  },
+  "GET /retail/inventory": {
+   "400": {
+    "status": 400,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/invalid-request",
+     "title": "Invalid Request",
+     "status": 400,
+     "detail": "A required field is missing, or a value falls outside its accepted range.",
+     "instance": "/retail/inventory"
+    }
+   },
+   "401": {
+    "status": 401,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/unauthorized",
+     "title": "Unauthorized",
+     "status": 401,
+     "detail": "The request carried no bearer token. Sign in through the staff portal or attach an API key.",
+     "instance": "/retail/inventory"
+    }
+   },
+   "403": {
+    "status": 403,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/insufficient-scope",
+     "title": "Insufficient Scope",
+     "status": 403,
+     "detail": "The access token lacks write:animals. Request that scope during authorization, then retry.",
+     "instance": "/retail/inventory"
+    }
+   },
+   "429": {
+    "status": 429,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/rate-limited",
+     "title": "Rate Limited",
+     "status": 429,
+     "detail": "The credential exceeded its window. Retry in 12 seconds.",
+     "instance": "/retail/inventory"
+    }
+   }
+  },
+  "POST /retail/orders": {
+   "400": {
+    "status": 400,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/invalid-request",
+     "title": "Invalid Request",
+     "status": 400,
+     "detail": "A required field is missing, or a value falls outside its accepted range.",
+     "instance": "/retail/orders"
+    }
+   },
+   "401": {
+    "status": 401,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/unauthorized",
+     "title": "Unauthorized",
+     "status": 401,
+     "detail": "The request carried no bearer token. Sign in through the staff portal or attach an API key.",
+     "instance": "/retail/orders"
+    }
+   },
+   "403": {
+    "status": 403,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/insufficient-scope",
+     "title": "Insufficient Scope",
+     "status": 403,
+     "detail": "The access token lacks write:animals. Request that scope during authorization, then retry.",
+     "instance": "/retail/orders"
+    }
+   },
+   "404": {
+    "status": 404,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/record-not-found",
+     "title": "Record Not Found",
+     "status": 404,
+     "detail": "The supplier catalog has no item for that SKU, or the branch does not exist.",
+     "instance": "/retail/orders",
+     "request_id": "req_6c1f90ab3d4e"
+    }
+   },
+   "422": {
+    "status": 422,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/business-rule-rejected",
+     "title": "Business Rule Rejected",
+     "status": 422,
+     "detail": "The request broke a policy rule, such as an ineligible animal or a SKU with no stock.",
+     "instance": "/retail/orders"
+    }
+   },
+   "429": {
+    "status": 429,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/rate-limited",
+     "title": "Rate Limited",
+     "status": 429,
+     "detail": "The credential exceeded its window. Retry in 12 seconds.",
+     "instance": "/retail/orders"
+    }
+   }
+  },
+  "GET /retail/orders/{orderId}": {
+   "401": {
+    "status": 401,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/unauthorized",
+     "title": "Unauthorized",
+     "status": 401,
+     "detail": "The request carried no bearer token. Sign in through the staff portal or attach an API key.",
+     "instance": "/retail/orders/ord_2026_0417"
+    }
+   },
+   "403": {
+    "status": 403,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/insufficient-scope",
+     "title": "Insufficient Scope",
+     "status": 403,
+     "detail": "The access token lacks write:animals. Request that scope during authorization, then retry.",
+     "instance": "/retail/orders/ord_2026_0417"
+    }
+   },
+   "404": {
+    "status": 404,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/record-not-found",
+     "title": "Record Not Found",
+     "status": 404,
+     "detail": "No record matches the identifier in the request.",
+     "instance": "/retail/orders/ord_0000"
+    }
+   },
+   "429": {
+    "status": 429,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/rate-limited",
+     "title": "Rate Limited",
+     "status": 429,
+     "detail": "The credential exceeded its window. Retry in 12 seconds.",
+     "instance": "/retail/orders/ord_2026_0417"
+    }
+   }
+  },
+  "DELETE /retail/orders/{orderId}": {
+   "401": {
+    "status": 401,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/unauthorized",
+     "title": "Unauthorized",
+     "status": 401,
+     "detail": "The request carried no bearer token. Sign in through the staff portal or attach an API key.",
+     "instance": "/retail/orders/ord_2026_0417"
+    }
+   },
+   "403": {
+    "status": 403,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/insufficient-scope",
+     "title": "Insufficient Scope",
+     "status": 403,
+     "detail": "The access token lacks write:animals. Request that scope during authorization, then retry.",
+     "instance": "/retail/orders/ord_2026_0417"
+    }
+   },
+   "404": {
+    "status": 404,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/record-not-found",
+     "title": "Record Not Found",
+     "status": 404,
+     "detail": "No record matches the identifier in the request.",
+     "instance": "/retail/orders/ord_0000"
+    }
+   },
+   "409": {
+    "status": 409,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/state-conflict",
+     "title": "State Conflict",
+     "status": 409,
+     "detail": "The order already shipped, so the supplier cannot recall it.",
+     "instance": "/retail/orders/ord_2026_0417",
+     "request_id": "req_6c1f90ab3d4e"
+    }
+   },
+   "429": {
+    "status": 429,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/rate-limited",
+     "title": "Rate Limited",
+     "status": 429,
+     "detail": "The credential exceeded its window. Retry in 12 seconds.",
+     "instance": "/retail/orders/ord_2026_0417"
+    }
+   }
+  },
+  "POST /applicants": {
+   "400": {
+    "status": 400,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/invalid-request",
+     "title": "Invalid Request",
+     "status": 400,
+     "detail": "A required field is missing, or a value falls outside its accepted range.",
+     "instance": "/applicants"
+    }
+   },
+   "409": {
+    "status": 409,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/state-conflict",
+     "title": "State Conflict",
+     "status": 409,
+     "detail": "The email already belongs to an account.",
+     "instance": "/applicants",
+     "request_id": "req_6c1f90ab3d4e"
+    }
+   },
+   "429": {
+    "status": 429,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/rate-limited",
+     "title": "Rate Limited",
+     "status": 429,
+     "detail": "The credential exceeded its window. Retry in 12 seconds.",
+     "instance": "/applicants"
+    }
+   }
+  },
+  "GET /applicants/{username}": {
+   "401": {
+    "status": 401,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/unauthorized",
+     "title": "Unauthorized",
+     "status": 401,
+     "detail": "The request carried no bearer token. Sign in through the staff portal or attach an API key.",
+     "instance": "/applicants/budbaker"
+    }
+   },
+   "403": {
+    "status": 403,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/insufficient-scope",
+     "title": "Insufficient Scope",
+     "status": 403,
+     "detail": "The access token lacks write:animals. Request that scope during authorization, then retry.",
+     "instance": "/applicants/budbaker"
+    }
+   },
+   "404": {
+    "status": 404,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/record-not-found",
+     "title": "Record Not Found",
+     "status": 404,
+     "detail": "No record matches the identifier in the request.",
+     "instance": "/applicants/no_such_account"
+    }
+   },
+   "429": {
+    "status": 429,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/rate-limited",
+     "title": "Rate Limited",
+     "status": 429,
+     "detail": "The credential exceeded its window. Retry in 12 seconds.",
+     "instance": "/applicants/budbaker"
+    }
+   }
+  },
+  "PUT /applicants/{username}": {
+   "400": {
+    "status": 400,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/invalid-request",
+     "title": "Invalid Request",
+     "status": 400,
+     "detail": "A required field is missing, or a value falls outside its accepted range.",
+     "instance": "/applicants/budbaker"
+    }
+   },
+   "401": {
+    "status": 401,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/unauthorized",
+     "title": "Unauthorized",
+     "status": 401,
+     "detail": "The request carried no bearer token. Sign in through the staff portal or attach an API key.",
+     "instance": "/applicants/budbaker"
+    }
+   },
+   "403": {
+    "status": 403,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/insufficient-scope",
+     "title": "Insufficient Scope",
+     "status": 403,
+     "detail": "The access token lacks write:animals. Request that scope during authorization, then retry.",
+     "instance": "/applicants/budbaker"
+    }
+   },
+   "404": {
+    "status": 404,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/record-not-found",
+     "title": "Record Not Found",
+     "status": 404,
+     "detail": "No record matches the identifier in the request.",
+     "instance": "/applicants/no_such_account"
+    }
+   },
+   "429": {
+    "status": 429,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/rate-limited",
+     "title": "Rate Limited",
+     "status": 429,
+     "detail": "The credential exceeded its window. Retry in 12 seconds.",
+     "instance": "/applicants/budbaker"
+    }
+   }
+  },
+  "DELETE /applicants/{username}": {
+   "401": {
+    "status": 401,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/unauthorized",
+     "title": "Unauthorized",
+     "status": 401,
+     "detail": "The request carried no bearer token. Sign in through the staff portal or attach an API key.",
+     "instance": "/applicants/budbaker"
+    }
+   },
+   "403": {
+    "status": 403,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/insufficient-scope",
+     "title": "Insufficient Scope",
+     "status": 403,
+     "detail": "The access token lacks write:animals. Request that scope during authorization, then retry.",
+     "instance": "/applicants/budbaker"
+    }
+   },
+   "404": {
+    "status": 404,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/record-not-found",
+     "title": "Record Not Found",
+     "status": 404,
+     "detail": "No record matches the identifier in the request.",
+     "instance": "/applicants/no_such_account"
+    }
+   },
+   "409": {
+    "status": 409,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/state-conflict",
+     "title": "State Conflict",
+     "status": 409,
+     "detail": "An open hold or application blocks closure.",
+     "instance": "/applicants/budbaker",
+     "request_id": "req_6c1f90ab3d4e"
+    }
+   },
+   "429": {
+    "status": 429,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/rate-limited",
+     "title": "Rate Limited",
+     "status": 429,
+     "detail": "The credential exceeded its window. Retry in 12 seconds.",
+     "instance": "/applicants/budbaker"
+    }
+   }
+  },
+  "POST /sessions": {
+   "400": {
+    "status": 400,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/invalid-request",
+     "title": "Invalid Request",
+     "status": 400,
+     "detail": "A required field is missing, or a value falls outside its accepted range.",
+     "instance": "/sessions"
+    }
+   },
+   "401": {
+    "status": 401,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/unauthorized",
+     "title": "Unauthorized",
+     "status": 401,
+     "detail": "Email and password do not match an account.",
+     "instance": "/sessions",
+     "request_id": "req_6c1f90ab3d4e"
+    }
+   },
+   "429": {
+    "status": 429,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/rate-limited",
+     "title": "Rate Limited",
+     "status": 429,
+     "detail": "The credential exceeded its window. Retry in 12 seconds.",
+     "instance": "/sessions"
+    }
+   }
+  },
+  "DELETE /sessions/current": {
+   "401": {
+    "status": 401,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/unauthorized",
+     "title": "Unauthorized",
+     "status": 401,
+     "detail": "The request carried no bearer token. Sign in through the staff portal or attach an API key.",
+     "instance": "/sessions/current"
+    }
+   },
+   "403": {
+    "status": 403,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/insufficient-scope",
+     "title": "Insufficient Scope",
+     "status": 403,
+     "detail": "The access token lacks write:animals. Request that scope during authorization, then retry.",
+     "instance": "/sessions/current"
+    }
+   },
+   "429": {
+    "status": 429,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/rate-limited",
+     "title": "Rate Limited",
+     "status": 429,
+     "detail": "The credential exceeded its window. Retry in 12 seconds.",
+     "instance": "/sessions/current"
+    }
+   }
+  },
+  "POST /refunds": {
+   "401": {
+    "status": 401,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/unauthorized",
+     "title": "Unauthorized",
+     "status": 401,
+     "detail": "The request carried no bearer token. Sign in through the staff portal or attach an API key.",
+     "instance": "/refunds"
+    }
+   },
+   "403": {
+    "status": 403,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/insufficient-scope",
+     "title": "Insufficient Scope",
+     "status": 403,
+     "detail": "The access token lacks write:animals. Request that scope during authorization, then retry.",
+     "instance": "/refunds"
+    }
+   },
+   "404": {
+    "status": 404,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/record-not-found",
+     "title": "Record Not Found",
+     "status": 404,
+     "detail": "No record matches the identifier in the request.",
+     "instance": "/refunds"
+    }
+   },
+   "409": {
+    "status": 409,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/duplicate-refund",
+     "title": "Duplicate Refund",
+     "status": 409,
+     "detail": "Refund rfd_01HQ9B7TX4 already covers the placement fee on app_2026_1188.",
+     "instance": "/refunds"
+    }
+   },
+   "422": {
+    "status": 422,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/business-rule-rejected",
+     "title": "Business Rule Rejected",
+     "status": 422,
+     "detail": "The request broke a policy rule, such as an ineligible animal or a SKU with no stock.",
+     "instance": "/refunds"
+    }
+   },
+   "429": {
+    "status": 429,
+    "contentType": "application/problem+json",
+    "body": {
+     "type": "https://api.bludhavenpets.com/errors/rate-limited",
+     "title": "Rate Limited",
+     "status": 429,
+     "detail": "The credential exceeded its window. Retry in 12 seconds.",
+     "instance": "/refunds"
+    }
+   }
+  }
+ },
+ "security": {
+  "POST /animals": {
+   "schemes": [
+    "api_key",
+    "bludhaven_oauth"
+   ],
+   "scopes": [
+    "write:animals"
+   ]
+  },
+  "PUT /animals/{animalId}": {
+   "schemes": [
+    "api_key",
+    "bludhaven_oauth"
+   ],
+   "scopes": [
+    "write:animals"
+   ]
+  },
+  "DELETE /animals/{animalId}": {
+   "schemes": [
+    "bludhaven_oauth"
+   ],
+   "scopes": [
+    "write:animals"
+   ]
+  },
+  "POST /animals/{animalId}/photos": {
+   "schemes": [
+    "bludhaven_oauth"
+   ],
+   "scopes": [
+    "write:animals"
+   ]
+  },
+  "GET /animals/{animalId}/health-records": {
+   "schemes": [
+    "bludhaven_oauth"
+   ],
+   "scopes": [
+    "read:animals"
+   ]
+  },
+  "POST /animals/{animalId}/health-records": {
+   "schemes": [
+    "bludhaven_oauth"
+   ],
+   "scopes": [
+    "vet:clearance"
+   ]
+  },
+  "POST /adoptions/holds": {
+   "schemes": [
+    "api_key",
+    "bludhaven_oauth"
+   ],
+   "scopes": [
+    "write:adoptions"
+   ]
+  },
+  "GET /adoptions/holds/{holdId}": {
+   "schemes": [
+    "bludhaven_oauth"
+   ],
+   "scopes": [
+    "read:adoptions"
+   ]
+  },
+  "DELETE /adoptions/holds/{holdId}": {
+   "schemes": [
+    "bludhaven_oauth"
+   ],
+   "scopes": [
+    "write:adoptions"
+   ]
+  },
+  "POST /adoptions/applications": {
+   "schemes": [
+    "bludhaven_oauth"
+   ],
+   "scopes": [
+    "write:adoptions"
+   ]
+  },
+  "GET /retail/inventory": {
+   "schemes": [
+    "api_key",
+    "bludhaven_oauth"
+   ],
+   "scopes": [
+    "read:retail"
+   ]
+  },
+  "POST /retail/orders": {
+   "schemes": [
+    "api_key",
+    "bludhaven_oauth"
+   ],
+   "scopes": [
+    "write:retail"
+   ]
+  },
+  "GET /retail/orders/{orderId}": {
+   "schemes": [
+    "api_key",
+    "bludhaven_oauth"
+   ],
+   "scopes": [
+    "read:retail"
+   ]
+  },
+  "DELETE /retail/orders/{orderId}": {
+   "schemes": [
+    "api_key",
+    "bludhaven_oauth"
+   ],
+   "scopes": [
+    "write:retail"
+   ]
+  },
+  "GET /applicants/{username}": {
+   "schemes": [
+    "bludhaven_oauth"
+   ],
+   "scopes": [
+    "read:applicants"
+   ]
+  },
+  "PUT /applicants/{username}": {
+   "schemes": [
+    "bludhaven_oauth"
+   ],
+   "scopes": [
+    "write:applicants"
+   ]
+  },
+  "DELETE /applicants/{username}": {
+   "schemes": [
+    "bludhaven_oauth"
+   ],
+   "scopes": [
+    "write:applicants"
+   ]
+  },
+  "DELETE /sessions/current": {
+   "schemes": [
+    "bludhaven_oauth"
+   ],
+   "scopes": [
+    "read:applicants"
+   ]
+  },
+  "POST /refunds": {
+   "schemes": [
+    "bludhaven_oauth"
+   ],
+   "scopes": [
+    "admin:adoptions"
+   ]
+  }
+ }
+}

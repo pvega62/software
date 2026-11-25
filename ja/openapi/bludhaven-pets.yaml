@@ -1,0 +1,1978 @@
+openapi: 3.1.0
+info:
+  title: Blüdhaven Pets Platform API
+  version: 2026.11.0
+  summary: Intake, adoption, veterinary, and retail operations for Blüdhaven Pets.
+  description: |
+    The Blüdhaven Pets platform runs municipal animal intake, statutory microchip
+    registration, veterinary clearance, and 30-minute adoption holds. Three
+    branches and an online catalog carry the retail and adoption inventory.
+
+    ### Authentication
+
+    Send an OAuth 2.0 bearer token in the `Authorization` header, or an API key
+    in `X-API-Key`. The sandbox gateway runs the authorization server, so the
+    reference completes a real sign-in rather than asking for a pasted string.
+
+    - **Authorization code with PKCE** backs the Connect button. Approve the
+      consent screen, and the client exchanges the code for a token that lasts
+      one hour. The refresh token lasts thirty days.
+    - **Client credentials** mints a token in one POST for a script with no
+      browser. Send `client_id=bludhaven-staff-portal` and the scopes you need.
+      Omit `scope` to receive the four read scopes.
+    - **API key** authenticates server-to-server jobs and POS register terminals.
+      Send it in the `X-API-Key` header. A key carries an assigned scope set
+      rather than the whole catalog, so a register key reaches retail stock and
+      nothing else. An unrecognized key returns `401`, and a key outside the set
+      a route requires returns `403`.
+
+    The gateway verifies both credentials. It signs every token with HMAC-SHA256
+    and looks every key up in its registry, so a made-up value of either kind
+    fails. An `Authorization` header and an `X-API-Key` header may both arrive.
+    The request passes when either one satisfies the route. A session token from
+    `POST /sessions` behaves like an access token, with the two applicant scopes
+    and nothing more.
+
+    ### Scopes
+
+    Every bearer token carries scopes, and each OAuth route requires one of them.
+
+    - `read:animals` reads animal records, intake history, and eligibility.
+    - `write:animals` creates, amends, and withdraws animal records.
+    - `read:adoptions` reads holds and adoption applications.
+    - `write:adoptions` places holds, releases holds, and submits applications.
+    - `read:applicants` reads applicant accounts during counselor review.
+    - `write:applicants` creates and amends applicant accounts.
+    - `vet:clearance` files veterinary certificates. Licensed practitioners only.
+    - `read:retail` reads inventory levels and supply orders.
+    - `write:retail` places and cancels supply orders.
+    - `admin:adoptions` overrides hold conflicts and issues refunds on any cost
+      line.
+
+    ### Regulatory obligations
+
+    Every intake record carries a 15-digit ISO 11784/11785 microchip number.
+    Municipal code forbids releasing an intact animal without verified spay or
+    neuter certification, so the platform blocks adoption until a veterinarian
+    files clearance.
+
+    ### Support
+
+    Request credentials or report a production incident through
+    **budbaker@bludhavenpets.com**. Include the `X-Request-Id` value from the
+    failing response.
+  contact:
+    name: Blüdhaven Pets Platform Team
+    email: budbaker@bludhavenpets.com
+    url: https://developers.bludhavenpets.com
+  license:
+    name: Blüdhaven Pets API License
+    url: https://bludhavenpets.com/legal/api-license
+externalDocs:
+  description: Integration guides, domain model, and adoption lifecycle documentation
+  url: https://pvega62.github.io/software/docs/platform-api/intro
+servers:
+  - url: https://sandbox.bludhaven-pets.workers.dev
+    description: Sandbox gateway. Real HTTP with real credentials. Answers every operation with representative records.
+  - url: /software/api-mock
+    description: Browser demo. Answers inside this page from the published contract. Try It needs no account and no outbound request.
+  - url: https://api.bludhavenpets.com/v1
+    description: Production gateway. Requires contracted credentials.
+tags:
+  - name: animals
+    description: Intake records, companion animal profiles, and adoption eligibility
+  - name: adoptions
+    description: 30-minute reservation holds, adoption applications, and placement
+  - name: applicants
+    description: Adopter accounts, identity verification, and session tokens
+  - name: retail
+    description: Omnichannel retail inventory, supply orders, and POS reconciliation
+  - name: veterinary
+    description: Rabies vaccination records, spay/neuter certifications, and quarantine releases
+  - name: webhooks
+    description: Signed event delivery, verification, and test dispatch
+paths:
+  /animals:
+    get:
+      tags: [animals]
+      summary: List animals
+      description: |
+        Returns intake records that match every supplied filter. The public
+        adoption gallery sends `status=AVAILABLE`, and the veterinary worklist
+        sends `status=MEDICAL_QUARANTINE`. Results paginate with `cursor`.
+
+        This route carries no security requirement, because the adoption catalog
+        is public. A prospective adopter can browse without an account.
+      operationId: listAnimals
+      security: []
+      parameters:
+        - name: status
+          in: query
+          description: Adoption status to match. Omit the parameter to list every status.
+          required: false
+          schema:
+            $ref: '#/components/schemas/AnimalStatus'
+        - name: species
+          in: query
+          description: Restrict results to one species.
+          required: false
+          schema:
+            $ref: '#/components/schemas/Species'
+        - name: branch_id
+          in: query
+          description: Branch location that holds the animal.
+          required: false
+          schema:
+            $ref: '#/components/schemas/BranchId'
+        - name: temperament_tag
+          in: query
+          description: |
+            Volunteer-entered tag, such as `good-with-cats` or
+            `apartment-friendly`. Use it to build the matching view that
+            adoption counselors rely on.
+          required: false
+          schema:
+            type: string
+            example: good-with-cats
+        - name: cursor
+          in: query
+          description: Opaque cursor from the previous page.
+          required: false
+          schema:
+            type: string
+            example: eyJvZmZzZXQiOjIwfQ
+        - name: limit
+          in: query
+          description: Page size. Defaults to 20 and caps at 100.
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+            example: 20
+      responses:
+        '200':
+          description: One page of intake records.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Animal'
+                  next_cursor:
+                    type: [string, 'null']
+                    description: Cursor for the next page. `null` on the last page.
+                    example: eyJvZmZzZXQiOjQwfQ
+                  has_more:
+                    type: boolean
+                    example: true
+              example:
+                data:
+                  - id: pet_krypto_210
+                    name: Krypto
+                    species: dog
+                    breed: White Shepherd mix
+                    age_months: 24
+                    microchip_id: '985141002348123'
+                    status: AVAILABLE
+                    intake_branch_id: loc_harbor_04
+                    adoption_fee_cents: 15000
+                    temperament_tags:
+                      - good-with-cats
+                      - apartment-friendly
+                    health_record:
+                      rabies_tag_number: RB-2026-9921
+                      rabies_expiration_date: '2027-11-01'
+                      spay_neuter_certified: true
+                      veterinarian_license: DVM-04821
+                      quarantine_release_date: '2026-11-10T14:00:00Z'
+                    photo_urls:
+                      - https://images.bludhavenpets.com/animals/pet_krypto_210/front.jpg
+                  - id: pet_luna_118
+                    name: Luna
+                    species: cat
+                    breed: Domestic Shorthair
+                    age_months: 14
+                    microchip_id: '985141002348198'
+                    status: AVAILABLE
+                    intake_branch_id: loc_harbor_04
+                    adoption_fee_cents: 9500
+                    temperament_tags:
+                      - good-with-children
+                    health_record:
+                      rabies_tag_number: RB-2026-9934
+                      rabies_expiration_date: '2027-10-19'
+                      spay_neuter_certified: true
+                      veterinarian_license: DVM-04821
+                      quarantine_release_date: '2026-11-08T09:30:00Z'
+                    photo_urls: []
+                next_cursor: eyJvZmZzZXQiOjQwfQ
+                has_more: true
+        '400':
+          $ref: '#/components/responses/InvalidRequest'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    post:
+      tags: [animals]
+      summary: Register an animal at intake
+      description: |
+        Creates an intake record at a branch facility. The request must carry a
+        15-digit ISO 11784 microchip number and an intake branch. A microchip
+        already on file returns `409`, because the platform cannot hold two
+        records for one animal.
+      operationId: createAnimal
+      security:
+        - bludhaven_oauth: [write:animals]
+        - api_key: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnimalIntake'
+      responses:
+        '201':
+          description: Intake record created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Animal'
+        '400':
+          $ref: '#/components/responses/InvalidRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          description: The microchip number already belongs to another record.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: https://api.bludhavenpets.com/errors/microchip-already-registered
+                title: Microchip Already Registered
+                status: 409
+                detail: Microchip 985141002348123 belongs to pet_krypto_210 at loc_harbor_04.
+                instance: /animals
+        '422':
+          $ref: '#/components/responses/Unprocessable'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /animals/{animalId}:
+    parameters:
+      - $ref: '#/components/parameters/AnimalId'
+    get:
+      tags: [animals]
+      summary: Read an animal record
+      description: |
+        Returns one intake record with its health clearance, adoption fee, and
+        current status. A record withdrawn after transfer returns `410`, because
+        municipal law keeps the microchip history.
+
+        This route carries no security requirement, because the adoption catalog
+        is public.
+      operationId: getAnimal
+      security: []
+      responses:
+        '200':
+          description: The intake record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Animal'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '410':
+          description: The record moved to a partner shelter and no longer serves requests.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    put:
+      tags: [animals]
+      summary: Amend an animal record
+      description: |
+        Replaces the staff-editable fields when a counselor corrects a breed,
+        weight, or name. The platform keeps the prior values in the audit trail
+        and re-runs the eligibility check before it returns the record.
+      operationId: updateAnimal
+      security:
+        - bludhaven_oauth: [write:animals]
+        - api_key: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnimalIntake'
+      responses:
+        '200':
+          description: Amended record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Animal'
+        '400':
+          $ref: '#/components/responses/InvalidRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '410':
+          description: The record moved to a partner shelter and no longer accepts amendments.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '422':
+          $ref: '#/components/responses/Unprocessable'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    delete:
+      tags: [animals]
+      summary: Withdraw an animal record
+      description: |
+        Retires a record after a transfer to a partner shelter. Withdrawal keeps
+        the microchip registration, and a record under an active hold returns
+        `409` until the hold expires or a counselor releases it.
+      operationId: withdrawAnimal
+      security:
+        - bludhaven_oauth: [write:animals]
+      responses:
+        '204':
+          description: Record withdrawn. No body returns.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: An active adoption hold blocks withdrawal.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /animals/{animalId}/photos:
+    parameters:
+      - $ref: '#/components/parameters/AnimalId'
+    post:
+      tags: [animals]
+      summary: Request a presigned photo upload URL
+      description: |
+        Generates a direct-to-storage presigned PUT URL. The client uploads raw
+        binary (JPEG or PNG up to 8 MB) straight to the object storage bucket
+        without routing bytes through the application servers.
+      operationId: uploadAnimalPhoto
+      security:
+        - bludhaven_oauth: [write:animals]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [content_type]
+              properties:
+                content_type:
+                  type: string
+                  enum: [image/jpeg, image/png]
+                  example: image/jpeg
+                caption:
+                  type: string
+                  example: Krypto at the Harbor branch play yard.
+                is_primary:
+                  type: boolean
+                  default: false
+      responses:
+        '201':
+          description: Presigned upload URL created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhotoUpload'
+        '400':
+          $ref: '#/components/responses/InvalidRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /animals/{animalId}/health-records:
+    parameters:
+      - $ref: '#/components/parameters/AnimalId'
+    get:
+      tags: [veterinary]
+      summary: Read the health clearance
+      description: |
+        Returns the rabies certificate, spay or neuter certification, and
+        quarantine release for one animal. Adoption eligibility depends on this
+        record, so a stale `rabies_expiration_date` blocks placement.
+      operationId: getHealthRecord
+      security:
+        - bludhaven_oauth: [read:animals]
+      responses:
+        '200':
+          description: The health clearance on file.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnimalHealthRecord'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    post:
+      tags: [veterinary]
+      summary: File a health clearance
+      description: |
+        Attaches a veterinarian's clearance to the record and moves the animal
+        from `VET_CLEARANCE` to `AVAILABLE` when every requirement passes. The
+        call requires the license number of the signing practitioner.
+      operationId: fileHealthRecord
+      security:
+        - bludhaven_oauth: [vet:clearance]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnimalHealthRecord'
+      responses:
+        '201':
+          description: Clearance filed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnimalHealthRecord'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/Unprocessable'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /adoptions/holds:
+    post:
+      tags: [adoptions]
+      summary: Place a 30-minute adoption hold
+      description: |
+        Locks one eligible animal to one applicant for 30 minutes. The lock spans
+        every branch and the public website, so a second attempt on the same
+        animal returns `409` while the hold lives. A counselor can release the
+        hold early with `DELETE /adoptions/holds/{holdId}`.
+      operationId: createAdoptionHold
+      security:
+        - bludhaven_oauth: [write:adoptions]
+        - api_key: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [animal_id, applicant_id]
+              properties:
+                animal_id:
+                  type: string
+                  example: pet_krypto_210
+                applicant_id:
+                  type: string
+                  example: usr_9921bc
+                branch_id:
+                  description: Branch where the applicant will meet the animal.
+                  $ref: '#/components/schemas/BranchId'
+                notes:
+                  type: string
+                  example: In-person interview scheduled at the Harbor branch.
+      responses:
+        '201':
+          description: Hold confirmed and lock established.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdoptionHold'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          description: The animal or the applicant does not exist.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '409':
+          description: Another applicant already holds the animal.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: https://api.bludhavenpets.com/errors/adoption-hold-conflict
+                title: Adoption Hold Conflict
+                status: 409
+                detail: Animal pet_krypto_210 is currently reserved under active hold hld_77a28f expiring at 2026-11-17T08:15:00Z.
+                instance: /adoptions/holds
+        '422':
+          description: The animal is not eligible, such as under medical quarantine.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /adoptions/holds/{holdId}:
+    parameters:
+      - name: holdId
+        in: path
+        description: Identifier the hold response returned.
+        required: true
+        schema:
+          type: string
+          example: hld_77a28f
+    get:
+      tags: [adoptions]
+      summary: Read an adoption hold
+      description: |
+        Returns the hold with the seconds remaining on the lock. Poll it at most
+        once a minute, because the countdown lives on `expires_at`.
+      operationId: getAdoptionHold
+      security:
+        - bludhaven_oauth: [read:adoptions]
+      responses:
+        '200':
+          description: The hold.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdoptionHold'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    delete:
+      tags: [adoptions]
+      summary: Release an adoption hold
+      description: |
+        Frees the animal for other applicants before the 30-minute window closes.
+        A counselor releases a hold when the interview fails or the applicant
+        leaves the branch.
+      operationId: releaseAdoptionHold
+      security:
+        - bludhaven_oauth: [write:adoptions]
+      responses:
+        '204':
+          description: Hold released. No body returns.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: The hold already converted into an application.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /adoptions/applications:
+    post:
+      tags: [adoptions]
+      summary: Submit an adoption application
+      description: |
+        Converts an active hold into an application and starts the counselor
+        review. Submission freezes the $150 placement fee and the $25 municipal
+        license fee on the application record.
+      operationId: submitAdoptionApplication
+      security:
+        - bludhaven_oauth: [write:adoptions]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [hold_id]
+              properties:
+                hold_id:
+                  type: string
+                  example: hld_77a28f
+                household_adults:
+                  type: integer
+                  example: 2
+                household_children:
+                  type: integer
+                  example: 1
+                landlord_approval_on_file:
+                  type: boolean
+                  example: true
+                notes:
+                  type: string
+                  example: Fenced yard, prior shepherd experience.
+      responses:
+        '201':
+          description: Application queued for counselor review.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdoptionApplication'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: The hold expired before submission.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '422':
+          $ref: '#/components/responses/Unprocessable'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /retail/inventory:
+    get:
+      tags: [retail]
+      summary: Read retail inventory levels
+      description: |
+        Returns on-hand and reserved counts for every retail SKU at one branch.
+        The POS reconciles its local ledger against this snapshot each night, and
+        a mismatch raises a ticket for the store manager.
+      operationId: getRetailInventory
+      security:
+        - bludhaven_oauth: [read:retail]
+        - api_key: []
+      parameters:
+        - name: branch_id
+          in: query
+          description: Branch to report. Omit the parameter to read the Harbor branch.
+          required: false
+          schema:
+            $ref: '#/components/schemas/BranchId'
+      responses:
+        '200':
+          description: Stock levels by SKU.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inventory'
+        '400':
+          $ref: '#/components/responses/InvalidRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /retail/orders:
+    post:
+      tags: [retail]
+      summary: Create a retail supply order
+      description: |
+        Orders supplies, such as food, litter, or leashes, for one branch. Animals
+        never move through this route, because adoption runs through the hold
+        workflow instead.
+      operationId: createRetailOrder
+      security:
+        - bludhaven_oauth: [write:retail]
+        - api_key: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [sku, quantity, location_id]
+              properties:
+                sku:
+                  type: string
+                  example: SKU-FOOD-PUPPY-18KG
+                quantity:
+                  type: integer
+                  minimum: 1
+                  example: 24
+                location_id:
+                  type: string
+                  example: loc_harbor_04
+      responses:
+        '201':
+          description: Order placed with the supplier.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplyOrder'
+        '400':
+          $ref: '#/components/responses/InvalidRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          description: The supplier catalog has no item for that SKU, or the branch does not exist.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '422':
+          $ref: '#/components/responses/Unprocessable'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /retail/orders/{orderId}:
+    parameters:
+      - name: orderId
+        in: path
+        description: Identifier the order response returned.
+        required: true
+        schema:
+          type: string
+          example: ord_2026_0417
+    get:
+      tags: [retail]
+      summary: Read a retail order
+      description: Returns one supply order with its fulfillment stage and the branch that placed it.
+      operationId: getRetailOrder
+      security:
+        - bludhaven_oauth: [read:retail]
+        - api_key: []
+      responses:
+        '200':
+          description: The supply order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupplyOrder'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    delete:
+      tags: [retail]
+      summary: Cancel a retail order
+      description: |
+        Cancels an order before the picking stage. A shipped order returns `409`,
+        because the supplier already left the distribution center.
+      operationId: cancelRetailOrder
+      security:
+        - bludhaven_oauth: [write:retail]
+        - api_key: []
+      responses:
+        '204':
+          description: Order cancelled. No body returns.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: The order already shipped, so the supplier cannot recall it.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /applicants:
+    post:
+      tags: [applicants]
+      summary: Create an adopter account
+      description: |
+        Registers an applicant before the interview. The platform verifies the
+        email and leaves the account in `pending` until a counselor confirms
+        identity in person.
+      operationId: createApplicant
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicantRegistration'
+      responses:
+        '201':
+          description: Account created in `pending` status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Applicant'
+        '400':
+          $ref: '#/components/responses/InvalidRequest'
+        '409':
+          description: The email already belongs to an account.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /applicants/{username}:
+    parameters:
+      - name: username
+        in: path
+        description: Account handle the applicant chose at registration.
+        required: true
+        schema:
+          type: string
+          example: budbaker
+    get:
+      tags: [applicants]
+      summary: Read an adopter account
+      description: |
+        Returns one account with its verification state and preferred species.
+        Counselors read this record during the adoption interview.
+      operationId: getApplicant
+      security:
+        - bludhaven_oauth: [read:applicants]
+      responses:
+        '200':
+          description: The account.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Applicant'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    put:
+      tags: [applicants]
+      summary: Update an adopter account
+      description: |
+        Replaces the details an applicant controls, such as phone number and
+        preferred species. Verification state stays staff-controlled, so a client
+        cannot promote itself.
+      operationId: updateApplicant
+      security:
+        - bludhaven_oauth: [write:applicants]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicantRegistration'
+      responses:
+        '200':
+          description: Updated account.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Applicant'
+        '400':
+          $ref: '#/components/responses/InvalidRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    delete:
+      tags: [applicants]
+      summary: Close an adopter account
+      description: |
+        Closes an account at the applicant's request and anonymizes the contact
+        details. Adoption records keep the account identifier for the statutory
+        retention period.
+      operationId: closeApplicant
+      security:
+        - bludhaven_oauth: [write:applicants]
+      responses:
+        '204':
+          description: Account closed. No body returns.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: An open hold or application blocks closure.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /sessions:
+    post:
+      tags: [applicants]
+      summary: Start an adopter session
+      description: |
+        Exchanges email and password for a short-lived bearer token. The portal
+        keeps the token in memory and never writes it to storage.
+      operationId: createSession
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: nadia.okafor@fastmail.com
+                password:
+                  type: string
+                  writeOnly: true
+                  example: corr3ct-horse-otter
+      responses:
+        '200':
+          description: Session established.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionToken'
+        '400':
+          $ref: '#/components/responses/InvalidRequest'
+        '401':
+          description: Email and password do not match an account.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /sessions/current:
+    delete:
+      tags: [applicants]
+      summary: End the current session
+      description: Revokes the bearer token that authorized the call.
+      operationId: endSession
+      security:
+        - bludhaven_oauth: [read:applicants]
+      responses:
+        '204':
+          description: Session closed. The token no longer works.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /refunds:
+    post:
+      tags: [adoptions]
+      summary: Return a placement fee or supplies line on an application
+      description: |
+        Returns money against an adoption application. Each cost line follows its
+        own rule, so one request can return the placement fee while it withholds
+        the deposit and the municipal license fee.
+      operationId: createRefund
+      security:
+        - bludhaven_oauth: [admin:adoptions]
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          description: Client-generated key. A retry with the same key returns the original refund.
+          required: true
+          schema:
+            type: string
+            format: uuid
+            example: 8f14e45f-ceea-467f-a1c2-3d4e5f607182
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefundRequest'
+      responses:
+        '201':
+          description: Refund recorded. Settlement follows the processor schedule.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refund'
+        '200':
+          description: The idempotency key already produced this refund, so no second refund was issued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refund'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: The application already carries a refund for that line.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+              example:
+                type: https://api.bludhavenpets.com/errors/duplicate-refund
+                title: Duplicate Refund
+                status: 409
+                detail: Refund rfd_01HQ9B7TX4 already covers the placement fee on app_2026_1188.
+                instance: /refunds
+        '422':
+          $ref: '#/components/responses/Unprocessable'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /webhooks/test-dispatch:
+    post:
+      tags: [webhooks]
+      summary: Dispatch a signed test event
+      description: |
+        Signs an example payload and returns the delivery the platform would
+        send, including the `X-Bludhaven-Signature` header. Replay the returned
+        body against a local receiver to prove that verification works before a
+        live event depends on it.
+
+        The gateway does not dial a subscriber URL. It returns the delivery for
+        you to replay, which keeps signature testing off the public internet.
+      operationId: dispatchTestWebhook
+      security: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Event to sign. Omit the body to sign the hold-expired example.
+              properties:
+                event:
+                  type: string
+                  enum: [adoption.hold.expired, veterinary.clearance.filed]
+                  example: adoption.hold.expired
+      responses:
+        '200':
+          description: A signed delivery, ready to replay against a receiver.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookDispatchReceipt'
+webhooks:
+  adoptionHoldExpired:
+    post:
+      tags: [webhooks]
+      summary: Adoption hold expired
+      description: |
+        The platform sends this event when a 30-minute reservation hold expires
+        with no application. The hold releases and the animal returns to
+        AVAILABLE.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdoptionHoldExpiredEvent'
+      responses:
+        '200':
+          description: The destination accepted the event.
+  veterinaryClearanceFiled:
+    post:
+      tags: [webhooks]
+      summary: Veterinary clearance filed
+      description: |
+        The platform sends this event when a municipal veterinarian certifies
+        rabies observation or spay/neuter clearance. The certification updates
+        the animal's adoption eligibility.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VeterinaryClearanceFiledEvent'
+      responses:
+        '200':
+          description: The destination accepted the event.
+components:
+  securitySchemes:
+    bludhaven_oauth:
+      type: oauth2
+      description: |
+        OAuth 2.0 token issued by the sandbox authorization server. The
+        authorization code flow with PKCE backs the Connect button in this
+        reference. The client credentials grant mints a token for a script.
+        A token past its `exp` returns `401`, and a token without a scope the
+        route requires returns `403`.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://sandbox.bludhaven-pets.workers.dev/oauth/authorize
+          tokenUrl: https://sandbox.bludhaven-pets.workers.dev/oauth/token
+          refreshUrl: https://sandbox.bludhaven-pets.workers.dev/oauth/token
+          x-scalar-client-id: bludhaven-staff-portal
+          x-usePkce: SHA-256
+          scopes:
+            read:animals: Read animal records, intake history, and eligibility.
+            write:animals: Create, amend, and withdraw animal records.
+            read:adoptions: Read holds and adoption applications.
+            write:adoptions: Place holds, release holds, and submit applications.
+            read:applicants: Read applicant accounts during counselor review.
+            write:applicants: Create and amend applicant accounts.
+            vet:clearance: File veterinary certificates. Licensed practitioners only.
+            read:retail: Read inventory levels and supply orders.
+            write:retail: Place and cancel supply orders.
+            admin:adoptions: Override hold conflicts and issue refunds on any cost line.
+        clientCredentials:
+          tokenUrl: https://sandbox.bludhaven-pets.workers.dev/oauth/token
+          x-scalar-client-id: bludhaven-staff-portal
+          # Scalar sends client_id in the body only when the flow declares where
+          # the credential goes. Without this key the token endpoint receives no
+          # client_id, and a public client has no secret to fall back on.
+          x-scalar-credentials-location: body
+          scopes:
+            read:animals: Read animal records, intake history, and eligibility.
+            write:animals: Create, amend, and withdraw animal records.
+            read:adoptions: Read holds and adoption applications.
+            write:adoptions: Place holds, release holds, and submit applications.
+            read:applicants: Read applicant accounts during counselor review.
+            write:applicants: Create and amend applicant accounts.
+            vet:clearance: File veterinary certificates. Licensed practitioners only.
+            read:retail: Read inventory levels and supply orders.
+            write:retail: Place and cancel supply orders.
+            admin:adoptions: Override hold conflicts and issue refunds on any cost line.
+    api_key:
+      type: apiKey
+      name: X-API-Key
+      in: header
+      description: |
+        Key for server-to-server inventory synchronization and POS register
+        terminals. A key carries an assigned scope set rather than the full
+        catalog. A register key reaches retail stock, and a server job key
+        reaches intake and holds. A route outside that set returns `403`, and an
+        unrecognized key returns `401`.
+
+        The sandbox publishes two working keys, because a test credential is
+        safe to copy:
+
+        - `bpk_sandbox_pos_7f3a91c4` reaches `read:retail` and `write:retail`.
+        - `bpk_sandbox_ops_2d8be05f` reaches `read:animals`, `write:animals`,
+          `write:adoptions`, and `read:retail`.
+
+        Production issues a per-integration key through
+        **budbaker@bludhavenpets.com**. Rotate a key by requesting its
+        replacement, then removing the old value.
+  parameters:
+    AnimalId:
+      name: animalId
+      in: path
+      description: Identifier of the intake record.
+      required: true
+      schema:
+        type: string
+        example: pet_krypto_210
+  responses:
+    Unauthorized:
+      description: |
+        The gateway could not identify the caller. The cause is a missing header,
+        a token without a valid signature, an expired token, a retired session,
+        or a key outside the registry. The `WWW-Authenticate` challenge names
+        which scheme failed, `Bearer` for a token and `ApiKey` for a key.
+      headers:
+        WWW-Authenticate:
+          description: Challenge that names the scheme the client must present.
+          schema:
+            type: string
+            example: Bearer realm="bludhaven", error="invalid_token"
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+          example:
+            type: https://api.bludhavenpets.com/errors/unauthorized
+            title: Unauthorized
+            status: 401
+            detail: The request carried no bearer token. Sign in through the staff portal or attach an API key.
+            instance: /animals
+    Forbidden:
+      description: The token authenticated, but it lacks a scope this route requires.
+      headers:
+        WWW-Authenticate:
+          description: Challenge that names the scope the route requires.
+          schema:
+            type: string
+            example: Bearer realm="bludhaven", error="insufficient_scope", scope="write:animals"
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+          example:
+            type: https://api.bludhavenpets.com/errors/insufficient-scope
+            title: Insufficient Scope
+            status: 403
+            detail: The access token lacks write:animals. Request that scope during authorization, then retry.
+            instance: /animals
+    InvalidRequest:
+      description: A parameter or body field failed validation.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+          example:
+            type: https://api.bludhavenpets.com/errors/invalid-request
+            title: Invalid Request
+            status: 400
+            detail: A required field is missing, or a value falls outside its accepted range.
+            instance: /animals
+    Unprocessable:
+      description: The request parsed, but a business rule rejected it.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+          example:
+            type: https://api.bludhavenpets.com/errors/business-rule-rejected
+            title: Business Rule Rejected
+            status: 422
+            detail: The request broke a policy rule, such as an ineligible animal or a SKU with no stock.
+            instance: /animals/pet_krypto_210
+    NotFound:
+      description: The platform holds no record for that identifier.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+          example:
+            type: https://api.bludhavenpets.com/errors/record-not-found
+            title: Record Not Found
+            status: 404
+            detail: No record matches the identifier in the request.
+            instance: /animals/pet_krypto_999
+    RateLimited:
+      description: The caller exceeded the per-key rate limit. Retry after `Retry-After` seconds.
+      headers:
+        Retry-After:
+          description: Seconds to wait before the next attempt.
+          schema:
+            type: integer
+            example: 12
+        X-RateLimit-Remaining:
+          description: Requests left in the current window.
+          schema:
+            type: integer
+            example: 0
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+          example:
+            type: https://api.bludhavenpets.com/errors/rate-limited
+            title: Rate Limited
+            status: 429
+            detail: The credential exceeded its window. Retry in 12 seconds.
+            instance: /animals
+  schemas:
+    BranchId:
+      type: string
+      description: |
+        Identifier of a physical facility. `loc_harbor_04` runs intake and
+        surgery, `loc_downtown_01` runs the adoption floor and supplies counter,
+        and `loc_westend_08` runs transitional care and partner rescue intake.
+      enum:
+        - loc_harbor_04
+        - loc_downtown_01
+        - loc_westend_08
+      pattern: '^loc_[a-z0-9_]+$'
+      example: loc_harbor_04
+    Branch:
+      type: object
+      description: |
+        Physical facility that holds animals, staff, and retail stock. Every
+        intake record, adoption hold, and supply order names one.
+      required: [id, name, kind, city]
+      properties:
+        id:
+          $ref: '#/components/schemas/BranchId'
+        name:
+          type: string
+          example: Harbor Branch
+        kind:
+          type: string
+          description: |
+            Role in the network. `intake` handles surrender, stray rescue,
+            quarantine, and surgery. `retail` runs the adoption floor and the
+            supplies counter. `transitional` holds long-term care for partner
+            rescues.
+          enum: [intake, retail, transitional]
+          example: intake
+        city:
+          type: string
+          example: Blüdhaven
+        address:
+          type: string
+          example: 1180 Harbor Row, Blüdhaven
+        phone:
+          type: string
+          description: Front desk number for client visits.
+          example: '+1-856-555-0147'
+        services:
+          type: array
+          description: Services a client can book at this facility.
+          items:
+            type: string
+          example: [intake, microchipping, spay-neuter, adoption-counseling]
+      example:
+        id: loc_harbor_04
+        name: Harbor Branch
+        kind: intake
+        city: Blüdhaven
+        address: 1180 Harbor Row, Blüdhaven
+        phone: '+1-856-555-0147'
+        services: [intake, microchipping, spay-neuter, adoption-counseling]
+    AnimalStatus:
+      type: string
+      description: |
+        Lifecycle state, in order. `INTAKE` admits an animal through surrender or
+        stray rescue, and the catalog stays hidden. `VET_CLEARANCE` covers the
+        clinical intake exam and statutory microchipping. `MEDICAL_QUARANTINE`
+        isolates an animal for infection or bite observation, which hides the
+        record from clients and blocks holds. `AVAILABLE` opens the animal to the
+        adoption catalog. `RESERVED_HOLD` marks an exclusive 30-minute lock.
+        `ADOPTED` closes the record after the platform collects the license fee
+        and transfers the microchip registry.
+      enum:
+        - INTAKE
+        - VET_CLEARANCE
+        - MEDICAL_QUARANTINE
+        - AVAILABLE
+        - RESERVED_HOLD
+        - ADOPTED
+      example: AVAILABLE
+    Species:
+      type: string
+      enum: [dog, cat, rabbit, bird, small_mammal]
+      example: dog
+    AnimalHealthRecord:
+      type: object
+      required: [rabies_tag_number, rabies_expiration_date, spay_neuter_certified]
+      properties:
+        rabies_tag_number:
+          type: string
+          description: Municipal rabies tag issued for the vaccination.
+          example: RB-2026-9921
+        rabies_expiration_date:
+          type: string
+          format: date
+          example: '2027-11-01'
+        spay_neuter_certified:
+          type: boolean
+          description: Municipal code blocks placement of an intact animal.
+          example: true
+        veterinarian_license:
+          type: string
+          description: License number of the signing practitioner.
+          example: DVM-04821
+        last_exam_date:
+          type: string
+          format: date
+          example: '2026-11-09'
+        quarantine_release_date:
+          type: string
+          format: date-time
+          example: '2026-11-10T14:00:00Z'
+    Animal:
+      type: object
+      required: [id, name, species, microchip_id, status, health_record]
+      properties:
+        id:
+          type: string
+          example: pet_krypto_210
+        name:
+          type: string
+          example: Krypto
+        species:
+          $ref: '#/components/schemas/Species'
+        breed:
+          type: string
+          example: White Shepherd mix
+        age_months:
+          type: integer
+          minimum: 0
+          example: 24
+        sex:
+          type: string
+          enum: [male, female]
+          example: male
+        weight_kg:
+          type: number
+          format: float
+          example: 28.4
+        microchip_id:
+          type: string
+          pattern: '^[0-9]{15}$'
+          description: 15-digit ISO 11784/11785 microchip number.
+          example: '985141002348123'
+        status:
+          $ref: '#/components/schemas/AnimalStatus'
+        intake_branch_id:
+          $ref: '#/components/schemas/BranchId'
+        intake_date:
+          type: string
+          format: date
+          example: '2026-10-02'
+        adoption_fee_cents:
+          type: integer
+          format: int64
+          description: Placement fee in cents. The Harbor branch charges $150.00 for a dog.
+          example: 15000
+        temperament_tags:
+          type: array
+          items:
+            type: string
+          example:
+            - good-with-cats
+            - apartment-friendly
+        health_record:
+          $ref: '#/components/schemas/AnimalHealthRecord'
+        photo_urls:
+          type: array
+          items:
+            type: string
+            format: uri
+          example:
+            - https://images.bludhavenpets.com/animals/pet_krypto_210/front.jpg
+    AnimalIntake:
+      type: object
+      required: [name, species, microchip_id, intake_branch_id]
+      properties:
+        name:
+          type: string
+          example: Krypto
+        species:
+          $ref: '#/components/schemas/Species'
+        breed:
+          type: string
+          example: White Shepherd mix
+        age_months:
+          type: integer
+          minimum: 0
+          example: 24
+        sex:
+          type: string
+          enum: [male, female]
+          example: male
+        weight_kg:
+          type: number
+          format: float
+          example: 28.4
+        microchip_id:
+          type: string
+          pattern: '^[0-9]{15}$'
+          example: '985141002348123'
+        intake_branch_id:
+          $ref: '#/components/schemas/BranchId'
+        temperament_tags:
+          type: array
+          items:
+            type: string
+          example:
+            - good-with-cats
+    AdoptionHold:
+      type: object
+      required: [id, animal_id, applicant_id, status, created_at, expires_at]
+      properties:
+        id:
+          type: string
+          example: hld_77a28f
+        animal_id:
+          type: string
+          example: pet_krypto_210
+        applicant_id:
+          type: string
+          example: usr_9921bc
+        branch_id:
+          description: Branch where the counselor reviews the application.
+          $ref: '#/components/schemas/BranchId'
+        status:
+          type: string
+          enum: [ACTIVE, RELEASED, EXPIRED, CONVERTED]
+          example: ACTIVE
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-11-17T07:45:00Z'
+        expires_at:
+          type: string
+          format: date-time
+          description: Exactly 30 minutes after `created_at`.
+          example: '2026-11-17T08:15:00Z'
+        seconds_remaining:
+          type: integer
+          example: 1180
+    AdoptionApplication:
+      type: object
+      required: [id, hold_id, animal_id, applicant_id, status, submitted_at]
+      properties:
+        id:
+          type: string
+          example: app_2026_1188
+        hold_id:
+          type: string
+          example: hld_77a28f
+        animal_id:
+          type: string
+          example: pet_krypto_210
+        applicant_id:
+          type: string
+          example: usr_9921bc
+        status:
+          type: string
+          enum:
+            - UNDER_REVIEW
+            - APPROVED
+            - PLACED
+            - DECLINED
+            - WITHDRAWN
+            - CANCELLED_NO_SHOW
+          example: UNDER_REVIEW
+        submitted_at:
+          type: string
+          format: date-time
+          example: '2026-11-17T07:58:00Z'
+        counselor_id:
+          type: [string, 'null']
+          description: Counselor assigned to the review. `null` until the queue assigns one.
+          example: stf_1042
+        placement_fee_cents:
+          type: integer
+          format: int64
+          example: 15000
+        license_fee_cents:
+          type: integer
+          format: int64
+          description: Municipal registration fee, collected with the placement fee.
+          example: 2500
+        reservation_deposit_cents:
+          type: integer
+          format: int64
+          description: Non-refundable deposit that converts a hold into a scheduled pickup.
+          example: 5000
+        supplies_subtotal_cents:
+          type: integer
+          format: int64
+          description: Unopened retail supplies on the same checkout. Refundable until pickup.
+          example: 2500
+        placed_at:
+          type: [string, 'null']
+          format: date-time
+          description: Timestamp the counselor closed the placement. `null` until approval.
+          example: '2026-11-17T15:12:00Z'
+    ApplicantRegistration:
+      type: object
+      required: [username, email, password]
+      properties:
+        username:
+          type: string
+          pattern: '^[a-z0-9_]{3,24}$'
+          example: budbaker
+        first_name:
+          type: string
+          example: Nadia
+        last_name:
+          type: string
+          example: Okafor
+        email:
+          type: string
+          format: email
+          example: nadia.okafor@fastmail.com
+        phone:
+          type: string
+          example: +1-201-555-0143
+        preferred_species:
+          $ref: '#/components/schemas/Species'
+        password:
+          type: string
+          writeOnly: true
+          minLength: 12
+          description: Write-only. The platform stores an Argon2id hash and never returns the value.
+          example: corr3ct-horse-otter
+    Applicant:
+      type: object
+      required: [id, username, email, account_status]
+      properties:
+        id:
+          type: string
+          example: usr_9921bc
+        username:
+          type: string
+          example: budbaker
+        first_name:
+          type: string
+          example: Nadia
+        last_name:
+          type: string
+          example: Okafor
+        email:
+          type: string
+          format: email
+          example: nadia.okafor@fastmail.com
+        phone:
+          type: string
+          example: +1-201-555-0143
+        preferred_species:
+          $ref: '#/components/schemas/Species'
+        account_status:
+          type: string
+          description: |
+            Verification state. A counselor moves an account from `pending` to
+            `verified` at the interview.
+          enum: [PENDING, VERIFIED, SUSPENDED, CLOSED]
+          example: VERIFIED
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-09-14T16:22:05Z'
+    SessionToken:
+      type: object
+      required: [token, expires_at]
+      properties:
+        token:
+          type: string
+          description: |
+            Opaque signed token. The gateway mints a fresh one on every call, so
+            copy it from the response rather than from this example. It reaches
+            the routes an applicant session reads, and nowhere else.
+          example: blud_sess_eyJzdWIiOiJ1c3JfOTkyMWJjIn0.9c1f4d2b7a
+        expires_at:
+          type: string
+          format: date-time
+          example: '2027-01-15T21:04:11Z'
+        scope:
+          type: string
+          example: read:applicants write:applicants
+    SupplyOrder:
+      type: object
+      required: [id, sku, quantity, location_id, status]
+      properties:
+        id:
+          type: string
+          example: ord_2026_0417
+        sku:
+          type: string
+          example: SKU-FOOD-PUPPY-18KG
+        product_name:
+          type: string
+          example: Puppy Formula Dry Food, 18 kg
+        quantity:
+          type: integer
+          format: int32
+          example: 24
+        unit_price_cents:
+          type: integer
+          format: int64
+          example: 5899
+        location_id:
+          type: string
+          example: loc_harbor_04
+        status:
+          type: string
+          description: Fulfillment stage for the supply order.
+          enum: [PLACED, PICKING, SHIPPED, DELIVERED]
+          example: PICKING
+        placed_at:
+          type: string
+          format: date-time
+          example: '2026-11-16T09:05:00Z'
+        expected_delivery:
+          type: string
+          format: date
+          example: '2026-11-21'
+    Inventory:
+      type: object
+      description: On-hand stock per SKU for one branch, plus the quantity reserved by open orders.
+      additionalProperties:
+        type: object
+        properties:
+          on_hand:
+            type: integer
+            format: int32
+          reserved:
+            type: integer
+            format: int32
+      example:
+        SKU-FOOD-PUPPY-18KG:
+          on_hand: 38
+          reserved: 24
+        SKU-LITTER-CLUMP-12KG:
+          on_hand: 61
+          reserved: 6
+        SKU-LEASH-NYLON-2M:
+          on_hand: 12
+          reserved: 0
+        SKU-BED-ORTHO-L:
+          on_hand: 4
+          reserved: 4
+    PhotoUpload:
+      type: object
+      required: [photo_id, animal_id, upload_url, method, expires_at]
+      properties:
+        photo_id:
+          type: string
+          example: pht_9c41ab
+        animal_id:
+          type: string
+          example: pet_krypto_210
+        upload_url:
+          type: string
+          format: uri
+          description: Presigned HTTPS PUT destination on Cloudflare R2 / S3 storage.
+          example: https://sandbox.bludhaven-pets.workers.dev/uploads/photos/pht_9c41ab?animal_id=pet_krypto_210&exp=1795123456&sig=7a8b9c...
+        method:
+          type: string
+          enum: [PUT]
+          example: PUT
+        public_url:
+          type: string
+          format: uri
+          description: Public CDN URL where the image will be readable after upload.
+          example: https://images.bludhavenpets.com/animals/pet_krypto_210/pht_9c41ab.jpg
+        expires_at:
+          type: string
+          format: date-time
+          example: '2026-11-19T13:34:11Z'
+        max_bytes:
+          type: integer
+          example: 8388608
+    ProblemDetails:
+      type: object
+      description: RFC 9457 problem detail. Every error response uses this shape.
+      required: [type, title, status, detail]
+      properties:
+        type:
+          type: string
+          format: uri
+          description: Stable error identifier that clients can branch on.
+          example: https://api.bludhavenpets.com/errors/adoption-hold-conflict
+        title:
+          type: string
+          example: Adoption Hold Conflict
+        status:
+          type: integer
+          example: 409
+        detail:
+          type: string
+          example: Animal pet_krypto_210 is currently reserved under active hold hld_77a28f expiring at 2026-11-17T08:15:00Z.
+        instance:
+          type: string
+          description: Request path that produced the error.
+          example: /adoptions/holds
+        request_id:
+          type: string
+          description: Value of the `X-Request-Id` header, for support tickets.
+          example: req_6c1f90ab3d4e
+    RefundRequest:
+      type: object
+      required: [application_id, amount_cents, reason]
+      properties:
+        application_id:
+          type: string
+          example: app_2026_1188
+        amount_cents:
+          type: integer
+          format: int64
+          description: Amount to return. Must not exceed the refundable balance on the application.
+          example: 10000
+        reason:
+          type: string
+          enum:
+            - CANCELLATION_INSIDE_48H
+            - CANCELLATION_AFTER_48H
+            - MEDICAL_DISQUALIFICATION
+            - RETAIL_SUPPLIES_ONLY
+          example: CANCELLATION_AFTER_48H
+        refund_retail_supplies:
+          type: boolean
+          description: Return the unopened supplies line with the placement fee.
+          default: false
+          example: true
+        veterinary_record_id:
+          type: string
+          description: Required when `reason` is `MEDICAL_DISQUALIFICATION`. Must resolve to a cleared certificate.
+          example: hr_2026_0914
+    Refund:
+      type: object
+      required: [id, application_id, amount_cents, status, settles_at]
+      properties:
+        id:
+          type: string
+          example: rfd_01HQ9B7TX4
+        application_id:
+          type: string
+          example: app_2026_1188
+        amount_cents:
+          type: integer
+          format: int64
+          example: 10000
+        breakdown:
+          type: object
+          description: Amount returned per cost line.
+          properties:
+            placement_fee_cents:
+              type: integer
+              format: int64
+              example: 7500
+            retail_supplies_cents:
+              type: integer
+              format: int64
+              example: 2500
+        withheld:
+          type: object
+          description: Amount the platform keeps, per cost line.
+          properties:
+            reservation_deposit_cents:
+              type: integer
+              format: int64
+              example: 5000
+            license_fee_cents:
+              type: integer
+              format: int64
+              example: 2500
+        status:
+          type: string
+          enum: [PENDING, SETTLED, FAILED]
+          example: PENDING
+        settles_at:
+          type: string
+          format: date-time
+          description: Processor estimate. Read `status` rather than counting elapsed time.
+          example: '2026-11-19T14:00:00Z'
+    AdoptionHoldExpiredEvent:
+      type: object
+      description: Envelope delivered when a reservation hold lapses.
+      required: [id, event, created_at, data]
+      properties:
+        id:
+          type: string
+          example: evt_wh_901ab2cd
+        event:
+          type: string
+          enum: [adoption.hold.expired]
+          example: adoption.hold.expired
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-11-19T13:30:00Z'
+        data:
+          type: object
+          required: [hold_id, animal_id, reason]
+          properties:
+            hold_id:
+              type: string
+              example: hld_a8f90b
+            animal_id:
+              type: string
+              example: pet_krypto_210
+            reason:
+              type: string
+              example: 30_MINUTE_WINDOW_LAPSED
+    VeterinaryClearanceFiledEvent:
+      type: object
+      description: Envelope delivered when a municipal veterinarian files clearance.
+      required: [id, event, created_at, data]
+      properties:
+        id:
+          type: string
+          example: evt_wh_881fe4ca
+        event:
+          type: string
+          enum: [veterinary.clearance.filed]
+          example: veterinary.clearance.filed
+        created_at:
+          type: string
+          format: date-time
+          example: '2026-11-19T13:31:00Z'
+        data:
+          type: object
+          required: [animal_id, certificate_number, license_number, status]
+          properties:
+            animal_id:
+              type: string
+              example: pet_krypto_210
+            certificate_number:
+              type: string
+              example: VET-RB-2026-9921
+            license_number:
+              type: string
+              example: LIC-NJ-98241
+            status:
+              type: string
+              example: AVAILABLE
+    WebhookDispatchReceipt:
+      type: object
+      description: A signed delivery returned for replay, not a queued outbound call.
+      required: [dispatched, event, secret_used, headers, payload, verification_guide]
+      properties:
+        dispatched:
+          type: boolean
+          example: true
+        event:
+          type: string
+          example: adoption.hold.expired
+        secret_used:
+          type: string
+          example: whsec_sandbox_bludhaven_test_secret_9981
+        headers:
+          type: object
+          required: [Content-Type, X-Bludhaven-Signature, X-Bludhaven-Timestamp]
+          properties:
+            Content-Type:
+              type: string
+              example: application/json
+            X-Bludhaven-Signature:
+              type: string
+              example: 't=1795123456,v1=5d41402abc4b2a76b9719d911017c5926c459992f026a0b72a6a8b1a7f05252b'
+            X-Bludhaven-Timestamp:
+              type: string
+              example: '1795123456'
+        payload:
+          oneOf:
+            - $ref: '#/components/schemas/AdoptionHoldExpiredEvent'
+            - $ref: '#/components/schemas/VeterinaryClearanceFiledEvent'
+        verification_guide:
+          type: object
+          required: [scheme, signed_template, header_format]
+          properties:
+            scheme:
+              type: string
+              example: HMAC-SHA256
+            signed_template:
+              type: string
+              example: 't={timestamp},v1={raw_body}'
+            header_format:
+              type: string
+              example: 't={timestamp},v1={hex_signature}'
